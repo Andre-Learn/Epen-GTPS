@@ -30,7 +30,7 @@ window.EPEN_CONFIG = {
         category: 'Promote',
         title: 'Buy Promote GTPS',
         url: 'https://discord.gg/aWBz8tn6QK',
-        iconUrl: '',
+        iconUrl: 'https://cdn.discordapp.com/attachments/1371532839132205089/1553999265045549106/Proyek_Baru_34_A5DF0C3.png?ex=6abb4a18&is=6ab9f898&hm=c22e9f7204f471acd25f42b9801ca9052817eb07b98cd3b92fefdbd9de35b873&',
         icon: 'discord',
         target: '_blank'
       },
@@ -39,7 +39,7 @@ window.EPEN_CONFIG = {
         category: 'Information',
         title: 'Information Giveaway',
         url: 'https://whatsapp.com/channel/0029VbDsLl9LNSZxidjstX2E',
-        iconUrl: '',
+        iconUrl: 'https://cdn.discordapp.com/attachments/1371532839132205089/1553999264550625331/Proyek_Baru_34_73DB9C1.png?ex=6abb4a18&is=6ab9f898&hm=6eb39e06ae82856ad284672cc963de15209194bad9569dc63a1df010a437120f&',
         icon: 'whatsapp',
         target: '_blank'
       },
@@ -48,7 +48,7 @@ window.EPEN_CONFIG = {
         category: 'Network',
         title: 'Lihat Partner Kami',
         url: 'partners.html',
-        iconUrl: '',
+        iconUrl: 'https://cdn.discordapp.com/attachments/1371532839132205089/1553999263950704701/Proyek_Baru_34_71025E1.png?ex=6abb4a18&is=6ab9f898&hm=411ae74772552863879ae5b1c6888511a7bfd4db57b378f9509a3ccc9d2671e0&',
         icon: 'users',
         target: '_self'
       },
