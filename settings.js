@@ -16,7 +16,7 @@ window.EPEN_CONFIG = {
   epen: {
     // Isi dengan Channel ID YouTube Epen GTPS.
     // Contoh: 'UCxxxxxxxxxxxxxxxxxxxxxx'
-    youtubeChannelId: UCg8u_12KwZlZn9ZhWM_TExw'',
+    youtubeChannelId: "UCg8u_12KwZlZn9ZhWM_TExw",
 
     // Fallback jika API belum dikonfigurasi / channel ID masih kosong.
     videos: [
