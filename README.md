@@ -52,3 +52,10 @@ site: {
 - URL gambar harus bisa diakses publik (HTTPS disarankan).
 
 Logo dan banner partner tetap diatur per partner melalui `logo` dan `banner` di array `partners`.
+
+
+### v6.4 banner
+- `site.bannerUrl` is displayed using the banner's natural aspect ratio.
+- The built-in EPEN/orb decoration is hidden when a custom banner is supplied, preventing duplicate artwork.
+- No cropping is used for the custom main banner.
+- Partner custom banners use the same no-crop approach.

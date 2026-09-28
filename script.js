@@ -32,6 +32,17 @@ function applySiteImages() {
   if (banner && bannerUrl) {
     banner.classList.add('has-site-banner');
     banner.style.backgroundImage = `url(\"${String(bannerUrl).replace(/\"/g, '%22')}\")`;
+
+    // Keep the banner proportional to the actual image. The CSS defaults to
+    // the recommended 16:5 ratio, then this upgrades it automatically when
+    // the supplied URL uses another ratio.
+    const bannerProbe = new Image();
+    bannerProbe.onload = () => {
+      if (bannerProbe.naturalWidth && bannerProbe.naturalHeight) {
+        banner.style.aspectRatio = `${bannerProbe.naturalWidth} / ${bannerProbe.naturalHeight}`;
+      }
+    };
+    bannerProbe.src = bannerUrl;
   }
 }
 
@@ -159,7 +170,7 @@ function partnerDetailMarkup(partner) {
 
   return `
     <div class="partner-expand" aria-hidden="true">
-      <div class="partner-expand-banner">${banner}</div>
+      <div class="partner-expand-banner${partner.banner ? ' has-partner-banner' : ''}">${banner}</div>
       <div class="partner-expand-content">
         <div class="partner-expand-logo">${logo}</div>
         <span class="section-kicker">PARTNER PROFILE</span>
