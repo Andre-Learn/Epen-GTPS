@@ -11,7 +11,57 @@ window.EPEN_CONFIG = {
     //
     // Bisa diganti kapan saja tanpa mengedit HTML.
     logoUrl: "https://cdn.discordapp.com/attachments/1371532839132205089/1553968672727371806/Proyek_Baru_25_A36F6C3.png?ex=6abb2d9a&is=6ab9dc1a&hm=a236a0a6c6ce5b0026f57613088fa29fd0e14b8f18d48f63050d6b92486602db&",
-    bannerUrl: "https://cdn.discordapp.com/attachments/1371532839132205089/1553968672182239233/Proyek_Baru_33_01976A3.png?ex=6abb2d9a&is=6ab9dc1a&hm=c51123abaa001a4ddb9941448c78bc8f1861ac5c87e590e52f635ed170996f96&"
+    bannerUrl: "https://cdn.discordapp.com/attachments/1371532839132205089/1553968672182239233/Proyek_Baru_33_01976A3.png?ex=6abb2d9a&is=6ab9dc1a&hm=c51123abaa001a4ddb9941448c78bc8f1861ac5c87e590e52f635ed170996f96&",
+
+    // =====================================
+    // BUTTON UTAMA
+    // =====================================
+    // Semua button di halaman utama dibuat dari daftar ini.
+    // Mau tambah button baru? Cukup copy salah satu object lalu ubah isinya.
+    //
+    // iconUrl  : URL gambar icon. Kosongkan untuk memakai SVG fallback.
+    // icon     : nama SVG fallback: discord, whatsapp, users, network,
+    //            play, video, link.
+    // url      : tujuan saat button diklik. Bisa URL, #section, atau halaman.
+    // target   : '_blank' untuk tab baru atau '_self' untuk halaman yang sama.
+    actionButtons: [
+      {
+        id: 'discord',
+        category: 'Promote',
+        title: 'Buy Promote GTPS',
+        url: 'https://discord.gg/aWBz8tn6QK',
+        iconUrl: '',
+        icon: 'discord',
+        target: '_blank'
+      },
+      {
+        id: 'whatsapp',
+        category: 'Information',
+        title: 'Information Giveaway',
+        url: 'https://whatsapp.com/channel/0029VbDsLl9LNSZxidjstX2E',
+        iconUrl: '',
+        icon: 'whatsapp',
+        target: '_blank'
+      },
+      {
+        id: 'partners',
+        category: 'Network',
+        title: 'Lihat Partner Kami',
+        url: 'partners.html',
+        iconUrl: '',
+        icon: 'users',
+        target: '_self'
+      },
+      {
+        id: 'videos',
+        category: 'Content',
+        title: 'Lihat Video Epen GTPS',
+        url: '#videos',
+        iconUrl: '',
+        icon: 'play',
+        target: '_self'
+      }
+    ]
   },
 
   video: {

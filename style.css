@@ -377,3 +377,38 @@ html[data-theme=dark] .socials a:hover{
     aspect-ratio:16 / 5;
   }
 }
+
+
+/* v6.5 — configurable action-card icons from settings.js */
+.action-logo.has-action-icon {
+  padding: 7px;
+}
+.action-logo.has-action-icon img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  border-radius: 9px;
+}
+/* Social buttons removed from the profile area in v6.5. */
+.profile-info > .socials {
+  display: none !important;
+}
+
+
+/* v6.6 — SVG fallback icons when actionIcons URL is empty */
+.action-logo.has-fallback-icon {
+  display: grid;
+  place-items: center;
+  padding: 0;
+}
+.action-logo.has-fallback-icon svg {
+  width: 30px;
+  height: 30px;
+  display: block;
+}
+
+/* v6.7 — action buttons are generated entirely from settings.js */
+.action-list:empty{display:none}
+.action-logo.has-action-icon img{object-fit:contain}
+.action-card[data-action-id]{text-decoration:none}

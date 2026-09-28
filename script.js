@@ -15,6 +15,58 @@ const escapeHtml = value => String(value ?? '').replace(/[&<>'"]/g, c => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#039;', '"': '&quot;'
 }[c]));
 
+function actionFallbackSvg(name) {
+  const common = 'width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
+  const icons = {
+    discord: `<svg ${common}><path d="M8.5 8.2A7.7 7.7 0 0 1 12 7.4a7.7 7.7 0 0 1 3.5.8"/><path d="M6.8 17.2c1.5 1.1 3.3 1.7 5.2 1.7s3.7-.6 5.2-1.7c.6-2.1.7-4.8.1-7.2-1.2-.8-2.4-1.2-3.8-1.4l-.5 1.1c-.7-.1-1.4-.1-2.1 0l-.5-1.1c-1.4.2-2.6.6-3.8 1.4-.6 2.4-.5 5.1.2 7.2Z"/><path d="M9.4 13.9h.1M14.5 13.9h.1"/></svg>`,
+    whatsapp: `<svg ${common}><path d="M20 11.6a8 8 0 0 1-11.9 7L4 20l1.5-4A8 8 0 1 1 20 11.6Z"/><path d="M9 9.2c.2-.4.4-.5.7-.5h.5c.2 0 .4.1.5.4l.5 1.2c.1.2.1.4-.1.6l-.5.6c.5.9 1.2 1.6 2.1 2.1l.6-.5c.2-.2.4-.2.6-.1l1.2.5c.3.1.4.3.4.5v.5c0 .3-.1.5-.5.7-1 .4-2.4-.1-3.8-1.3-1.4-1.2-2.5-2.5-2.2-4.7Z"/></svg>`,
+    users: `<svg ${common}><path d="M16 20v-1.4a3.6 3.6 0 0 0-3.6-3.6H7.6A3.6 3.6 0 0 0 4 18.6V20"/><circle cx="10" cy="8" r="3"/><path d="M16 11a3 3 0 0 0 0-6M20 20v-1.4a3.6 3.6 0 0 0-2.7-3.5"/></svg>`,
+    network: `<svg ${common}><circle cx="12" cy="5" r="2.2"/><circle cx="5" cy="18" r="2.2"/><circle cx="19" cy="18" r="2.2"/><path d="M10.8 6.9 6.2 16M13.2 6.9l4.6 9M7.2 18h9.6"/></svg>`,
+    play: `<svg ${common} fill="currentColor" stroke="none"><path d="m9 6.5 9 5.5-9 5.5v-11Z"/></svg>`,
+    video: `<svg ${common}><rect x="3" y="5" width="13" height="14" rx="2"/><path d="m16 10 5-3v10l-5-3"/></svg>`,
+    link: `<svg ${common}><path d="M10 13.8a4 4 0 0 0 5.7.2l2-2a4 4 0 0 0-5.7-5.7l-1.1 1.1"/><path d="M14 10.2a4 4 0 0 0-5.7-.2l-2 2A4 4 0 0 0 12 17.7l1.1-1.1"/></svg>`
+  };
+  return icons[name] || icons.link;
+}
+
+function renderActionButtons() {
+  const container = document.querySelector('#actionList');
+  if (!container) return;
+
+  const site = SITE_CONFIG.site || {};
+  const configured = Array.isArray(site.actionButtons) ? site.actionButtons : [];
+
+  // Backward compatibility for older settings.js files that only have actionIcons.
+  const legacyIcons = site.actionIcons || {};
+  const legacyFallback = site.actionIconFallback || {};
+  const buttons = configured.length ? configured : [
+    { id: 'discord', category: 'Community', title: 'Discord Community', url: '#', iconUrl: legacyIcons.discord || '', icon: legacyFallback.discord || 'discord', target: '_blank' },
+    { id: 'whatsapp', category: 'Community', title: 'WhatsApp Community', url: '#', iconUrl: legacyIcons.whatsapp || '', icon: legacyFallback.whatsapp || 'whatsapp', target: '_blank' },
+    { id: 'partners', category: 'Network', title: 'Lihat Partner Kami', url: 'partners.html', iconUrl: legacyIcons.partner || '', icon: legacyFallback.partner || 'users', target: '_self' },
+    { id: 'videos', category: 'Content', title: 'Lihat Video Epen GTPS', url: '#videos', iconUrl: legacyIcons.videos || '', icon: legacyFallback.videos || 'play', target: '_self' }
+  ];
+
+  container.innerHTML = buttons.map((button, index) => {
+    const item = button && typeof button === 'object' ? button : {};
+    const id = String(item.id || `action-${index + 1}`);
+    const category = String(item.category || 'Link');
+    const title = String(item.title || `Button ${index + 1}`);
+    const url = String(item.url || '#');
+    const iconUrl = String(item.iconUrl || '').trim();
+    const iconName = String(item.icon || legacyFallback[id] || 'link').trim();
+    const target = item.target === '_blank' ? '_blank' : '_self';
+    const rel = target === '_blank' ? ' rel="noopener noreferrer"' : '';
+    const icon = iconUrl
+      ? `<img src="${escapeHtml(iconUrl)}" alt="" loading="eager" />`
+      : actionFallbackSvg(iconName);
+
+    return `<a class="action-card" href="${escapeHtml(url)}" target="${target}"${rel} data-action-id="${escapeHtml(id)}">
+      <span class="action-logo${iconUrl ? ' has-action-icon' : ' has-fallback-icon'}" aria-hidden="true">${icon}</span>
+      <span class="action-copy"><small>${escapeHtml(category)}</small><strong>${escapeHtml(title)}</strong></span>
+    </a>`;
+  }).join('');
+}
+
 function applySiteImages() {
   const site = SITE_CONFIG.site || {};
   const logoUrl = String(site.logoUrl || '').trim();
@@ -303,6 +355,7 @@ function initTheme() {
 }
 
 function init() {
+  renderActionButtons();
   try { applySiteImages(); } catch (error) { console.warn('Site images skipped:', error); }
   try { initTheme(); } catch (error) { console.warn('Theme init skipped:', error); }
   try { renderHomeVideos(); } catch (error) { console.warn('Home video render skipped:', error); }

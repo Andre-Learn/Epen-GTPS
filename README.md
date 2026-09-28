@@ -1,61 +1,77 @@
-# Epen GTPS — YouTube Auto Feed
+# Epen GTPS v6.7
 
-## Konfigurasi utama
-Semua konfigurasi konten ada di `settings.js`:
-- `epen.youtubeChannelId` = Channel ID YouTube Epen GTPS
-- `partners[].youtubeChannelId` = Channel ID YouTube masing-masing partner
-- `video.initialLimit` = jumlah video awal
-- `video.fetchLimit` = jumlah maksimum video yang diambil dari YouTube
-- logo, banner, link, nama, deskripsi partner juga ada di file ini.
+## Pengaturan button dari `settings.js`
 
-## Keamanan API key
-Jangan masukkan API key YouTube ke `settings.js` atau file frontend.
-
-Di Vercel buka:
-**Project → Settings → Environment Variables**
-
-Tambahkan:
-`YOUTUBE_API_KEY=API_KEY_KAMU`
-
-Vercel Function di `api/youtube.js` membaca key tersebut dari `process.env.YOUTUBE_API_KEY`.
-
-## Cara kerja video
-Browser → `/api/youtube` → Vercel Function → YouTube Data API → data video → card website.
-
-Website menampilkan 4 video pertama. Jika lebih banyak, tombol **Show More** akan muncul.
-
-## Catatan
-Jika `youtubeChannelId` masih kosong atau API gagal, website memakai data fallback di `settings.js`, sehingga halaman tetap bisa tampil.
-
-
-## v6.2 — Video grid fix
-- Fixed Show More rendering as a grid column item on the home video section.
-- Show More now sits full-width below the video grid.
-- Added consistent 16:9 video layout and 3-line title clamp for home and partner videos.
-
-
-## v6.3 — Ganti Logo & Banner dari settings.js
-
-Sekarang gambar utama website bisa diganti tanpa menyentuh HTML. Buka `settings.js`:
+Semua button utama di halaman `index.html` sekarang dibuat otomatis dari:
 
 ```js
-site: {
-  name: 'Epen GTPS',
-  logoUrl: 'https://domain.com/logo.png',
-  bannerUrl: 'https://domain.com/banner.jpg'
+window.EPEN_CONFIG.site.actionButtons
+```
+
+Contoh:
+
+```js
+actionButtons: [
+  {
+    id: 'discord',
+    category: 'Community',
+    title: 'Discord Community',
+    url: 'https://discord.com/username',
+    iconUrl: '',
+    icon: 'discord',
+    target: '_blank'
+  },
+  {
+    id: 'telegram',
+    category: 'Community',
+    title: 'Telegram Community',
+    url: 'https://t.me/example',
+    iconUrl: '',
+    icon: 'link',
+    target: '_blank'
+  }
+]
+```
+
+### Field
+
+- `id`: ID unik button.
+- `category`: teks kecil di atas judul.
+- `title`: teks utama button.
+- `url`: link tujuan saat button diklik. Bisa URL eksternal, `#videos`, atau halaman seperti `partners.html`.
+- `iconUrl`: URL gambar icon. Kosongkan jika ingin memakai SVG fallback.
+- `icon`: fallback SVG. Pilihan bawaan: `discord`, `whatsapp`, `users`, `network`, `play`, `video`, `link`.
+- `target`: gunakan `_blank` untuk tab baru atau `_self` untuk halaman yang sama.
+
+### Menambah button baru
+
+Cukup tambahkan object baru ke array `actionButtons`. Tidak perlu mengubah `index.html` atau `script.js`.
+
+```js
+{
+  id: 'website',
+  category: 'Official',
+  title: 'Website Epen',
+  url: 'https://example.com',
+  iconUrl: 'https://example.com/icon.png',
+  icon: 'link',
+  target: '_blank'
 }
 ```
 
-- `logoUrl` → logo Epen yang dipakai di header dan avatar profil.
-- `bannerUrl` → banner/cover utama di halaman index.
-- Kosongkan `''` kalau ingin kembali ke tampilan fallback bawaan.
-- URL gambar harus bisa diakses publik (HTTPS disarankan).
+Button akan muncul otomatis sesuai urutan object di array.
 
-Logo dan banner partner tetap diatur per partner melalui `logo` dan `banner` di array `partners`.
+## Gambar utama
 
+```js
+site: {
+  logoUrl: 'https://example.com/logo.png',
+  bannerUrl: 'https://example.com/banner.jpg'
+}
+```
 
-### v6.4 banner
-- `site.bannerUrl` is displayed using the banner's natural aspect ratio.
-- The built-in EPEN/orb decoration is hidden when a custom banner is supplied, preventing duplicate artwork.
-- No cropping is used for the custom main banner.
-- Partner custom banners use the same no-crop approach.
+Banner mengikuti rasio gambar asli dan tidak dicrop.
+
+## YouTube API
+
+API key tetap disimpan di Vercel Environment Variables sebagai `YOUTUBE_API_KEY` dan tidak dimasukkan ke `settings.js`.
