@@ -32,3 +32,23 @@ Jika `youtubeChannelId` masih kosong atau API gagal, website memakai data fallba
 - Fixed Show More rendering as a grid column item on the home video section.
 - Show More now sits full-width below the video grid.
 - Added consistent 16:9 video layout and 3-line title clamp for home and partner videos.
+
+
+## v6.3 — Ganti Logo & Banner dari settings.js
+
+Sekarang gambar utama website bisa diganti tanpa menyentuh HTML. Buka `settings.js`:
+
+```js
+site: {
+  name: 'Epen GTPS',
+  logoUrl: 'https://domain.com/logo.png',
+  bannerUrl: 'https://domain.com/banner.jpg'
+}
+```
+
+- `logoUrl` → logo Epen yang dipakai di header dan avatar profil.
+- `bannerUrl` → banner/cover utama di halaman index.
+- Kosongkan `''` kalau ingin kembali ke tampilan fallback bawaan.
+- URL gambar harus bisa diakses publik (HTTPS disarankan).
+
+Logo dan banner partner tetap diatur per partner melalui `logo` dan `banner` di array `partners`.

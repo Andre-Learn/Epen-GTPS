@@ -15,6 +15,26 @@ const escapeHtml = value => String(value ?? '').replace(/[&<>'"]/g, c => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#039;', '"': '&quot;'
 }[c]));
 
+function applySiteImages() {
+  const site = SITE_CONFIG.site || {};
+  const logoUrl = String(site.logoUrl || '').trim();
+  const bannerUrl = String(site.bannerUrl || '').trim();
+
+  // Main logo: header + profile avatar.
+  document.querySelectorAll('[data-site-logo]').forEach(el => {
+    if (!logoUrl) return;
+    el.classList.add('has-site-logo');
+    el.innerHTML = `<img src="${escapeHtml(logoUrl)}" alt="${escapeHtml(site.name || 'Epen GTPS')} logo" loading="eager" />`;
+  });
+
+  // Main banner / cover.
+  const banner = document.querySelector('[data-site-banner]');
+  if (banner && bannerUrl) {
+    banner.classList.add('has-site-banner');
+    banner.style.backgroundImage = `url(\"${String(bannerUrl).replace(/\"/g, '%22')}\")`;
+  }
+}
+
 function iconSvg(type) {
   const common = 'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
   if (type === 'whatsapp') return `<svg ${common}><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4.1A8 8 0 1 1 20 11.5Z"/><path d="M9 8.5c.3 1.9 1.5 3.4 3.2 4.4l1.2-.9c.2-.2.5-.2.8-.1l1.5.7c.3.1.4.4.3.7-.2.8-.9 1.3-1.7 1.3-3.6-.2-6.6-3.2-6.8-6.8 0-.8.5-1.5 1.3-1.7.3-.1.6 0 .7.3l.7 1.5c.1.3.1.6-.1.8L9 8.5Z"/></svg>`;
@@ -272,6 +292,7 @@ function initTheme() {
 }
 
 function init() {
+  try { applySiteImages(); } catch (error) { console.warn('Site images skipped:', error); }
   try { initTheme(); } catch (error) { console.warn('Theme init skipped:', error); }
   try { renderHomeVideos(); } catch (error) { console.warn('Home video render skipped:', error); }
 
