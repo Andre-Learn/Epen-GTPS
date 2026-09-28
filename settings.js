@@ -109,11 +109,11 @@ window.EPEN_CONFIG = {
       ]
     },
     {
-      id: 'growtopia-project',
-      name: 'Growtopia Project',
-      short: 'GP',
-      tagline: 'Project & server community',
-      description: 'Tempat menemukan project, server, dan creator yang aktif di ekosistem GTPS.',
+      id: 'Dora',
+      name: 'Dora GTPS',
+      short: 'D',
+      tagline: 'Promoter GTPS',
+      description: '',
       logo: '',
       banner: '',
       links: {
@@ -121,7 +121,7 @@ window.EPEN_CONFIG = {
         discord: 'https://discord.com/',
         youtube: 'https://youtube.com/'
       },
-      youtubeChannelId: '',
+      youtubeChannelId: 'UCakFHiJ1Q_3zoc81-71EMJQ',
       videos: [
         { title: 'Project Showcase', videoId: 'dQw4w9WgXcQ', meta: 'Growtopia Project' },
         { title: 'Community Highlights', videoId: 'dQw4w9WgXcQ', meta: 'Growtopia Project' }
