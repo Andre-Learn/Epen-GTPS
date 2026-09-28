@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#6d28d9" />
+  <meta name="description" content="Partner Epen GTPS." />
+  <title>Partner — Epen GTPS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <script>
+    (() => {
+      try {
+        const saved = localStorage.getItem('epen-theme');
+        const systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (saved === 'dark' || (!saved && systemDark)) document.documentElement.dataset.theme = 'dark';
+      } catch (_) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="partners-page">
+  <header class="site-header">
+    <div class="header-inner page-width">
+      <a href="index.html" class="header-back" aria-label="Kembali ke halaman utama">Kembali</a>
+      <div class="header-page-title">Partner</div>
+      <button class="theme-switch" type="button" id="themeButton" aria-label="Ganti tema" aria-pressed="false">
+        <span class="theme-switch-label theme-light-label">Light</span>
+        <span class="theme-switch-track" aria-hidden="true"><span class="theme-switch-knob"><span></span><i></i></span></span>
+        <span class="theme-switch-label theme-dark-label">Dark</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="page-width partner-page-main">
+    <section class="partners-intro" id="partnersIntro">
+      <span class="section-kicker">EPEN GTPS NETWORK</span>
+      <h1>Partner <span>kami.</span></h1>
+      <p>Temukan komunitas, creator, dan project yang menjadi bagian dari jaringan Epen GTPS.</p>
+    </section>
+
+    <section class="partner-list" id="partnerList" aria-label="Daftar partner"></section>
+  </main>
+
+  <footer class="footer page-width"><strong>Epen GTPS</strong><span>Partner network.</span></footer>
+  <script src="settings.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

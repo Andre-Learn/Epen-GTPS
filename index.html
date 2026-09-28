@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#6d28d9" />
+  <meta name="description" content="Epen GTPS — Growtopia private server creator, community, videos, and partner network." />
+  <title>Epen GTPS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <script>
+    (() => {
+      try {
+        const saved = localStorage.getItem('epen-theme');
+        const systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (saved === 'dark' || (!saved && systemDark)) document.documentElement.dataset.theme = 'dark';
+      } catch (_) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="home-page">
+  <header class="site-header">
+    <div class="header-inner page-width home-header-inner">
+      <a href="index.html" class="header-brand" aria-label="Beranda Epen GTPS">
+        <span class="avatar avatar-small">E</span>
+        <span class="header-brand-copy"><strong>Epen GTPS</strong><small>Growtopia Private Server Creator</small></span>
+      </a>
+      <button class="theme-switch" type="button" id="themeButton" aria-label="Ganti tema" aria-pressed="false">
+        <span class="theme-switch-label theme-light-label">Light</span>
+        <span class="theme-switch-track" aria-hidden="true"><span class="theme-switch-knob"><span></span><i></i></span></span>
+        <span class="theme-switch-label theme-dark-label">Dark</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="profile-hero page-width">
+      <div class="cover-art">
+        <div class="cover-glow"></div>
+        <div class="cover-grid"></div>
+        <div class="cover-copy"><strong>EPEN</strong><span>GTPS CREATOR</span></div>
+        <div class="cover-orb">E</div>
+      </div>
+      <div class="profile-avatar-wrap"><div class="avatar profile-avatar">E</div></div>
+      <div class="profile-info">
+        <h1>Epen GTPS</h1>
+        <p>Growtopia Private Server Creator &amp; Community</p>
+        <strong class="profile-tags">GROWTOPIA · GTPS · CONTENT CREATOR</strong>
+        <div class="socials" aria-label="Social media Epen GTPS">
+          <a href="#" target="_blank" rel="noopener">YouTube</a>
+          <a href="#" target="_blank" rel="noopener">TikTok</a>
+          <a href="#" target="_blank" rel="noopener">Discord</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="action-list page-width" aria-label="Menu utama">
+      <a class="action-card" href="#" target="_blank" rel="noopener">
+        <span class="action-logo discord-logo" aria-hidden="true">D</span>
+        <span class="action-copy"><small>Community</small><strong>Discord Community</strong></span>
+      </a>
+      <a class="action-card" href="#" target="_blank" rel="noopener">
+        <span class="action-logo whatsapp-logo" aria-hidden="true">W</span>
+        <span class="action-copy"><small>Community</small><strong>WhatsApp Community</strong></span>
+      </a>
+      <a class="action-card" href="partners.html">
+        <span class="action-logo partner-logo" aria-hidden="true">P</span>
+        <span class="action-copy"><small>Network</small><strong>Lihat Partner Kami</strong></span>
+      </a>
+      <a class="action-card" href="#videos">
+        <span class="action-logo video-logo" aria-hidden="true">▶</span>
+        <span class="action-copy"><small>Content</small><strong>Lihat Video Epen GTPS</strong></span>
+      </a>
+    </section>
+
+    <section class="content-section page-width" id="videos">
+      <div class="section-title-row">
+        <div><span class="section-kicker">LATEST CONTENT</span><h2>Video Epen GTPS</h2></div>
+        <button class="section-refresh" type="button" data-video-refresh="home" aria-label="Muat ulang video terbaru"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 1 0 1 4"/><path d="M20 5v6h-6"/></svg></button>
+      </div>
+      <div class="video-grid home-video-grid" id="homeVideoGrid"></div>
+    </section>
+  </main>
+
+  <footer class="footer page-width"><strong>Epen GTPS</strong><span>Community, creator, dan partner network.</span></footer>
+  <script src="settings.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
