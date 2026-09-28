@@ -39,7 +39,7 @@ window.EPEN_CONFIG = {
         category: 'Information',
         title: 'Information Giveaway',
         url: 'https://whatsapp.com/channel/0029VbDsLl9LNSZxidjstX2E',
-        iconUrl: 'https://cdn.discordapp.com/attachments/1371532839132205089/1553999264550625331/Proyek_Baru_34_73DB9C1.png?ex=6abb4a18&is=6ab9f898&hm=6eb39e06ae82856ad284672cc963de15209194bad9569dc63a1df010a437120f&',
+        iconUrl: 'https://cdn.discordapp.com/attachments/1371532839132205089/1553999977171124244/Proyek_Baru_34_9035CD4.png?ex=6abb4ac2&is=6ab9f942&hm=07abe93aed1a87dbcf9b474b742e9ab163ba376dfe794970b1855da10e223cb0&',
         icon: 'whatsapp',
         target: '_blank'
       },
