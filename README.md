@@ -26,3 +26,9 @@ Website menampilkan 4 video pertama. Jika lebih banyak, tombol **Show More** aka
 
 ## Catatan
 Jika `youtubeChannelId` masih kosong atau API gagal, website memakai data fallback di `settings.js`, sehingga halaman tetap bisa tampil.
+
+
+## v6.2 — Video grid fix
+- Fixed Show More rendering as a grid column item on the home video section.
+- Show More now sits full-width below the video grid.
+- Added consistent 16:9 video layout and 3-line title clamp for home and partner videos.
