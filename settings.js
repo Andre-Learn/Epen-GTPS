@@ -78,7 +78,7 @@ window.EPEN_CONFIG = {
     // tetapi nilai ini disiapkan untuk pengembangan berikutnya.
     pageSize: 6,
     // Jumlah video maksimum yang diminta dari YouTube untuk satu feed.
-    fetchLimit: 24
+    fetchLimit: 24,
     
     cache: {
       enabled: true,
