@@ -106,6 +106,16 @@ function applySiteMetadata() {
   setMeta('meta[name="twitter:image"]', 'name', ogImageUrl);
 }
 
+function applyFooterScene() {
+  const site = SITE_CONFIG.site || {};
+  const sceneUrl = String(site.footerSceneUrl || '').trim();
+  if (!sceneUrl) return;
+
+  document.querySelectorAll('[data-footer-scene]').forEach(img => {
+    img.src = sceneUrl;
+  });
+}
+
 function applySiteImages() {
   const site = SITE_CONFIG.site || {};
   const logoUrl = String(site.logoUrl || '').trim();
@@ -492,6 +502,7 @@ function init() {
   renderActionButtons();
   try { applySiteMetadata(); } catch (error) { console.warn('Site metadata skipped:', error); }
   try { applySiteImages(); } catch (error) { console.warn('Site images skipped:', error); }
+  try { applyFooterScene(); } catch (error) { console.warn('Footer scene skipped:', error); }
   try { initTheme(); } catch (error) { console.warn('Theme init skipped:', error); }
   try { renderHomeVideos(); } catch (error) { console.warn('Home video render skipped:', error); }
 

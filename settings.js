@@ -19,6 +19,7 @@ window.EPEN_CONFIG = {
     description: 'Epen GTPS — Growtopia private server creator, community, videos, promoter, and partner network.',
     faviconUrl: 'https://cdn.discordapp.com/attachments/1371532839132205089/1553968672727371806/Proyek_Baru_25_A36F6C3.png?ex=6abb2d9a&is=6ab9dc1a&hm=a236a0a6c6ce5b0026f57613088fa29fd0e14b8f18d48f63050d6b92486602db&',
     ogImageUrl: 'https://cdn.discordapp.com/attachments/1371532839132205089/1553968672182239233/Proyek_Baru_33_01976A3.png?ex=6abb2d9a&is=6ab9dc1a&hm=c51123abaa001a4ddb9941448c78bc8f1861ac5c87e590e52f635ed170996f96&',
+    footerSceneUrl: 'https://cdn.discordapp.com/attachments/1371532839132205089/1554536722149146797/Proyek_Baru_37_F85454B.png?ex=6abd3ea4&is=6abbed24&hm=56ace0f3996d59a5170ea5135bdba8631256da2aa2da1a71326a385359ca0547&',
 
     // =====================================
     // BUTTON UTAMA
