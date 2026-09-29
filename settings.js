@@ -12,6 +12,13 @@ window.EPEN_CONFIG = {
     // Bisa diganti kapan saja tanpa mengedit HTML.
     logoUrl: "https://cdn.discordapp.com/attachments/1371532839132205089/1553968672727371806/Proyek_Baru_25_A36F6C3.png?ex=6abb2d9a&is=6ab9dc1a&hm=a236a0a6c6ce5b0026f57613088fa29fd0e14b8f18d48f63050d6b92486602db&",
     bannerUrl: "https://cdn.discordapp.com/attachments/1371532839132205089/1553968672182239233/Proyek_Baru_33_01976A3.png?ex=6abb2d9a&is=6ab9dc1a&hm=c51123abaa001a4ddb9941448c78bc8f1861ac5c87e590e52f635ed170996f96&",
+    
+     // =====================================
+    // SEO / SOCIAL PREVIEW
+    // =====================================
+    description: 'Epen GTPS — Growtopia private server creator, community, videos, promoter, and partner network.',
+    faviconUrl: 'https://cdn.discordapp.com/attachments/1371532839132205089/1553968672727371806/Proyek_Baru_25_A36F6C3.png?ex=6abb2d9a&is=6ab9dc1a&hm=a236a0a6c6ce5b0026f57613088fa29fd0e14b8f18d48f63050d6b92486602db&',
+    ogImageUrl: 'https://cdn.discordapp.com/attachments/1371532839132205089/1553968672182239233/Proyek_Baru_33_01976A3.png?ex=6abb2d9a&is=6ab9dc1a&hm=c51123abaa001a4ddb9941448c78bc8f1861ac5c87e590e52f635ed170996f96&',
 
     // =====================================
     // BUTTON UTAMA
@@ -72,10 +79,15 @@ window.EPEN_CONFIG = {
     pageSize: 6,
     // Jumlah video maksimum yang diminta dari YouTube untuk satu feed.
     fetchLimit: 24
+    
+    cache: {
+      enabled: true,
+      duration: 1800000,
+      useStaleOnError: true
+    }
   },
 
   epen: {
-    // Isi dengan Channel ID YouTube Epen GTPS.
     // Contoh: 'UCxxxxxxxxxxxxxxxxxxxxxx'
     youtubeChannelId: "UCg8u_12KwZlZn9ZhWM_TExw",
 
@@ -102,6 +114,7 @@ window.EPEN_CONFIG = {
         discord: 'https://discord.com/',
         youtube: 'https://youtube.com/'
       },
+      videoLimit: 4,
       youtubeChannelId: 'UCz9raHwx9TleY6VcZiIjmDA',
       videos: [
         { title: 'GTPS Community Update', videoId: 'dQw4w9WgXcQ', meta: 'GTPS Nusantara' },
@@ -121,6 +134,7 @@ window.EPEN_CONFIG = {
         discord: 'https://discord.com/',
         youtube: 'https://youtube.com/'
       },
+      videoLimit: 4,
       youtubeChannelId: 'UCakFHiJ1Q_3zoc81-71EMJQ',
       videos: [
         { title: 'Project Showcase', videoId: 'dQw4w9WgXcQ', meta: 'Growtopia Project' },
@@ -140,6 +154,7 @@ window.EPEN_CONFIG = {
         discord: 'https://discord.com/',
         youtube: 'https://youtube.com/'
       },
+      videoLimit: 4,
       youtubeChannelId: '',
       videos: [
         { title: 'Creator Tutorial', videoId: 'dQw4w9WgXcQ', meta: 'GTPS Creator' },

@@ -36,15 +36,7 @@ function renderActionButtons() {
   const site = SITE_CONFIG.site || {};
   const configured = Array.isArray(site.actionButtons) ? site.actionButtons : [];
 
-  // Backward compatibility for older settings.js files that only have actionIcons.
-  const legacyIcons = site.actionIcons || {};
-  const legacyFallback = site.actionIconFallback || {};
-  const buttons = configured.length ? configured : [
-    { id: 'discord', category: 'Community', title: 'Discord Community', url: '#', iconUrl: legacyIcons.discord || '', icon: legacyFallback.discord || 'discord', target: '_blank' },
-    { id: 'whatsapp', category: 'Community', title: 'WhatsApp Community', url: '#', iconUrl: legacyIcons.whatsapp || '', icon: legacyFallback.whatsapp || 'whatsapp', target: '_blank' },
-    { id: 'partners', category: 'Network', title: 'Lihat Partner Kami', url: 'partners.html', iconUrl: legacyIcons.partner || '', icon: legacyFallback.partner || 'users', target: '_self' },
-    { id: 'videos', category: 'Content', title: 'Lihat Video Epen GTPS', url: '#videos', iconUrl: legacyIcons.videos || '', icon: legacyFallback.videos || 'play', target: '_self' }
-  ];
+  const buttons = configured;
 
   container.innerHTML = buttons.map((button, index) => {
     const item = button && typeof button === 'object' ? button : {};
@@ -53,7 +45,7 @@ function renderActionButtons() {
     const title = String(item.title || `Button ${index + 1}`);
     const url = String(item.url || '#');
     const iconUrl = String(item.iconUrl || '').trim();
-    const iconName = String(item.icon || legacyFallback[id] || 'link').trim();
+    const iconName = String(item.icon || 'link').trim();
     const target = item.target === '_blank' ? '_blank' : '_self';
     const rel = target === '_blank' ? ' rel="noopener noreferrer"' : '';
     const icon = iconUrl
@@ -65,6 +57,53 @@ function renderActionButtons() {
       <span class="action-copy"><small>${escapeHtml(category)}</small><strong>${escapeHtml(title)}</strong></span>
     </a>`;
   }).join('');
+}
+
+function applySiteMetadata() {
+  const site = SITE_CONFIG.site || {};
+  const name = String(site.name || 'Epen GTPS').trim();
+  const description = String(site.description || '').trim();
+  const faviconUrl = String(site.faviconUrl || site.logoUrl || '').trim();
+  const ogImageUrl = String(site.ogImageUrl || site.bannerUrl || site.logoUrl || '').trim();
+
+  document.title = name;
+
+  const metaDescription = document.querySelector('meta[name="description"]');
+  if (metaDescription && description) metaDescription.setAttribute('content', description);
+
+  const themeMeta = document.querySelector('meta[name="theme-color"]');
+  if (themeMeta) themeMeta.setAttribute('content', '#6d28d9');
+
+  if (faviconUrl) {
+    let icon = document.querySelector('#siteFavicon');
+    if (!icon) {
+      icon = document.createElement('link');
+      icon.id = 'siteFavicon';
+      icon.rel = 'icon';
+      document.head.appendChild(icon);
+    }
+    icon.href = faviconUrl;
+  }
+
+  const setMeta = (selector, attr, value) => {
+    if (!value) return;
+    let el = document.querySelector(selector);
+    if (!el) {
+      el = document.createElement('meta');
+      el.setAttribute(attr, selector.includes('[property=') ? selector.match(/property=\"([^\"]+)/)?.[1] || '' : selector.match(/name=\"([^\"]+)/)?.[1] || '');
+      document.head.appendChild(el);
+    }
+    el.setAttribute('content', value);
+  };
+
+  setMeta('meta[property="og:title"]', 'property', name);
+  setMeta('meta[property="og:description"]', 'property', description);
+  setMeta('meta[property="og:image"]', 'property', ogImageUrl);
+  setMeta('meta[property="og:type"]', 'property', 'website');
+  setMeta('meta[name="twitter:card"]', 'name', ogImageUrl ? 'summary_large_image' : 'summary');
+  setMeta('meta[name="twitter:title"]', 'name', name);
+  setMeta('meta[name="twitter:description"]', 'name', description);
+  setMeta('meta[name="twitter:image"]', 'name', ogImageUrl);
 }
 
 function applySiteImages() {
@@ -114,6 +153,19 @@ function youtubePlayIcon() {
   return `<span class="youtube-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 7.5v9l8-4.5-8-4.5Z"/></svg></span>`;
 }
 
+function videoSkeletonCard() {
+  return `<article class="video-card video-skeleton-card" aria-hidden="true">
+    <div class="video-skeleton-thumb skeleton-shimmer"></div>
+    <div class="video-skeleton-info"><span class="skeleton-line skeleton-line-lg skeleton-shimmer"></span><span class="skeleton-line skeleton-line-sm skeleton-shimmer"></span></div>
+  </article>`;
+}
+
+function renderVideoSkeletons(container, count = 4, partner = false) {
+  if (!container) return;
+  const safeCount = Math.max(2, Math.min(12, Number(count) || 4));
+  container.innerHTML = `<div class="video-grid-inner is-loading">${Array.from({length: safeCount}, videoSkeletonCard).join('')}</div>`;
+}
+
 function videoCard(video, index = 0, scope = 'home') {
   const id = String(video.videoId || '');
   const thumb = youtubeThumb(id);
@@ -160,39 +212,121 @@ function renderVideoCollection(container, videos, scope) {
   });
 }
 
-async function fetchYoutubeVideos(channelId, limit = 24) {
-  if (!channelId) return [];
+function renderPartnerVideoCollection(container, videos, scope) {
+  if (!container) return;
+  const list = Array.isArray(videos) ? videos : [];
+  const cards = list.map((video, index) => videoCard(video, index, scope)).join('');
+  container.innerHTML = `<div class="video-grid-inner">${cards || '<p class="empty-content">Belum ada video dari partner ini.</p>'}</div>`;
+}
+
+function videoCacheConfig() {
+  const cfg = SITE_CONFIG.video?.cache || {};
+  const duration = Number(cfg.duration);
+  return {
+    enabled: cfg.enabled !== false,
+    duration: Number.isFinite(duration) && duration > 0 ? duration : 300000,
+    useStaleOnError: cfg.useStaleOnError !== false
+  };
+}
+
+function videoCacheKey(channelId, limit) {
+  return `epen-youtube-cache:v1:${channelId}:${limit}`;
+}
+
+function readVideoCache(channelId, limit) {
+  const cfg = videoCacheConfig();
+  if (!cfg.enabled) return null;
   try {
-    const response = await fetch(`/api/youtube?channelId=${encodeURIComponent(channelId)}&limit=${encodeURIComponent(limit)}`, { cache: 'no-store' });
+    const raw = localStorage.getItem(videoCacheKey(channelId, limit));
+    if (!raw) return null;
+    const cached = JSON.parse(raw);
+    if (!Array.isArray(cached.videos) || !cached.savedAt) return null;
+    return {
+      videos: cached.videos,
+      savedAt: Number(cached.savedAt),
+      fresh: Date.now() - Number(cached.savedAt) < cfg.duration
+    };
+  } catch (_) {
+    return null;
+  }
+}
+
+function writeVideoCache(channelId, limit, videos) {
+  const cfg = videoCacheConfig();
+  if (!cfg.enabled || !Array.isArray(videos) || !videos.length) return;
+  try {
+    localStorage.setItem(videoCacheKey(channelId, limit), JSON.stringify({
+      savedAt: Date.now(),
+      videos
+    }));
+  } catch (_) {}
+}
+
+async function fetchYoutubeVideos(channelId, limit = 24, options = {}) {
+  if (!channelId) return [];
+
+  const forceRefresh = Boolean(options.forceRefresh);
+  const cfg = videoCacheConfig();
+  const cached = forceRefresh ? null : readVideoCache(channelId, limit);
+  if (cached?.fresh) return cached.videos;
+
+  try {
+    const refreshQuery = forceRefresh ? `&refresh=${Date.now()}` : '';
+    const response = await fetch(`/api/youtube?channelId=${encodeURIComponent(channelId)}&limit=${encodeURIComponent(limit)}${refreshQuery}`, {
+      cache: forceRefresh ? 'no-store' : 'default'
+    });
     if (!response.ok) throw new Error(`YouTube API ${response.status}`);
     const data = await response.json();
-    return Array.isArray(data.videos) ? data.videos : [];
+    const videos = Array.isArray(data.videos) ? data.videos : [];
+    if (videos.length) writeVideoCache(channelId, limit, videos);
+    return videos;
   } catch (error) {
     console.warn('YouTube feed unavailable:', error);
+    if (cfg.useStaleOnError && cached?.videos?.length) return cached.videos;
     return [];
   }
 }
 
-async function renderHomeVideos() {
+async function renderHomeVideos(forceRefresh = false) {
   const grid = document.querySelector('#homeVideoGrid');
   if (!grid) return;
+  renderVideoSkeletons(grid, VIDEO_INITIAL_LIMIT);
   const channelId = SITE_CONFIG.epen?.youtubeChannelId || '';
   if (channelId) {
-    const videos = await fetchYoutubeVideos(channelId, SITE_CONFIG.video?.fetchLimit || 24);
+    const videos = await fetchYoutubeVideos(channelId, SITE_CONFIG.video?.fetchLimit || 24, { forceRefresh });
     if (videos.length) { renderVideoCollection(grid, videos, 'home'); return; }
   }
   renderVideoCollection(grid, epenVideos, 'home');
 }
 
-async function renderPartnerVideos(partner) {
+async function renderPartnerVideos(partner, forceRefresh = false) {
   const container = document.querySelector(`[data-partner-video="${CSS.escape(partner.id)}"]`);
   if (!container) return;
+
+  // Atur jumlah video per partner langsung dari settings.js.
+  // 0 / kosong = tampilkan semua video yang berhasil didapat.
+  const configuredLimit = Number(partner.videoLimit);
+  const limit = Number.isFinite(configuredLimit) && configuredLimit > 0 ? Math.floor(configuredLimit) : 0;
+  const globalFetchLimit = Number(SITE_CONFIG.video?.fetchLimit) || 24;
+  const fetchLimit = Math.min(50, Math.max(globalFetchLimit, limit || 0));
+
+  const applyLimit = (videos) => {
+    const list = Array.isArray(videos) ? videos : [];
+    return limit > 0 ? list.slice(0, limit) : list;
+  };
+
+  renderVideoSkeletons(container, Math.max(2, Math.min(limit || 4, 12)));
+
   const channelId = partner.youtubeChannelId || '';
   if (channelId) {
-    const videos = await fetchYoutubeVideos(channelId, SITE_CONFIG.video?.fetchLimit || 24);
-    if (videos.length) { renderVideoCollection(container, videos, `partner-${partner.id}`); return; }
+    const videos = await fetchYoutubeVideos(channelId, fetchLimit, { forceRefresh });
+    if (videos.length) {
+      renderPartnerVideoCollection(container, applyLimit(videos), `partner-${partner.id}`);
+      return;
+    }
   }
-  renderVideoCollection(container, partner.videos || [], `partner-${partner.id}`);
+
+  renderPartnerVideoCollection(container, applyLimit(partner.videos || []), `partner-${partner.id}`);
 }
 
 function setLinkButton(type, url) {
@@ -356,6 +490,7 @@ function initTheme() {
 
 function init() {
   renderActionButtons();
+  try { applySiteMetadata(); } catch (error) { console.warn('Site metadata skipped:', error); }
   try { applySiteImages(); } catch (error) { console.warn('Site images skipped:', error); }
   try { initTheme(); } catch (error) { console.warn('Theme init skipped:', error); }
   try { renderHomeVideos(); } catch (error) { console.warn('Home video render skipped:', error); }
@@ -365,12 +500,12 @@ function init() {
       button.classList.add('is-refreshing');
       setTimeout(() => button.classList.remove('is-refreshing'), 500);
       const key = button.dataset.videoRefresh || '';
-      if (key === 'home') renderHomeVideos();
+      if (key === 'home') renderHomeVideos(true);
       else if (key.startsWith('partner-')) {
         const partnerId = key.slice('partner-'.length);
         const partner = partners.find(item => item.id === partnerId);
         const container = document.querySelector(`[data-partner-video="${CSS.escape(partnerId)}"]`);
-        if (partner && container) renderPartnerVideos(partner);
+        if (partner && container) renderPartnerVideos(partner, true);
       }
     });
   });

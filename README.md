@@ -1,77 +1,42 @@
-# Epen GTPS v6.7
+# Epen GTPS v7.0
 
-## Pengaturan button dari `settings.js`
+Perubahan v7.0:
+- Partner search/filter dari `settings.js`.
+- YouTube loading skeleton saat feed sedang dimuat.
+- Favicon dan metadata SEO/social preview dapat diatur dari `settings.js`.
+- `actionButtons` menjadi satu-satunya sistem action button; legacy `actionIcons` / `actionIconFallback` sudah dihapus.
 
-Semua button utama di halaman `index.html` sekarang dibuat otomatis dari:
-
+## Partner search
+Atur di `settings.js`:
 ```js
-window.EPEN_CONFIG.site.actionButtons
-```
-
-Contoh:
-
-```js
-actionButtons: [
-  {
-    id: 'discord',
-    category: 'Community',
-    title: 'Discord Community',
-    url: 'https://discord.com/username',
-    iconUrl: '',
-    icon: 'discord',
-    target: '_blank'
-  },
-  {
-    id: 'telegram',
-    category: 'Community',
-    title: 'Telegram Community',
-    url: 'https://t.me/example',
-    iconUrl: '',
-    icon: 'link',
-    target: '_blank'
-  }
-]
-```
-
-### Field
-
-- `id`: ID unik button.
-- `category`: teks kecil di atas judul.
-- `title`: teks utama button.
-- `url`: link tujuan saat button diklik. Bisa URL eksternal, `#videos`, atau halaman seperti `partners.html`.
-- `iconUrl`: URL gambar icon. Kosongkan jika ingin memakai SVG fallback.
-- `icon`: fallback SVG. Pilihan bawaan: `discord`, `whatsapp`, `users`, `network`, `play`, `video`, `link`.
-- `target`: gunakan `_blank` untuk tab baru atau `_self` untuk halaman yang sama.
-
-### Menambah button baru
-
-Cukup tambahkan object baru ke array `actionButtons`. Tidak perlu mengubah `index.html` atau `script.js`.
-
-```js
-{
-  id: 'website',
-  category: 'Official',
-  title: 'Website Epen',
-  url: 'https://example.com',
-  iconUrl: 'https://example.com/icon.png',
-  icon: 'link',
-  target: '_blank'
+partnerSearch: {
+  enabled: true,
+  placeholder: 'Cari partner...'
 }
 ```
 
-Button akan muncul otomatis sesuai urutan object di array.
-
-## Gambar utama
-
+## SEO / favicon
 ```js
 site: {
+  name: 'Epen GTPS',
+  description: 'Deskripsi website...',
   logoUrl: 'https://example.com/logo.png',
-  bannerUrl: 'https://example.com/banner.jpg'
+  bannerUrl: 'https://example.com/banner.jpg',
+  faviconUrl: 'https://example.com/favicon.png',
+  ogImageUrl: 'https://example.com/share-image.jpg'
 }
 ```
+`faviconUrl` dipakai untuk favicon browser. `ogImageUrl` dipakai untuk Open Graph/Twitter metadata di browser. Untuk preview sosial crawler yang tidak menjalankan JavaScript, nilai OG idealnya juga dicantumkan langsung di HTML saat deployment.
 
-Banner mengikuti rasio gambar asli dan tidak dicrop.
+## Loading skeleton
+Skeleton otomatis muncul sebelum data YouTube selesai dimuat, baik di video Epen maupun video partner.
 
-## YouTube API
 
-API key tetap disimpan di Vercel Environment Variables sebagai `YOUTUBE_API_KEY` dan tidak dimasukkan ke `settings.js`.
+## v7.1 changes
+
+- YouTube video cache in `localStorage`, configurable from `settings.js` via `video.cache`. Default: 5 minutes.
+- Manual refresh buttons bypass the browser cache and request fresh data.
+- Stale cached videos can be shown when YouTube/API is temporarily unavailable.
+- YouTube loading skeletons are shown for the main feed and partner feeds.
+- Favicon and Open Graph/Twitter metadata remain configurable from `settings.js` using `faviconUrl` and `ogImageUrl`.
+- Removed the partner search feature from the previous v7.0 build because it was not requested.
