@@ -625,7 +625,7 @@ function openServerModal(server) {
     <h2 id="serverModalTitle">${escapeHtml(server.name || 'Server GTPS')}</h2>
     <p>${escapeHtml(server.description || 'GTPS Community')}</p>
     <div class="server-modal-links">
-      ${links.map(item => `<a class="server-modal-link" href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer"><span class="server-modal-link-icon">${item.icon}</span><span>${escapeHtml(item.label)}</span><b>›</b></a>`).join('')}
+      ${links.map(item => `<a class="server-modal-link" href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer"><div class="server-modal-link-icon" aria-hidden="true">${item.icon}</div><span class="server-modal-link-label">${escapeHtml(item.label)}</span><b>›</b></a>`).join('')}
     </div>`;
   modal.classList.add('is-open');
   modal.setAttribute('aria-hidden', 'false');
