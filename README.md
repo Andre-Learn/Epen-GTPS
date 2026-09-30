@@ -1,3 +1,8 @@
+
+## v8.9 update
+- Popup server link icons now use purple icon boxes.
+- Host Server globe icon is white inside the purple box.
+- WhatsApp and Discord use configured custom icon images inside the same box.
 # Epen GTPS v8.7 — Server GTPS Directory
 
 Added a new **Server GTPS** button on the home action list and a new `servers.html` page.
