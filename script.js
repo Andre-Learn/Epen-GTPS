@@ -546,9 +546,52 @@ function initTheme() {
   });
 }
 
+function renderPromoteSection() {
+  const section = document.querySelector('[data-promote-section]');
+  const promote = SITE_CONFIG.site?.promote;
+  if (!section || !promote?.enabled) {
+    if (section) section.hidden = true;
+    return;
+  }
+
+  const packages = Array.isArray(promote.packages) ? promote.packages : [];
+  if (!packages.length) {
+    section.hidden = true;
+    return;
+  }
+
+  section.hidden = false;
+  section.innerHTML = `
+    <div class="promote-heading">
+      <div>
+        <span class="section-kicker">PROMOTE SERVER</span>
+        <h2>${escapeHtml(promote.title || 'Promote GTPS')}</h2>
+        <p>${escapeHtml(promote.description || '')}</p>
+      </div>
+    </div>
+    <div class="promote-grid">
+      ${packages.map((item, index) => `
+        <article class="promote-card${item.popular ? ' is-popular' : ''}">
+          ${item.popular ? '<span class="promote-badge">POPULAR</span>' : ''}
+          <div class="promote-card-head">
+            <span class="promote-plan">${escapeHtml(item.name || `Paket ${index + 1}`)}</span>
+            ${item.description ? `<span class="promote-description">${escapeHtml(item.description)}</span>` : ''}
+          </div>
+          <div class="promote-price">${escapeHtml(item.price || '')}</div>
+          <ul class="promote-features">
+            ${(Array.isArray(item.features) ? item.features : []).map(feature => `<li><span aria-hidden="true">✓</span>${escapeHtml(feature)}</li>`).join('')}
+          </ul>
+          <a class="promote-cta" href="${escapeHtml(item.url || '#')}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.button || 'Pesan Sekarang')}<span aria-hidden="true">→</span></a>
+        </article>
+      `).join('')}
+    </div>
+  `;
+}
+
 function init() {
   renderGlobalFooter();
   renderActionButtons();
+  renderPromoteSection();
   try { applySiteMetadata(); } catch (error) { console.warn('Site metadata skipped:', error); }
   try { applySiteImages(); } catch (error) { console.warn('Site images skipped:', error); }
   try { initTheme(); } catch (error) { console.warn('Theme init skipped:', error); }

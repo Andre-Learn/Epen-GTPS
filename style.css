@@ -318,7 +318,7 @@ html[data-theme=dark] .socials a:hover{
 
 /* v6.0 — YouTube-like 16:9 thumbnails, refresh action, and progressive Show More */
 .video-grid-inner{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.partner-video-container{width:100%}.partner-video-container .video-grid-inner{grid-template-columns:repeat(2,minmax(0,1fr))}
-@media(max-width:560px){.video-grid-inner,.partner-video-container .video-grid-inner{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:start}.youtube-play{width:46px;height:32px;border-radius:9px}.youtube-play svg{width:18px;height:18px}.section-refresh{width:36px;height:36px;border-radius:12px}.section-refresh svg{width:17px;height:17px}}
+@media(max-width:560px){.video-grid-inner,.partner-video-container .video-grid-inner{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:start}.youtube-play{width:46px;height:32px;border-radius:9px}.youtube-play svg{width:18px;height:18px}.section-refresh{width:32px;height:32px;border-radius:11px}.section-refresh svg{width:17px;height:17px}}
 
 
 /* v6.3 — configurable site logo + banner from settings.js */
@@ -709,9 +709,9 @@ body > main { flex: 1 0 auto; width: 100%; }
   font-size: 9px;
 }
 .section-refresh {
-  width: 38px;
-  height: 38px;
-  padding: 9px;
+  width: 32px;
+  height: 32px;
+  padding: 7px;
   border: 1px solid color-mix(in srgb, var(--purple) 22%, var(--line));
   border-radius: 13px;
   background: var(--surface);
@@ -727,7 +727,18 @@ body > main { flex: 1 0 auto; width: 100%; }
   transition: transform .25s ease, filter .2s ease;
 }
 .section-refresh:hover img { transform: rotate(20deg) scale(1.04); }
-.section-refresh.is-refreshing img { animation: spinRefresh .65s linear infinite; }
+.section-refresh.is-refreshing {
+  color: #fff;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  border-color: #8b5cf6;
+}
+.section-refresh.is-refreshing img {
+  animation: spinRefresh .65s linear infinite;
+  filter: brightness(0) invert(1);
+}
+.section-refresh:not(.is-refreshing) img {
+  filter: brightness(0) saturate(100%) invert(40%) sepia(88%) saturate(1000%) hue-rotate(235deg) brightness(92%) contrast(96%);
+}
 .section-refresh:hover { transform: translateY(-1px); }
 .section-refresh:active { transform: translateY(0) scale(.95); }
 @media (max-width:560px) {
@@ -740,3 +751,27 @@ body > main { flex: 1 0 auto; width: 100%; }
   .video-grid-inner .video-info strong,
   .partner-video-container .video-info strong { font-size: 11px; line-height: 1.4; }
 }
+
+/* ================================
+   PROMOTE GTPS / PRICE LIST
+   ================================ */
+.promote-section{padding-top:8px;padding-bottom:56px}
+.promote-heading{display:flex;justify-content:space-between;align-items:end;margin-bottom:18px}
+.promote-heading h2{font:700 22px "Space Grotesk";margin:5px 0 5px;letter-spacing:-.025em}
+.promote-heading p{margin:0;color:var(--muted);font-size:12px;line-height:1.55}
+.promote-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.promote-card{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:var(--shadow-sm);overflow:hidden;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.promote-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);border-color:rgba(124,58,237,.28)}
+.promote-card.is-popular{border-color:rgba(124,58,237,.48);box-shadow:0 12px 30px rgba(109,40,217,.12)}
+.promote-badge{position:absolute;top:14px;right:14px;padding:5px 8px;border-radius:999px;background:var(--purple-soft);color:var(--purple);font-size:8px;font-weight:800;letter-spacing:.1em}
+.promote-card-head{display:flex;flex-direction:column;gap:5px;padding-right:70px}
+.promote-plan{font:700 15px "Space Grotesk";letter-spacing:-.01em}
+.promote-description{color:var(--muted);font-size:10px;line-height:1.45}
+.promote-price{margin:17px 0 14px;font:800 25px "Space Grotesk";letter-spacing:-.04em;color:var(--text)}
+.promote-features{list-style:none;margin:0 0 19px;padding:0;display:grid;gap:9px}
+.promote-features li{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:10px;line-height:1.35}
+.promote-features li span{width:17px;height:17px;display:grid;place-items:center;border-radius:50%;background:var(--purple-soft);color:var(--purple);font-size:9px;font-weight:800;flex:none}
+.promote-cta{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:39px;padding:10px 13px;border-radius:12px;background:var(--text);color:var(--surface);font-size:10px;font-weight:800;text-decoration:none;transition:transform .2s ease,background .2s ease,color .2s ease}
+.promote-cta:hover{transform:translateY(-1px);background:var(--purple);color:#fff}
+.promote-cta:active{transform:translateY(0) scale(.98)}
+@media(max-width:560px){.promote-section{padding-top:2px;padding-bottom:44px}.promote-grid{grid-template-columns:1fr;gap:11px}.promote-card{padding:17px;border-radius:18px}.promote-heading{margin-bottom:14px}.promote-heading h2{font-size:20px}.promote-heading p{font-size:11px}.promote-price{font-size:23px}}

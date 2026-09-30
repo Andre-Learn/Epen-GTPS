@@ -45,6 +45,37 @@ window.EPEN_CONFIG = {
     //            play, video, link.
     // url      : tujuan saat button diklik. Bisa URL, #section, atau halaman.
     // target   : '_blank' untuk tab baru atau '_self' untuk halaman yang sama.
+    // =====================================
+    // PROMOTE GTPS / PRICE LIST
+    // =====================================
+    promote: {
+      enabled: true,
+      title: 'Promote GTPS',
+      description: 'Promosikan server GTPS kamu bersama Epen GTPS.',
+      packages: [
+        {
+          id: 'basic',
+          name: 'Basic',
+          price: 'Rp5.000',
+          description: 'Cocok untuk promosi singkat.',
+          features: ['1x Promote', 'Post ke komunitas', 'Promosi server'],
+          popular: false,
+          url: 'https://discord.gg/aWBz8tn6QK',
+          button: 'Pesan Sekarang'
+        },
+        {
+          id: 'premium',
+          name: 'Premium',
+          price: 'Rp10.000',
+          description: 'Untuk exposure yang lebih besar.',
+          features: ['3x Promote', 'Prioritas promosi', 'Post ke komunitas'],
+          popular: true,
+          url: 'https://discord.gg/aWBz8tn6QK',
+          button: 'Pesan Sekarang'
+        }
+      ]
+    },
+
     actionButtons: [
       {
         id: 'discord',
