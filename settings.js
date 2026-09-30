@@ -76,6 +76,24 @@ window.EPEN_CONFIG = {
       ]
     },
 
+    // =====================================
+    // SERVER GTPS DIRECTORY
+    // =====================================
+    // Tambahkan object baru untuk setiap server GTPS.
+    // whatsapp / discord / host akan muncul di popup saat server dipilih.
+    servers: [
+      {
+        id: 'epen-gtps',
+        name: 'Epen GTPS',
+        logo: '',
+        status: 'Online',
+        description: 'Growtopia private server dan community Epen GTPS.',
+        whatsapp: 'https://whatsapp.com/channel/0029VbDsLl9LNSZxidjstX2E',
+        discord: 'https://discord.gg/aWBz8tn6QK',
+        host: 'https://epengtps.vercel.app'
+      }
+    ],
+
     actionButtons: [
       {
         id: 'discord',
@@ -102,6 +120,15 @@ window.EPEN_CONFIG = {
         url: 'partners.html',
         iconUrl: 'https://cdn.discordapp.com/attachments/1371532839132205089/1553999263950704701/Proyek_Baru_34_71025E1.png?ex=6abb4a18&is=6ab9f898&hm=411ae74772552863879ae5b1c6888511a7bfd4db57b378f9509a3ccc9d2671e0&',
         icon: 'users',
+        target: '_self'
+      },
+      {
+        id: 'servers',
+        category: 'Network',
+        title: 'Lihat Server GTPS',
+        url: 'servers.html',
+        iconUrl: '',
+        icon: 'network',
         target: '_self'
       },
       {

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#6d28d9" />
+  <meta name="description" content="Daftar server GTPS Epen GTPS." />
+  <meta property="og:title" content="Server GTPS — Epen GTPS" />
+  <meta property="og:description" content="Temukan server GTPS dan detail komunitasnya." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="" />
+  <link id="siteFavicon" rel="icon" href="" />
+  <title>Server GTPS — Epen GTPS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <script>
+    (() => {
+      try {
+        const saved = localStorage.getItem('epen-theme');
+        const systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (saved === 'dark' || (!saved && systemDark)) document.documentElement.dataset.theme = 'dark';
+      } catch (_) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="servers-page">
+  <header class="site-header">
+    <div class="header-inner page-width">
+      <a href="index.html" class="header-back" aria-label="Kembali ke halaman utama">Kembali</a>
+      <div class="header-page-title">Server GTPS</div>
+      <button class="theme-switch" type="button" id="themeButton" aria-label="Ganti tema" aria-pressed="false">
+        <span class="theme-switch-label theme-light-label">Light</span>
+        <span class="theme-switch-track" aria-hidden="true"><span class="theme-switch-knob"><span></span><i></i></span></span>
+        <span class="theme-switch-label theme-dark-label">Dark</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="page-width server-page-main">
+    <section class="server-intro">
+      <span class="section-kicker">EPEN GTPS DIRECTORY</span>
+      <h1>Server <span>GTPS.</span></h1>
+      <p>Temukan server GTPS, lihat detailnya, lalu pilih komunitas yang ingin kamu kunjungi.</p>
+    </section>
+
+    <section class="server-search" aria-label="Cari server GTPS">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
+      <input id="serverSearch" type="search" autocomplete="off" placeholder="Cari server GTPS..." aria-label="Cari server GTPS" />
+      <span id="serverCount" class="server-count"></span>
+    </section>
+
+    <section class="server-list" id="serverList" aria-label="Daftar server GTPS"></section>
+  </main>
+
+  <div class="server-modal" id="serverModal" aria-hidden="true">
+    <div class="server-modal-backdrop" data-server-close></div>
+    <section class="server-modal-card" role="dialog" aria-modal="true" aria-labelledby="serverModalTitle">
+      <button class="server-modal-close" type="button" data-server-close aria-label="Tutup">×</button>
+      <div class="server-modal-glow"></div>
+      <div class="server-modal-content" id="serverModalContent"></div>
+    </section>
+  </div>
+
+  <footer class="footer" data-site-footer></footer>
+  <script src="settings.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

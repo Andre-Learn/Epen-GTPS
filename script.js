@@ -546,6 +546,107 @@ function initTheme() {
   });
 }
 
+function serverLinkIcon(type) {
+  const common = 'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
+  const icons = {
+    whatsapp: `<svg ${common}><path d="M20 11.5a8 8 0 0 1-11.9 7L4 20l1.5-4A8 8 0 1 1 20 11.5Z"/><path d="M9.1 9.1c.2-.4.4-.5.7-.5h.5c.2 0 .4.1.5.4l.5 1.2c.1.2.1.4-.1.6l-.5.6c.5.9 1.2 1.6 2.1 2.1l.6-.5c.2-.2.4-.2.6-.1l1.2.5c.3.1.4.3.4.5v.5c0 .3-.1.5-.5.7-1 .4-2.4-.1-3.8-1.3-1.4-1.2-2.5-2.5-2.2-4.7Z"/></svg>`,
+    discord: `<svg ${common}><path d="M8.2 8.2A8 8 0 0 1 12 7.3a8 8 0 0 1 3.8.9"/><path d="M6.5 17.1c1.6 1.1 3.4 1.7 5.5 1.7s3.9-.6 5.5-1.7c.6-2.2.7-4.7.1-7.1-1.2-.8-2.4-1.2-3.8-1.4l-.5 1.1a8 8 0 0 0-2.6 0l-.5-1.1c-1.4.2-2.6.6-3.8 1.4-.6 2.4-.5 4.9.1 7.1Z"/><circle cx="9.2" cy="13.7" r=".7" fill="currentColor" stroke="none"/><circle cx="14.8" cy="13.7" r=".7" fill="currentColor" stroke="none"/></svg>`,
+    host: `<svg ${common}><circle cx="12" cy="12" r="8.5"/><path d="M3.8 9h16.4M3.8 15h16.4M12 3.5c2.1 2.3 3.2 5.1 3.2 8.5S14.1 18.2 12 20.5c-2.1-2.3-3.2-5.1-3.2-8.5S9.9 5.8 12 3.5Z"/></svg>`
+  };
+  return icons[type] || icons.host;
+}
+
+function renderServerDirectory() {
+  const list = document.querySelector('#serverList');
+  const search = document.querySelector('#serverSearch');
+  const count = document.querySelector('#serverCount');
+  if (!list || !search) return;
+
+  const servers = Array.isArray(SITE_CONFIG.site?.servers) ? SITE_CONFIG.site.servers : [];
+  let filtered = servers.slice();
+
+  const render = () => {
+    const query = search.value.trim().toLowerCase();
+    filtered = servers.filter(server => {
+      const haystack = [server.name, server.description, server.status].map(value => String(value || '')).join(' ').toLowerCase();
+      return !query || haystack.includes(query);
+    });
+    if (count) count.textContent = `${filtered.length} server`;
+    if (!filtered.length) {
+      list.innerHTML = `<div class="server-empty"><strong>Server tidak ditemukan</strong><span>Coba kata kunci lain.</span></div>`;
+      return;
+    }
+    list.innerHTML = filtered.map((server, index) => {
+      const logo = String(server.logo || '').trim();
+      const logoHtml = logo
+        ? `<img src="${escapeHtml(logo)}" alt="" loading="lazy">`
+        : `<span>${escapeHtml(String(server.name || 'G').slice(0, 1).toUpperCase())}</span>`;
+      const status = String(server.status || 'Online');
+      return `<button class="server-card" type="button" data-server-index="${servers.indexOf(server)}">
+        <span class="server-card-logo">${logoHtml}</span>
+        <span class="server-card-copy"><strong>${escapeHtml(server.name || 'Unnamed Server')}</strong><small>${escapeHtml(server.description || 'GTPS Community')}</small></span>
+        <span class="server-card-meta"><i class="server-status-dot ${status.toLowerCase().includes('offline') ? 'is-offline' : ''}"></i>${escapeHtml(status)}</span>
+        <span class="server-card-arrow" aria-hidden="true">›</span>
+      </button>`;
+    }).join('');
+  };
+
+  search.addEventListener('input', render);
+  list.addEventListener('click', event => {
+    const card = event.target.closest('[data-server-index]');
+    if (!card) return;
+    openServerModal(servers[Number(card.dataset.serverIndex)]);
+  });
+
+  render();
+}
+
+function openServerModal(server) {
+  const modal = document.querySelector('#serverModal');
+  const content = document.querySelector('#serverModalContent');
+  if (!modal || !content || !server) return;
+  const logo = String(server.logo || '').trim();
+  const logoHtml = logo
+    ? `<img src="${escapeHtml(logo)}" alt="${escapeHtml(server.name || 'Server')} logo">`
+    : `<span>${escapeHtml(String(server.name || 'G').slice(0, 1).toUpperCase())}</span>`;
+  const links = [
+    { key: 'whatsapp', label: 'WhatsApp', url: server.whatsapp, icon: serverLinkIcon('whatsapp') },
+    { key: 'discord', label: 'Discord', url: server.discord, icon: serverLinkIcon('discord') },
+    { key: 'host', label: 'Host Server', url: server.host, icon: serverLinkIcon('host') }
+  ].filter(item => String(item.url || '').trim());
+
+  content.innerHTML = `
+    <div class="server-modal-logo">${logoHtml}</div>
+    <span class="server-modal-status"><i class="server-status-dot ${String(server.status || '').toLowerCase().includes('offline') ? 'is-offline' : ''}"></i>${escapeHtml(server.status || 'Online')}</span>
+    <h2 id="serverModalTitle">${escapeHtml(server.name || 'Server GTPS')}</h2>
+    <p>${escapeHtml(server.description || 'GTPS Community')}</p>
+    <div class="server-modal-links">
+      ${links.map(item => `<a class="server-modal-link" href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">${item.icon}<span>${escapeHtml(item.label)}</span><b>›</b></a>`).join('')}
+    </div>`;
+  modal.classList.add('is-open');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('modal-open');
+}
+
+function closeServerModal() {
+  const modal = document.querySelector('#serverModal');
+  if (!modal) return;
+  modal.classList.remove('is-open');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('modal-open');
+}
+
+function initServerDirectory() {
+  if (!document.querySelector('#serverList')) return;
+  renderServerDirectory();
+  document.addEventListener('click', event => {
+    if (event.target.closest('[data-server-close]')) closeServerModal();
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') closeServerModal();
+  });
+}
+
 function renderPromoteSection() {
   const section = document.querySelector('[data-promote-section]');
   const promote = SITE_CONFIG.site?.promote;
@@ -592,6 +693,7 @@ function init() {
   renderGlobalFooter();
   renderActionButtons();
   renderPromoteSection();
+  try { initServerDirectory(); } catch (error) { console.warn('Server directory skipped:', error); }
   try { applySiteMetadata(); } catch (error) { console.warn('Site metadata skipped:', error); }
   try { applySiteImages(); } catch (error) { console.warn('Site images skipped:', error); }
   try { initTheme(); } catch (error) { console.warn('Theme init skipped:', error); }
