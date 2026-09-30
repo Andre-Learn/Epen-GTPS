@@ -40,3 +40,7 @@ Skeleton otomatis muncul sebelum data YouTube selesai dimuat, baik di video Epen
 - YouTube loading skeletons are shown for the main feed and partner feeds.
 - Favicon and Open Graph/Twitter metadata remain configurable from `settings.js` using `faviconUrl` and `ogImageUrl`.
 - Removed the partner search feature from the previous v7.0 build because it was not requested.
+
+
+## v7.6 Footer
+Footer scene/image dihapus. Footer sekarang menggunakan layout clean berbasis surface/card ala SkillUI, responsive untuk mobile dan desktop.
