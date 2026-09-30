@@ -221,6 +221,11 @@ function renderVideoSkeletons(container, count = 4, partner = false) {
   container.innerHTML = `<div class="video-grid-inner is-loading">${Array.from({length: safeCount}, videoSkeletonCard).join('')}</div>`;
 }
 
+function refreshButtonMarkup(label = 'Muat ulang video', key = '') {
+  const attr = key ? ` data-video-refresh="${escapeHtml(key)}"` : '';
+  return `<button class="section-refresh" type="button"${attr} aria-label="${escapeHtml(label)}"><img src="assets/icons/refresh-loop.png" alt="" aria-hidden="true"></button>`;
+}
+
 function videoCard(video, index = 0, scope = 'home') {
   const id = String(video.videoId || '');
   const thumb = youtubeThumb(id);
@@ -422,9 +427,7 @@ function partnerDetailMarkup(partner) {
         <div class="partner-expand-videos">
           <div class="section-title-row">
             <div><span class="section-kicker">PARTNER CONTENT</span><h4>Video Partner</h4></div>
-            <button class="section-refresh" type="button" data-video-refresh="partner-${escapeHtml(partner.id)}" aria-label="Muat ulang video partner">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 1 0 1 4"/><path d="M20 5v6h-6"/></svg>
-            </button>
+            ${refreshButtonMarkup(`Muat ulang video partner ${partner.name}`, `partner-${partner.id}`)}
           </div>
           <div class="partner-video-container" data-partner-video="${escapeHtml(partner.id)}"></div>
         </div>
@@ -551,19 +554,25 @@ function init() {
   try { initTheme(); } catch (error) { console.warn('Theme init skipped:', error); }
   try { renderHomeVideos(); } catch (error) { console.warn('Home video render skipped:', error); }
 
-  document.querySelectorAll('[data-video-refresh]').forEach(button => {
-    button.addEventListener('click', () => {
-      button.classList.add('is-refreshing');
-      setTimeout(() => button.classList.remove('is-refreshing'), 500);
-      const key = button.dataset.videoRefresh || '';
-      if (key === 'home') renderHomeVideos(true);
-      else if (key.startsWith('partner-')) {
-        const partnerId = key.slice('partner-'.length);
-        const partner = partners.find(item => item.id === partnerId);
-        const container = document.querySelector(`[data-partner-video="${CSS.escape(partnerId)}"]`);
-        if (partner && container) renderPartnerVideos(partner, true);
+  document.addEventListener('click', (event) => {
+    const button = event.target.closest('[data-video-refresh]');
+    if (!button) return;
+    button.classList.add('is-refreshing');
+    const key = button.dataset.videoRefresh || '';
+    if (key === 'home') {
+      renderHomeVideos(true).finally(() => button.classList.remove('is-refreshing'));
+    } else if (key.startsWith('partner-')) {
+      const partnerId = key.slice('partner-'.length);
+      const partner = partners.find(item => item.id === partnerId);
+      const container = document.querySelector(`[data-partner-video="${CSS.escape(partnerId)}"]`);
+      if (partner && container) {
+        renderPartnerVideos(partner, true).finally(() => button.classList.remove('is-refreshing'));
+      } else {
+        button.classList.remove('is-refreshing');
       }
-    });
+    } else {
+      button.classList.remove('is-refreshing');
+    }
   });
 
   const partnerList = document.querySelector('#partnerList');
