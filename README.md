@@ -51,3 +51,7 @@ Footer scene/image dihapus. Footer sekarang menggunakan layout clean berbasis su
 - Logo, nama, deskripsi, dan menu footer dikonfigurasi dari `settings.js` melalui `site.footerNav` dan `site.footerDescription`.
 - Menu default: Home, Partner, Discord, WhatsApp.
 - Untuk halaman baru, cukup tambahkan `<footer class="footer" data-site-footer></footer>` sebelum script `settings.js` dan `script.js`.
+
+
+## v7.9
+Footer dibuat sticky secara layout: body menggunakan flex column, main mengambil ruang tersisa, dan footer hanya setinggi kontennya sehingga tidak ada area kosong di bawah footer.
