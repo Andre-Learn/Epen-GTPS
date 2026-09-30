@@ -44,3 +44,10 @@ Skeleton otomatis muncul sebelum data YouTube selesai dimuat, baik di video Epen
 
 ## v7.6 Footer
 Footer scene/image dihapus. Footer sekarang menggunakan layout clean berbasis surface/card ala SkillUI, responsive untuk mobile dan desktop.
+
+
+## v7.7 — Global Footer
+- Footer global dirender dari `script.js` ke `<footer data-site-footer></footer>` pada setiap halaman.
+- Logo, nama, deskripsi, dan menu footer dikonfigurasi dari `settings.js` melalui `site.footerNav` dan `site.footerDescription`.
+- Menu default: Home, Partner, Discord, WhatsApp.
+- Untuk halaman baru, cukup tambahkan `<footer class="footer" data-site-footer></footer>` sebelum script `settings.js` dan `script.js`.

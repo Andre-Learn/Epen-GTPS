@@ -17,8 +17,22 @@ window.EPEN_CONFIG = {
     // SEO / SOCIAL PREVIEW
     // =====================================
     description: 'Epen GTPS — Growtopia private server creator, community, videos, promoter, and partner network.',
+    footerDescription: 'Community, creator, dan partner network.',
     faviconUrl: 'https://cdn.discordapp.com/attachments/1371532839132205089/1553968672727371806/Proyek_Baru_25_A36F6C3.png?ex=6abb2d9a&is=6ab9dc1a&hm=a236a0a6c6ce5b0026f57613088fa29fd0e14b8f18d48f63050d6b92486602db&',
     ogImageUrl: 'https://cdn.discordapp.com/attachments/1371532839132205089/1553968672182239233/Proyek_Baru_33_01976A3.png?ex=6abb2d9a&is=6ab9dc1a&hm=c51123abaa001a4ddb9941448c78bc8f1861ac5c87e590e52f635ed170996f96&',
+
+    // =====================================
+    // GLOBAL FOOTER
+    // =====================================
+    // Footer ini dipakai otomatis di semua halaman yang memiliki
+    // <footer data-site-footer></footer>.
+    // Untuk menambah/mengubah menu, cukup edit daftar di bawah.
+    footerNav: [
+      { id: 'home', label: 'Home', url: 'index.html', target: '_self' },
+      { id: 'partners', label: 'Partner', url: 'partners.html', target: '_self' },
+      { id: 'discord', label: 'Discord', url: 'https://discord.gg/aWBz8tn6QK', target: '_blank' },
+      { id: 'whatsapp', label: 'WhatsApp', url: 'https://whatsapp.com/channel/0029VbDsLl9LNSZxidjstX2E', target: '_blank' }
+    ],
 
     // =====================================
     // BUTTON UTAMA

@@ -29,6 +29,60 @@ function actionFallbackSvg(name) {
   return icons[name] || icons.link;
 }
 
+function footerIcon(id) {
+  const common = 'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
+  const icons = {
+    home: `<svg ${common}><path d="m3 10 9-7 9 7"/><path d="M5 9v11h14V9"/><path d="M9 20v-6h6v6"/></svg>`,
+    partners: `<svg ${common}><circle cx="9" cy="8" r="3"/><path d="M3 20v-1.5A4.5 4.5 0 0 1 7.5 14h3A4.5 4.5 0 0 1 15 18.5V20"/><path d="M16 5.2a3 3 0 0 1 0 5.6M18 14.2a4.5 4.5 0 0 1 3 4.3V20"/></svg>`,
+    discord: `<svg ${common}><path d="M8.2 8.2A8 8 0 0 1 12 7.3a8 8 0 0 1 3.8.9"/><path d="M6.5 17.1c1.6 1.1 3.4 1.7 5.5 1.7s3.9-.6 5.5-1.7c.6-2.2.7-4.7.1-7.1-1.2-.8-2.4-1.2-3.8-1.4l-.5 1.1a8 8 0 0 0-2.6 0l-.5-1.1c-1.4.2-2.6.6-3.8 1.4-.6 2.4-.5 4.9.1 7.1Z"/><circle cx="9.2" cy="13.7" r=".7" fill="currentColor" stroke="none"/><circle cx="14.8" cy="13.7" r=".7" fill="currentColor" stroke="none"/></svg>`,
+    whatsapp: `<svg ${common}><path d="M20 11.5a8 8 0 0 1-11.9 7L4 20l1.5-4A8 8 0 1 1 20 11.5Z"/><path d="M9.1 9.1c.2-.4.4-.5.7-.5h.5c.2 0 .4.1.5.4l.5 1.2c.1.2.1.4-.1.6l-.5.6c.5.9 1.2 1.6 2.1 2.1l.6-.5c.2-.2.4-.2.6-.1l1.2.5c.3.1.4.3.4.5v.5c0 .3-.1.5-.5.7-1 .4-2.4-.1-3.8-1.3-1.4-1.2-2.5-2.5-2.2-4.7Z"/></svg>`
+  };
+  return icons[id] || icons.home;
+}
+
+function renderGlobalFooter() {
+  const footer = document.querySelector('[data-site-footer]');
+  if (!footer) return;
+
+  const site = SITE_CONFIG.site || {};
+  const name = String(site.name || 'Epen GTPS');
+  const logoUrl = String(site.logoUrl || '').trim();
+  const description = String(site.footerDescription || 'Community, creator, dan partner network.');
+  const nav = Array.isArray(site.footerNav) ? site.footerNav : [];
+
+  const logo = logoUrl
+    ? `<img class="global-footer-logo" src="${escapeHtml(logoUrl)}" alt="${escapeHtml(name)} logo" loading="lazy">`
+    : `<span class="global-footer-logo-fallback">E</span>`;
+
+  const links = nav.map((item, index) => {
+    const id = String(item?.id || `footer-${index + 1}`);
+    const label = String(item?.label || 'Link');
+    const url = String(item?.url || '#');
+    const target = item?.target === '_blank' ? '_blank' : '_self';
+    const rel = target === '_blank' ? ' rel="noopener noreferrer"' : '';
+    return `<a class="global-footer-link footer-link-${escapeHtml(id)}" href="${escapeHtml(url)}" target="${target}"${rel}>${footerIcon(id)}<span>${escapeHtml(label)}</span></a>`;
+  }).join('');
+
+  footer.innerHTML = `
+    <div class="global-footer-inner page-width">
+      <div class="global-footer-top">
+        <a class="global-footer-brand" href="index.html" aria-label="${escapeHtml(name)} home">
+          ${logo}
+          <span>${escapeHtml(name)}</span>
+        </a>
+        <p class="global-footer-description">${escapeHtml(description)}</p>
+      </div>
+      <nav class="global-footer-nav" aria-label="Footer navigation">
+        ${links}
+      </nav>
+      <div class="global-footer-divider"></div>
+      <div class="global-footer-bottom">
+        <span>© ${new Date().getFullYear()} ${escapeHtml(name)}</span>
+        <span>Made for the GTPS community.</span>
+      </div>
+    </div>`;
+}
+
 function renderActionButtons() {
   const container = document.querySelector('#actionList');
   if (!container) return;
@@ -490,6 +544,7 @@ function initTheme() {
 }
 
 function init() {
+  renderGlobalFooter();
   renderActionButtons();
   try { applySiteMetadata(); } catch (error) { console.warn('Site metadata skipped:', error); }
   try { applySiteImages(); } catch (error) { console.warn('Site images skipped:', error); }
