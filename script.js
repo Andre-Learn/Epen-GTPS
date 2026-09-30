@@ -548,10 +548,14 @@ function initTheme() {
 
 function serverLinkIcon(type) {
   const common = 'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
+  const configured = SITE_CONFIG.site?.serverLinkIcons?.[type];
+  if (configured && type !== 'host') {
+    return `<img class="server-link-icon" src="${escapeHtml(configured)}" alt="" aria-hidden="true">`;
+  }
   const icons = {
+    host: `<svg ${common}><circle cx="12" cy="12" r="8.5"/><path d="M3.8 9h16.4M3.8 15h16.4M12 3.5c2.1 2.3 3.2 5.1 3.2 8.5S14.1 18.2 12 20.5c-2.1-2.3-3.2-5.1-3.2-8.5S9.9 5.8 12 3.5Z"/></svg>`,
     whatsapp: `<svg ${common}><path d="M20 11.5a8 8 0 0 1-11.9 7L4 20l1.5-4A8 8 0 1 1 20 11.5Z"/><path d="M9.1 9.1c.2-.4.4-.5.7-.5h.5c.2 0 .4.1.5.4l.5 1.2c.1.2.1.4-.1.6l-.5.6c.5.9 1.2 1.6 2.1 2.1l.6-.5c.2-.2.4-.2.6-.1l1.2.5c.3.1.4.3.4.5v.5c0 .3-.1.5-.5.7-1 .4-2.4-.1-3.8-1.3-1.4-1.2-2.5-2.5-2.2-4.7Z"/></svg>`,
-    discord: `<svg ${common}><path d="M8.2 8.2A8 8 0 0 1 12 7.3a8 8 0 0 1 3.8.9"/><path d="M6.5 17.1c1.6 1.1 3.4 1.7 5.5 1.7s3.9-.6 5.5-1.7c.6-2.2.7-4.7.1-7.1-1.2-.8-2.4-1.2-3.8-1.4l-.5 1.1a8 8 0 0 0-2.6 0l-.5-1.1c-1.4.2-2.6.6-3.8 1.4-.6 2.4-.5 4.9.1 7.1Z"/><circle cx="9.2" cy="13.7" r=".7" fill="currentColor" stroke="none"/><circle cx="14.8" cy="13.7" r=".7" fill="currentColor" stroke="none"/></svg>`,
-    host: `<svg ${common}><circle cx="12" cy="12" r="8.5"/><path d="M3.8 9h16.4M3.8 15h16.4M12 3.5c2.1 2.3 3.2 5.1 3.2 8.5S14.1 18.2 12 20.5c-2.1-2.3-3.2-5.1-3.2-8.5S9.9 5.8 12 3.5Z"/></svg>`
+    discord: `<svg ${common}><path d="M8.2 8.2A8 8 0 0 1 12 7.3a8 8 0 0 1 3.8.9"/><path d="M6.5 17.1c1.6 1.1 3.4 1.7 5.5 1.7s3.9-.6 5.5-1.7c.6-2.2.7-4.7.1-7.1-1.2-.8-2.4-1.2-3.8-1.4l-.5 1.1a8 8 0 0 0-2.6 0l-.5-1.1c-1.4.2-2.6.6-3.8 1.4-.6 2.4-.5 4.9.1 7.1Z"/><circle cx="9.2" cy="13.7" r=".7" fill="currentColor" stroke="none"/><circle cx="14.8" cy="13.7" r=".7" fill="currentColor" stroke="none"/></svg>`
   };
   return icons[type] || icons.host;
 }

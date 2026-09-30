@@ -80,6 +80,12 @@ window.EPEN_CONFIG = {
     // SERVER GTPS DIRECTORY
     // =====================================
     // Tambahkan object baru untuk setiap server GTPS.
+    // Icon link pada popup server. Kosongkan URL jika ingin memakai fallback bawaan.
+    serverLinkIcons: {
+      whatsapp: 'https://cdn.discordapp.com/attachments/1371532839132205089/1553999977171124244/Proyek_Baru_34_9035CD4.png?ex=6abb4ac2&is=6ab9f942&hm=07abe93aed1a87dbcf9b474b742e9ab163ba376dfe794970b1855da10e223cb0&',
+      discord: 'https://cdn.discordapp.com/attachments/1371532839132205089/1553999265045549106/Proyek_Baru_34_A5DF0C3.png?ex=6abb4a18&is=6ab9f898&hm=c22e9f7204f471acd25f42b9801ca9052817eb07b98cd3b92fefdbd9de35b873&'
+    },
+
     // whatsapp / discord / host akan muncul di popup saat server dipilih.
     servers: [
       {
