@@ -581,7 +581,7 @@ function renderPromoteSection() {
           <ul class="promote-features">
             ${(Array.isArray(item.features) ? item.features : []).map(feature => `<li><span class="promote-feature-icon" aria-hidden="true">+</span>${escapeHtml(feature)}</li>`).join('')}
           </ul>
-          <a class="promote-cta" href="${escapeHtml(item.url || '#')}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.button || 'Pesan Sekarang')}<span aria-hidden="true">→</span></a>
+          <a class="promote-cta" href="${escapeHtml(item.url || '#')}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.button || 'Pesan Sekarang')}</a>
         </article>
       `).join('')}
     </div>

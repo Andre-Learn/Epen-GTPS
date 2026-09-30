@@ -775,3 +775,9 @@ body > main { flex: 1 0 auto; width: 100%; }
 .promote-cta:hover{transform:translateY(-1px);background:#6d28d9;color:#fff;box-shadow:0 10px 22px rgba(124,58,237,.24)}
 .promote-cta:active{transform:translateY(0) scale(.98)}
 @media(max-width:560px){.promote-section{padding-top:2px;padding-bottom:44px}.promote-grid{grid-template-columns:1fr;gap:11px}.promote-card{padding:17px;border-radius:18px}.promote-heading{margin-bottom:14px}.promote-heading h2{font-size:20px}.promote-heading p{font-size:11px}.promote-price{font-size:23px}}
+
+/* v8.6 — Promote CTA uses the same purple treatment as the main action buttons. */
+.promote-cta{background:linear-gradient(105deg,#6d28d9,#8b5cf6);color:#fff;box-shadow:0 8px 20px rgba(109,40,217,.15);transition:transform .2s ease,box-shadow .2s ease,filter .2s ease}
+.promote-cta:hover{background:linear-gradient(105deg,#6d28d9,#8b5cf6);color:#fff;transform:translateY(-2px);box-shadow:0 11px 25px rgba(109,40,217,.23);filter:saturate(1.04)}
+.promote-cta:active{transform:translateY(0)}
+.promote-cta span{display:none}
