@@ -10,16 +10,16 @@ window.EPEN_CONFIG = {
     // bannerUrl: 'https://example.com/banner.jpg',
     //
     // Bisa diganti kapan saja tanpa mengedit HTML.
-    logoUrl: "https://cdn.discordapp.com/attachments/1371532839132205089/1553968672727371806/Proyek_Baru_25_A36F6C3.png?ex=6abb2d9a&is=6ab9dc1a&hm=a236a0a6c6ce5b0026f57613088fa29fd0e14b8f18d48f63050d6b92486602db&",
-    bannerUrl: "https://cdn.discordapp.com/attachments/1371532839132205089/1553968672182239233/Proyek_Baru_33_01976A3.png?ex=6abb2d9a&is=6ab9dc1a&hm=c51123abaa001a4ddb9941448c78bc8f1861ac5c87e590e52f635ed170996f96&",
+    logoUrl: "/assets/logo.png",
+    bannerUrl: "/assets/banner.png",
     
      // =====================================
     // SEO / SOCIAL PREVIEW
     // =====================================
     description: 'Epen GTPS — Growtopia private server creator, community, videos, promoter, and partner network.',
     footerDescription: 'Community, creator, dan partner network.',
-    faviconUrl: 'https://cdn.discordapp.com/attachments/1371532839132205089/1553968672727371806/Proyek_Baru_25_A36F6C3.png?ex=6abb2d9a&is=6ab9dc1a&hm=a236a0a6c6ce5b0026f57613088fa29fd0e14b8f18d48f63050d6b92486602db&',
-    ogImageUrl: 'https://cdn.discordapp.com/attachments/1371532839132205089/1553968672182239233/Proyek_Baru_33_01976A3.png?ex=6abb2d9a&is=6ab9dc1a&hm=c51123abaa001a4ddb9941448c78bc8f1861ac5c87e590e52f635ed170996f96&',
+    faviconUrl: '/assets/logo.png',
+    ogImageUrl: '/assets/banner.png',
 
     // =====================================
     // GLOBAL FOOTER
@@ -50,25 +50,45 @@ window.EPEN_CONFIG = {
     // =====================================
     promote: {
       enabled: true,
-      title: 'Promote GTPS',
+      title: 'Price Promote GTPS',
       description: 'Promosikan server GTPS kamu bersama Epen GTPS.',
       packages: [
         {
-          id: 'basic',
-          name: 'Basic',
+          id: 'normal',
+          name: 'Normal',
           price: 'Rp5.000',
-          description: 'Cocok untuk promosi singkat.',
-          features: ['1x Promote', 'Post ke komunitas', 'Promosi server'],
+          description: 'Harga terjangkau dan cocok untuk server baru.',
+          features: ['Slowlest upload', 'Di proses sesuai antrian', 'Harga paling terjangkau'],
           popular: false,
           url: 'https://discord.gg/aWBz8tn6QK',
           button: 'Pesan Sekarang'
         },
         {
-          id: 'premium',
-          name: 'Premium',
-          price: 'Rp10.000',
-          description: 'Untuk exposure yang lebih besar.',
-          features: ['3x Promote', 'Prioritas promosi', 'Post ke komunitas'],
+          id: 'skip',
+          name: 'Skip',
+          price: 'Rp7.000',
+          description: 'Mendapatkan prioritas terlebih dahulu.',
+          features: ['Faster upload', 'Di proses lebih cepat', 'Prioritas upload'],
+          popular: true,
+          url: 'https://discord.gg/aWBz8tn6QK',
+          button: 'Pesan Sekarang'
+        },
+        {
+          id: 'ms',
+          name: 'Mega Skip',
+          price: 'Rp15.000',
+          description: 'Mendapatkan prioritas upload paling tinggi.',
+          features: ['High faster uploaf ', 'Di proses paling cepat', 'Prioritas upload lebih tinggi'],
+          popular: true,
+          url: 'https://discord.gg/aWBz8tn6QK',
+          button: 'Pesan Sekarang'
+        },
+        {
+          id: 'skipall',
+          name: 'Skip All',
+          price: 'Rp??.000',
+          description: 'Skip semua antrian, untuk harga chat Epen.',
+          features: ['Super faster uploaf ', 'Skip semua antrian', 'Prioritas upload paling tinggi'],
           popular: true,
           url: 'https://discord.gg/aWBz8tn6QK',
           button: 'Pesan Sekarang'
@@ -82,21 +102,61 @@ window.EPEN_CONFIG = {
     // Tambahkan object baru untuk setiap server GTPS.
     // Icon link pada popup server. Kosongkan URL jika ingin memakai fallback bawaan.
     serverLinkIcons: {
-      whatsapp: 'https://cdn.discordapp.com/attachments/1371532839132205089/1553999977171124244/Proyek_Baru_34_9035CD4.png?ex=6abb4ac2&is=6ab9f942&hm=07abe93aed1a87dbcf9b474b742e9ab163ba376dfe794970b1855da10e223cb0&',
-      discord: 'https://cdn.discordapp.com/attachments/1371532839132205089/1553999265045549106/Proyek_Baru_34_A5DF0C3.png?ex=6abb4a18&is=6ab9f898&hm=c22e9f7204f471acd25f42b9801ca9052817eb07b98cd3b92fefdbd9de35b873&'
+      whatsapp: '/assets/icons/whatsapp.png',
+      discord: '/assets/icons/discord.png'
     },
 
     // whatsapp / discord / host akan muncul di popup saat server dipilih.
     servers: [
       {
-        id: 'epen-gtps',
-        name: 'Epen GTPS',
-        logo: '',
+        id: 'nova',
+        name: 'Nova Ps',
+        logo: 'https://qu.ax/KbkVp',
         status: 'Online',
-        description: 'Growtopia private server dan community Epen GTPS.',
-        whatsapp: 'https://whatsapp.com/channel/0029VbDsLl9LNSZxidjstX2E',
-        discord: 'https://discord.gg/aWBz8tn6QK',
-        host: 'https://epengtps.vercel.app'
+        description: 'Growtopia private server terbaru 2026.',
+        whatsapp: 'https://chat.whatsapp.com/Hh2XwUpwaVyE2cPIkuZuXi?s=cl&p=a&mlu=4&ilr=4',
+        discord: 'https://discord.gg/nzmHvWMTG',
+        host: 'https://gtpshosting.web.id/how-to-play/NovaPs'
+      },
+      {
+        id: 'tera',
+        name: 'Tera Ps',
+        logo: 'https://qu.ax/Zo1Am',
+        status: 'Online',
+        description: 'Growtopia private server terbaru 2026.',
+        whatsapp: 'https://chat.whatsapp.com/KxCNIaXCYlPBKFO1Cpw2LH?mode=gi_t',
+        discord: 'https://discord.gg/9AgqrZ7aYu',
+        host: 'https://gtpshosting.web.id/how-to-play/TeraPS'
+      },
+      {
+        id: 'draco',
+        name: 'Draco Ps',
+        logo: 'https://qu.ax/iuehn',
+        status: 'Online',
+        description: 'Growtopia private server terbaru 2026.',
+        whatsapp: 'https://chat.whatsapp.com/FavXmPnPOtd4ZFe15xuZDC',
+        discord: '',
+        host: 'https://gtpshosting.web.id/how-to-play/DracoPs'
+      },
+      {
+        id: 'growy',
+        name: 'Growy',
+        logo: 'https://qu.ax/Zo1Am',
+        status: 'Online',
+        description: 'Growtopia private server terbaru 2026.',
+        whatsapp: 'https://chat.whatsapp.com/JQDaqkILa8i6k6v45Xod7K',
+        discord: 'https://discord.gg/Mz9Aerw8f',
+        host: 'https://fyrefly.tech/how-to-play/Growy'
+      },
+      {
+        id: 'sniff',
+        name: 'Sniff Ps',
+        logo: 'https://qu.ax/fk90g',
+        status: 'Online',
+        description: 'Growtopia private server terbaru 2026.',
+        whatsapp: 'https://chat.whatsapp.com/BtUM9L4pDMZKW7p1sqd9fk',
+        discord: 'https://discord.gg/TCVBaYS7F7',
+        host: 'https://dash.gtps.cloud/how-to-play/8564'
       }
     ],
 
@@ -106,7 +166,7 @@ window.EPEN_CONFIG = {
         category: 'Promote',
         title: 'Buy Promote GTPS',
         url: 'https://discord.gg/aWBz8tn6QK',
-        iconUrl: 'https://cdn.discordapp.com/attachments/1371532839132205089/1553999265045549106/Proyek_Baru_34_A5DF0C3.png?ex=6abb4a18&is=6ab9f898&hm=c22e9f7204f471acd25f42b9801ca9052817eb07b98cd3b92fefdbd9de35b873&',
+        iconUrl: '/assets/icons/discord.png',
         icon: 'discord',
         target: '_blank'
       },
@@ -115,7 +175,7 @@ window.EPEN_CONFIG = {
         category: 'Information',
         title: 'Information Giveaway',
         url: 'https://whatsapp.com/channel/0029VbDsLl9LNSZxidjstX2E',
-        iconUrl: 'https://cdn.discordapp.com/attachments/1371532839132205089/1553999977171124244/Proyek_Baru_34_9035CD4.png?ex=6abb4ac2&is=6ab9f942&hm=07abe93aed1a87dbcf9b474b742e9ab163ba376dfe794970b1855da10e223cb0&',
+        iconUrl: '/assets/icons/whatsapp.png',
         icon: 'whatsapp',
         target: '_blank'
       },
@@ -124,7 +184,7 @@ window.EPEN_CONFIG = {
         category: 'Network',
         title: 'Lihat Partner Kami',
         url: 'partners.html',
-        iconUrl: 'https://cdn.discordapp.com/attachments/1371532839132205089/1553999263950704701/Proyek_Baru_34_71025E1.png?ex=6abb4a18&is=6ab9f898&hm=411ae74772552863879ae5b1c6888511a7bfd4db57b378f9509a3ccc9d2671e0&',
+        iconUrl: '/assets/icons/partners.png',
         icon: 'users',
         target: '_self'
       },
@@ -185,8 +245,8 @@ window.EPEN_CONFIG = {
       short: 'GN',
       tagline: 'Promoter GTPS',
       description: 'Subscribe = 1 Account Free.',
-      logo: 'https://cdn.discordapp.com/attachments/1371532839132205089/1553968672727371806/Proyek_Baru_25_A36F6C3.png?ex=6abb2d9a&is=6ab9dc1a&hm=a236a0a6c6ce5b0026f57613088fa29fd0e14b8f18d48f63050d6b92486602db&',
-      banner: 'https://cdn.discordapp.com/attachments/1371532839132205089/1553968672182239233/Proyek_Baru_33_01976A3.png?ex=6abb2d9a&is=6ab9dc1a&hm=c51123abaa001a4ddb9941448c78bc8f1861ac5c87e590e52f635ed170996f96&',
+      logo: '/assets/partners/vincent-logo.png',
+      banner: '/assets/partners/vincent-banner.png',
       links: {
         whatsapp: 'https://wa.me/',
         discord: 'https://discord.com/',
