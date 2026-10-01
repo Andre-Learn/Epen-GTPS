@@ -11,9 +11,41 @@ const epenVideos = SITE_CONFIG.epen?.videos || [];
 const VIDEO_INITIAL_LIMIT = SITE_CONFIG.video?.initialLimit || 4;
 const VIDEO_PAGE_SIZE = SITE_CONFIG.video?.pageSize || 4;
 
+const YOUTUBE_VIDEO_ID_RE = /^[A-Za-z0-9_-]{11}$/;
+
 const escapeHtml = value => String(value ?? '').replace(/[&<>'"]/g, c => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#039;', '"': '&quot;'
 }[c]));
+
+// Security helpers: configuration is editable client-side, so never trust URLs
+// coming from settings.js. Only safe web/internal URLs are allowed.
+function safeUrl(value, options = {}) {
+  const raw = String(value ?? '').trim();
+  if (!raw) return '';
+  if (raw === '#') return '#';
+  if (raw.startsWith('#') || raw.startsWith('./') || raw.startsWith('../') || (raw.startsWith('/') && !raw.startsWith('//'))) return raw;
+  if (raw.startsWith('//') || /[\u0000-\u001F\u007F]/.test(raw)) return '';
+  try {
+    const url = new URL(raw, window.location.origin);
+    if (url.protocol !== 'https:' && url.protocol !== 'http:') return '';
+    if (options.sameOriginOnly && url.origin !== window.location.origin) return '';
+    return url.href;
+  } catch (_) {
+    return '';
+  }
+}
+
+function safeImageUrl(value) {
+  const url = safeUrl(value);
+  if (!url) return '';
+  try {
+    const parsed = new URL(url, window.location.origin);
+    return parsed.protocol === 'https:' || (parsed.protocol === 'http:' && parsed.origin === window.location.origin) ? url : '';
+  } catch (_) {
+    return '';
+  }
+}
+
 
 function actionFallbackSvg(name) {
   const common = 'width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
@@ -46,7 +78,7 @@ function renderGlobalFooter() {
 
   const site = SITE_CONFIG.site || {};
   const name = String(site.name || 'Epen GTPS');
-  const logoUrl = String(site.logoUrl || '').trim();
+  const logoUrl = safeImageUrl(site.logoUrl);
   const description = String(site.footerDescription || 'Community, creator, dan partner network.');
   const nav = Array.isArray(site.footerNav) ? site.footerNav : [];
 
@@ -57,7 +89,7 @@ function renderGlobalFooter() {
   const links = nav.map((item, index) => {
     const id = String(item?.id || `footer-${index + 1}`);
     const label = String(item?.label || 'Link');
-    const url = String(item?.url || '#');
+    const url = safeUrl(item?.url) || '#';
     const target = item?.target === '_blank' ? '_blank' : '_self';
     const rel = target === '_blank' ? ' rel="noopener noreferrer"' : '';
     return `<a class="global-footer-link footer-link-${escapeHtml(id)}" href="${escapeHtml(url)}" target="${target}"${rel}>${footerIcon(id)}<span>${escapeHtml(label)}</span></a>`;
@@ -97,8 +129,8 @@ function renderActionButtons() {
     const id = String(item.id || `action-${index + 1}`);
     const category = String(item.category || 'Link');
     const title = String(item.title || `Button ${index + 1}`);
-    const url = String(item.url || '#');
-    const iconUrl = String(item.iconUrl || '').trim();
+    const url = safeUrl(item.url) || '#';
+    const iconUrl = safeImageUrl(item.iconUrl);
     const iconName = String(item.icon || 'link').trim();
     const target = item.target === '_blank' ? '_blank' : '_self';
     const rel = target === '_blank' ? ' rel="noopener noreferrer"' : '';
@@ -117,8 +149,8 @@ function applySiteMetadata() {
   const site = SITE_CONFIG.site || {};
   const name = String(site.name || 'Epen GTPS').trim();
   const description = String(site.description || '').trim();
-  const faviconUrl = String(site.faviconUrl || site.logoUrl || '').trim();
-  const ogImageUrl = String(site.ogImageUrl || site.bannerUrl || site.logoUrl || '').trim();
+  const faviconUrl = safeImageUrl(site.faviconUrl || site.logoUrl);
+  const ogImageUrl = safeImageUrl(site.ogImageUrl || site.bannerUrl || site.logoUrl);
 
   document.title = name;
 
@@ -163,8 +195,8 @@ function applySiteMetadata() {
 
 function applySiteImages() {
   const site = SITE_CONFIG.site || {};
-  const logoUrl = String(site.logoUrl || '').trim();
-  const bannerUrl = String(site.bannerUrl || '').trim();
+  const logoUrl = safeImageUrl(site.logoUrl);
+  const bannerUrl = safeImageUrl(site.bannerUrl);
 
   // Main logo: header + profile avatar.
   document.querySelectorAll('[data-site-logo]').forEach(el => {
@@ -177,7 +209,7 @@ function applySiteImages() {
   const banner = document.querySelector('[data-site-banner]');
   if (banner && bannerUrl) {
     banner.classList.add('has-site-banner');
-    banner.style.backgroundImage = `url(\"${String(bannerUrl).replace(/\"/g, '%22')}\")`;
+    banner.style.backgroundImage = `url(\"${bannerUrl.replace(/\"/g, '%22')}\")`;
 
     // Keep the banner proportional to the actual image. The CSS defaults to
     // the recommended 16:5 ratio, then this upgrades it automatically when
@@ -228,6 +260,7 @@ function refreshButtonMarkup(label = 'Muat ulang video', key = '') {
 
 function videoCard(video, index = 0, scope = 'home') {
   const id = String(video.videoId || '');
+  if (!YOUTUBE_VIDEO_ID_RE.test(id)) return '';
   const thumb = youtubeThumb(id);
   return `<article class="video-card" data-video-index="${index}" data-video-scope="${scope}">
     <a class="video-thumb" href="https://www.youtube.com/watch?v=${encodeURIComponent(id)}" target="_blank" rel="noopener" aria-label="Buka ${escapeHtml(video.title)} di YouTube">
@@ -390,9 +423,10 @@ async function renderPartnerVideos(partner, forceRefresh = false) {
 }
 
 function setLinkButton(type, url) {
-  if (!url || url === '#') return '';
+  const safe = safeUrl(url);
+  if (!safe || safe === '#') return '';
   const labels = { whatsapp: 'WhatsApp', discord: 'Discord', youtube: 'YouTube' };
-  return `<a class="detail-link" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${iconSvg(type)}<span>${labels[type] || 'Link'}</span></a>`;
+  return `<a class="detail-link" href="${escapeHtml(safe)}" target="_blank" rel="noopener noreferrer">${iconSvg(type)}<span>${labels[type] || 'Link'}</span></a>`;
 }
 
 function partnerDetailMarkup(partner) {
@@ -406,17 +440,19 @@ function partnerDetailMarkup(partner) {
     ? partner.videos.map(videoCard).join('')
     : '<p class="empty-content">Belum ada video dari partner ini.</p>';
 
-  const logo = partner.logo
-    ? `<img src="${escapeHtml(partner.logo)}" alt="Logo ${escapeHtml(partner.name)}" loading="lazy">`
+  const partnerLogo = safeImageUrl(partner.logo);
+  const logo = partnerLogo
+    ? `<img src="${escapeHtml(partnerLogo)}" alt="Logo ${escapeHtml(partner.name)}" loading="lazy">`
     : `<span>${escapeHtml(partner.short)}</span>`;
 
-  const banner = partner.banner
-    ? `<img src="${escapeHtml(partner.banner)}" alt="Banner ${escapeHtml(partner.name)}" loading="lazy"><div class="partner-expand-banner-overlay"></div>`
+  const partnerBanner = safeImageUrl(partner.banner);
+  const banner = partnerBanner
+    ? `<img src="${escapeHtml(partnerBanner)}" alt="Banner ${escapeHtml(partner.name)}" loading="lazy"><div class="partner-expand-banner-overlay"></div>`
     : `<div class="partner-expand-banner-fallback"><span>${escapeHtml(partner.name)}</span></div>`;
 
   return `
     <div class="partner-expand" aria-hidden="true">
-      <div class="partner-expand-banner${partner.banner ? ' has-partner-banner' : ''}">${banner}</div>
+      <div class="partner-expand-banner${partnerBanner ? ' has-partner-banner' : ''}">${banner}</div>
       <div class="partner-expand-content">
         <div class="partner-expand-logo">${logo}</div>
         <span class="section-kicker">PARTNER PROFILE</span>
@@ -442,7 +478,7 @@ function renderPartners() {
   list.innerHTML = partners.map(partner => `
     <article class="partner-accordion" data-partner="${escapeHtml(partner.id)}">
       <button class="partner-item" type="button" aria-expanded="false" aria-controls="partner-panel-${escapeHtml(partner.id)}">
-        <span class="partner-item-logo">${partner.logo ? `<img src="${escapeHtml(partner.logo)}" alt="" loading="lazy">` : escapeHtml(partner.short)}</span>
+        <span class="partner-item-logo">${safeImageUrl(partner.logo) ? `<img src="${escapeHtml(safeImageUrl(partner.logo))}" alt="" loading="lazy">` : escapeHtml(partner.short)}</span>
         <span class="partner-item-copy"><strong>${escapeHtml(partner.name)}</strong><small>${escapeHtml(partner.tagline)}</small></span>
         <span class="partner-item-toggle" aria-hidden="true"><span class="toggle-plus">+</span><span class="toggle-minus">−</span></span>
       </button>
@@ -548,7 +584,7 @@ function initTheme() {
 
 function serverLinkIcon(type) {
   const common = 'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
-  const configured = SITE_CONFIG.site?.serverLinkIcons?.[type];
+  const configured = safeImageUrl(SITE_CONFIG.site?.serverLinkIcons?.[type]);
   if (configured && type !== 'host') {
     return `<img class="server-link-icon" src="${escapeHtml(configured)}" alt="" aria-hidden="true">`;
   }
@@ -581,7 +617,7 @@ function renderServerDirectory() {
       return;
     }
     list.innerHTML = filtered.map((server, index) => {
-      const logo = String(server.logo || '').trim();
+      const logo = safeImageUrl(server.logo);
       const logoHtml = logo
         ? `<img src="${escapeHtml(logo)}" alt="" loading="lazy">`
         : `<span>${escapeHtml(String(server.name || 'G').slice(0, 1).toUpperCase())}</span>`;
@@ -609,14 +645,14 @@ function openServerModal(server) {
   const modal = document.querySelector('#serverModal');
   const content = document.querySelector('#serverModalContent');
   if (!modal || !content || !server) return;
-  const logo = String(server.logo || '').trim();
+  const logo = safeImageUrl(server.logo);
   const logoHtml = logo
     ? `<img src="${escapeHtml(logo)}" alt="${escapeHtml(server.name || 'Server')} logo">`
     : `<span>${escapeHtml(String(server.name || 'G').slice(0, 1).toUpperCase())}</span>`;
   const links = [
-    { key: 'whatsapp', label: 'WhatsApp', url: server.whatsapp, icon: serverLinkIcon('whatsapp') },
-    { key: 'discord', label: 'Discord', url: server.discord, icon: serverLinkIcon('discord') },
-    { key: 'host', label: 'Host Server', url: server.host, icon: serverLinkIcon('host') }
+    { key: 'whatsapp', label: 'WhatsApp', url: safeUrl(server.whatsapp), icon: serverLinkIcon('whatsapp') },
+    { key: 'discord', label: 'Discord', url: safeUrl(server.discord), icon: serverLinkIcon('discord') },
+    { key: 'host', label: 'Host Server', url: safeUrl(server.host), icon: serverLinkIcon('host') }
   ].filter(item => String(item.url || '').trim());
 
   content.innerHTML = `
@@ -686,7 +722,7 @@ function renderPromoteSection() {
           <ul class="promote-features">
             ${(Array.isArray(item.features) ? item.features : []).map(feature => `<li><span class="promote-feature-icon" aria-hidden="true">+</span>${escapeHtml(feature)}</li>`).join('')}
           </ul>
-          <a class="promote-cta" href="${escapeHtml(item.url || '#')}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.button || 'Pesan Sekarang')}</a>
+          <a class="promote-cta" href="${escapeHtml(safeUrl(item.url) || '#')}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.button || 'Pesan Sekarang')}</a>
         </article>
       `).join('')}
     </div>
