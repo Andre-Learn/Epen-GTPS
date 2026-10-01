@@ -111,7 +111,7 @@ window.EPEN_CONFIG = {
       {
         id: 'nova',
         name: 'Nova Ps',
-        logo: 'https://qu.ax/KbkVp',
+        logo: 'https://a.top4top.io/p_3926ju9oh1.jpg',
         status: 'Online',
         description: 'Growtopia private server terbaru 2026.',
         whatsapp: 'https://chat.whatsapp.com/Hh2XwUpwaVyE2cPIkuZuXi?s=cl&p=a&mlu=4&ilr=4',
@@ -121,7 +121,7 @@ window.EPEN_CONFIG = {
       {
         id: 'tera',
         name: 'Tera Ps',
-        logo: 'https://qu.ax/Zo1Am',
+        logo: 'https://i.top4top.io/p_3926n9vtm1.jpg',
         status: 'Online',
         description: 'Growtopia private server terbaru 2026.',
         whatsapp: 'https://chat.whatsapp.com/KxCNIaXCYlPBKFO1Cpw2LH?mode=gi_t',
@@ -131,7 +131,7 @@ window.EPEN_CONFIG = {
       {
         id: 'draco',
         name: 'Draco Ps',
-        logo: 'https://qu.ax/iuehn',
+        logo: 'https://a.top4top.io/p_392669yva1.jpg',
         status: 'Online',
         description: 'Growtopia private server terbaru 2026.',
         whatsapp: 'https://chat.whatsapp.com/FavXmPnPOtd4ZFe15xuZDC',
@@ -141,7 +141,7 @@ window.EPEN_CONFIG = {
       {
         id: 'growy',
         name: 'Growy',
-        logo: 'https://qu.ax/Zo1Am',
+        logo: 'https://d.uguu.se/yywAMbxZ.jpg',
         status: 'Online',
         description: 'Growtopia private server terbaru 2026.',
         whatsapp: 'https://chat.whatsapp.com/JQDaqkILa8i6k6v45Xod7K',
@@ -151,7 +151,7 @@ window.EPEN_CONFIG = {
       {
         id: 'sniff',
         name: 'Sniff Ps',
-        logo: 'https://qu.ax/fk90g',
+        logo: 'https://l.top4top.io/p_3926rdvye1.jpg',
         status: 'Online',
         description: 'Growtopia private server terbaru 2026.',
         whatsapp: 'https://chat.whatsapp.com/BtUM9L4pDMZKW7p1sqd9fk',
