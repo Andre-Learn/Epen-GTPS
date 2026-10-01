@@ -89,26 +89,30 @@ window.EPEN_CONFIG = {
     // whatsapp / discord / host akan muncul di popup saat server dipilih.
     servers: [
       {
-        id: 'nova',
-        name: 'NOVA PS',
-        logo: 'https://cdn.discordapp.com/attachments/1371532839132205089/1554769595968004107/Proyek_Baru_32_56A2380.png?backend=b2&ex=6abe1785&is=6abcc605&hm=750be8c11f62cce1af4735035a0ba96e69cde89a8c9db398c555077730cd218f&',
+        id: 'epen-gtps',
+        featured: true,
+        name: 'Epen GTPS',
+        logo: '',
         status: 'Online',
-        description: 'Growtopia Private Server Terbaru.',
-        whatsapp: 'https://chat.whatsapp.com/Hh2XwUpwaVyE2cPIkuZuXi?s=cl&p=a&mlu=4&ilr=4',
-        discord: 'https://discord.gg/nzmHvWMTG',
-        host: 'https://gtpshosting.web.id/how-to-play/NovaPsp'
-      },
-      {
-        id: 'draco',
-        name: 'DRACO PS',
-        logo: 'https://cdn.discordapp.com/attachments/1371532839132205089/1554769814738702396/IMG-20260929-WA0025.jpg?backend=b2&ex=6abe17ba&is=6abcc63a&hm=0b113783851018799f94084c59c2fbcedacac1686ebbb8e372849dc74efe82c5&',
-        status: 'Online',
-        description: 'Growtopia Private Server Terbaru.',
-        whatsapp: 'https://chat.whatsapp.com/FavXmPnPOtd4ZFe15xuZDC',
-        discord: '',
-        host: 'https://gtpshosting.web.id/how-to-play/DracoPs'
+        description: 'Growtopia private server dan community Epen GTPS.',
+        whatsapp: 'https://whatsapp.com/channel/0029VbDsLl9LNSZxidjstX2E',
+        discord: 'https://discord.gg/aWBz8tn6QK',
+        host: 'https://epengtps.vercel.app'
       }
     ],
+
+    // =====================================
+    // FEATURED PARTNER / SERVER
+    // =====================================
+    // Set featured: true pada partner/server yang ingin ditampilkan
+    // di section Featured halaman utama.
+    featured: {
+      enabled: true,
+      title: 'Featured',
+      description: 'Partner dan server pilihan dari jaringan Epen GTPS.',
+      maxPartners: 3,
+      maxServers: 3
+    },
 
     actionButtons: [
       {
@@ -191,6 +195,7 @@ window.EPEN_CONFIG = {
   partners: [
     {
       id: 'Vincent',
+      featured: true,
       name: 'Vincent GTPS',
       short: 'GN',
       tagline: 'Promoter GTPS',

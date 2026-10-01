@@ -651,6 +651,69 @@ function initServerDirectory() {
   });
 }
 
+function renderFeaturedSection() {
+  const section = document.querySelector('[data-featured-section]');
+  const partnerContainer = document.querySelector('#featuredPartnerList');
+  const serverContainer = document.querySelector('#featuredServerList');
+  if (!section || !partnerContainer || !serverContainer) return;
+
+  const config = SITE_CONFIG.site?.featured || {};
+  if (config.enabled === false) {
+    section.hidden = true;
+    return;
+  }
+
+  const maxPartners = Math.max(0, Number(config.maxPartners ?? 3) || 0);
+  const maxServers = Math.max(0, Number(config.maxServers ?? 3) || 0);
+  const featuredPartners = partners.filter(item => item?.featured === true).slice(0, maxPartners);
+  const servers = Array.isArray(SITE_CONFIG.site?.servers) ? SITE_CONFIG.site.servers : [];
+  const featuredServers = servers.filter(item => item?.featured === true).slice(0, maxServers);
+
+  if (!featuredPartners.length && !featuredServers.length) {
+    section.hidden = true;
+    return;
+  }
+
+  section.hidden = false;
+  const title = String(config.title || 'Featured');
+  const description = String(config.description || 'Partner dan server pilihan dari jaringan Epen GTPS.');
+  const headingTitle = section.querySelector('h2');
+  const headingDescription = section.querySelector('.featured-description');
+  if (headingTitle) headingTitle.textContent = title;
+  if (headingDescription) headingDescription.textContent = description;
+
+  const partnerGroup = section.querySelector('[data-featured-partners]');
+  const serverGroup = section.querySelector('[data-featured-servers]');
+  if (partnerGroup) partnerGroup.hidden = !featuredPartners.length;
+  if (serverGroup) serverGroup.hidden = !featuredServers.length;
+
+  partnerContainer.innerHTML = featuredPartners.map(partner => {
+    const logo = String(partner.logo || '').trim();
+    const logoHtml = logo
+      ? `<img src="${escapeHtml(logo)}" alt="" loading="lazy">`
+      : `<span>${escapeHtml(String(partner.short || partner.name || 'P').slice(0, 2).toUpperCase())}</span>`;
+    return `<a class="featured-card featured-partner-card" href="partners.html?partner=${encodeURIComponent(partner.id)}">
+      <span class="featured-card-logo">${logoHtml}</span>
+      <span class="featured-card-copy"><strong>${escapeHtml(partner.name || 'Partner')}</strong><small>${escapeHtml(partner.tagline || 'Partner Epen GTPS')}</small></span>
+      <span class="featured-card-arrow" aria-hidden="true">›</span>
+    </a>`;
+  }).join('');
+
+  serverContainer.innerHTML = featuredServers.map(server => {
+    const logo = String(server.logo || '').trim();
+    const logoHtml = logo
+      ? `<img src="${escapeHtml(logo)}" alt="" loading="lazy">`
+      : `<span>${escapeHtml(String(server.name || 'G').slice(0, 1).toUpperCase())}</span>`;
+    const status = String(server.status || 'Online');
+    const offline = status.toLowerCase().includes('offline');
+    return `<a class="featured-card featured-server-card" href="servers.html?server=${encodeURIComponent(server.id)}">
+      <span class="featured-card-logo">${logoHtml}</span>
+      <span class="featured-card-copy"><strong>${escapeHtml(server.name || 'Server GTPS')}</strong><small><i class="server-status-dot${offline ? ' is-offline' : ''}"></i>${escapeHtml(status)} · ${escapeHtml(server.description || 'GTPS Community')}</small></span>
+      <span class="featured-card-arrow" aria-hidden="true">›</span>
+    </a>`;
+  }).join('');
+}
+
 function renderPromoteSection() {
   const section = document.querySelector('[data-promote-section]');
   const promote = SITE_CONFIG.site?.promote;
@@ -696,8 +759,16 @@ function renderPromoteSection() {
 function init() {
   renderGlobalFooter();
   renderActionButtons();
+  renderFeaturedSection();
   renderPromoteSection();
   try { initServerDirectory(); } catch (error) { console.warn('Server directory skipped:', error); }
+  if (document.querySelector('#serverList')) {
+    const requestedServer = new URLSearchParams(location.search).get('server');
+    if (requestedServer) {
+      const requested = (SITE_CONFIG.site?.servers || []).find(item => String(item?.id || '') === requestedServer);
+      if (requested) requestAnimationFrame(() => openServerModal(requested));
+    }
+  }
   try { applySiteMetadata(); } catch (error) { console.warn('Site metadata skipped:', error); }
   try { applySiteImages(); } catch (error) { console.warn('Site images skipped:', error); }
   try { initTheme(); } catch (error) { console.warn('Theme init skipped:', error); }

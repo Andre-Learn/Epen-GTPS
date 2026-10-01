@@ -850,3 +850,66 @@ body.modal-open{overflow:hidden}
   .server-modal-card{width:calc(100vw - 28px);border-radius:22px;max-height:calc(100vh - 28px);overflow-x:hidden}
   .server-modal-content{padding:30px 16px 17px}
 }
+
+
+/* v9.2 — Featured Partner / Server + responsive desktop/mobile layout */
+.featured-section{padding:6px 0 38px}
+.featured-heading{margin-bottom:16px}
+.featured-description{margin:5px 0 0;color:var(--muted);font-size:11px;line-height:1.55}
+.featured-layout{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start}
+.featured-group{min-width:0;padding:15px;border:1px solid var(--line);border-radius:20px;background:color-mix(in srgb,var(--surface) 92%,transparent);box-shadow:var(--shadow-sm)}
+.featured-group[hidden]{display:none}
+.featured-group-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:11px}
+.featured-group-head>div{min-width:0}
+.featured-label{display:block;color:var(--purple);font-size:8px;font-weight:900;letter-spacing:.13em}
+.featured-group-head h3{margin:3px 0 0;font:700 16px/1.15 "Space Grotesk";letter-spacing:-.025em}
+.featured-group-head>a{flex:none;color:var(--purple);font-size:9px;font-weight:800;text-decoration:none;white-space:nowrap}
+.featured-group-head>a:hover{text-decoration:underline}
+.featured-cards{display:grid;gap:9px}
+.featured-card{display:grid;grid-template-columns:44px minmax(0,1fr) 16px;align-items:center;gap:10px;min-width:0;padding:9px 10px;border:1px solid var(--line);border-radius:15px;background:var(--surface);color:var(--text);text-decoration:none;box-shadow:var(--shadow-sm);transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease,background .2s ease}
+.featured-card:hover{transform:translateY(-2px);border-color:#cbb5f4;box-shadow:var(--shadow-md);background:var(--surface)}
+.featured-card:active{transform:translateY(0) scale(.995)}
+.featured-card-logo{width:44px;height:44px;display:grid;place-items:center;overflow:hidden;border-radius:13px;background:linear-gradient(145deg,#c4b5fd,#6d28d9);color:#fff;font:700 15px "Space Grotesk";flex:none}
+.featured-card-logo img{width:100%;height:100%;display:block;object-fit:cover}
+.featured-card-copy{display:grid;gap:4px;min-width:0}
+.featured-card-copy strong{font-size:12px;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.featured-card-copy small{display:flex;align-items:center;gap:5px;min-width:0;color:var(--muted);font-size:9px;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.featured-card-copy small .server-status-dot{width:6px;height:6px;flex:none}
+.featured-card-arrow{color:var(--muted);font-size:21px;line-height:1;text-align:right}
+
+@media(min-width:900px){
+  .featured-section{padding-top:10px;padding-bottom:42px}
+  .featured-layout{gap:16px}
+  .featured-group{padding:17px}
+  .featured-card{grid-template-columns:48px minmax(0,1fr) 18px;padding:10px 11px}
+  .featured-card-logo{width:48px;height:48px}
+  .featured-card-copy strong{font-size:13px}
+}
+
+@media(max-width:700px){
+  .featured-layout{grid-template-columns:1fr;gap:11px}
+  .featured-group{padding:13px;border-radius:18px}
+  .featured-group-head{margin-bottom:10px}
+}
+
+@media(max-width:560px){
+  .featured-section{padding-top:2px;padding-bottom:32px}
+  .featured-heading{margin-bottom:13px}
+  .featured-description{font-size:10px}
+  .featured-group{padding:12px;border-radius:17px}
+  .featured-group-head h3{font-size:15px}
+  .featured-group-head>a{font-size:8px}
+  .featured-card{grid-template-columns:42px minmax(0,1fr) 14px;gap:9px;padding:9px}
+  .featured-card-logo{width:42px;height:42px;border-radius:12px;font-size:14px}
+  .featured-card-copy strong{font-size:11px}
+  .featured-card-copy small{font-size:8px}
+  .featured-card-arrow{font-size:19px}
+}
+
+@media(max-width:380px){
+  .featured-group{padding:10px}
+  .featured-card{grid-template-columns:38px minmax(0,1fr) 12px;gap:8px;padding:8px}
+  .featured-card-logo{width:38px;height:38px;border-radius:11px}
+  .featured-card-copy strong{font-size:10.5px}
+  .featured-card-copy small{font-size:7.5px}
+}

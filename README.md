@@ -1,3 +1,5 @@
+Epen GTPS v9.2 — Featured Partner/Server + responsive desktop/mobile layout
+
 
 ## v8.9 update
 - Popup server link icons now use purple icon boxes.
