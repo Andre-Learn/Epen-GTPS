@@ -90,7 +90,6 @@ window.EPEN_CONFIG = {
     servers: [
       {
         id: 'epen-gtps',
-        featured: true,
         name: 'Epen GTPS',
         logo: '',
         status: 'Online',
@@ -100,19 +99,6 @@ window.EPEN_CONFIG = {
         host: 'https://epengtps.vercel.app'
       }
     ],
-
-    // =====================================
-    // FEATURED PARTNER / SERVER
-    // =====================================
-    // Set featured: true pada partner/server yang ingin ditampilkan
-    // di section Featured halaman utama.
-    featured: {
-      enabled: true,
-      title: 'Featured',
-      description: 'Partner dan server pilihan dari jaringan Epen GTPS.',
-      maxPartners: 3,
-      maxServers: 3
-    },
 
     actionButtons: [
       {
@@ -195,7 +181,6 @@ window.EPEN_CONFIG = {
   partners: [
     {
       id: 'Vincent',
-      featured: true,
       name: 'Vincent GTPS',
       short: 'GN',
       tagline: 'Promoter GTPS',
