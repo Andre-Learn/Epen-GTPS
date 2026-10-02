@@ -1572,3 +1572,33 @@ html[data-theme=dark] .promote-card.is-popular{box-shadow:0 14px 34px rgba(0,0,0
 
 /* Partner social icon correction: YouTube uses its local colored mark. */
 .detail-link-icon-youtube{filter:none!important;object-fit:contain}
+
+
+/* Footer alignment — icon + label are treated as one centered group. */
+.global-footer-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+}
+.global-footer-link .global-footer-icon {
+  width: 22px !important;
+  height: 22px !important;
+  flex: 0 0 22px !important;
+  display: block;
+  object-fit: contain;
+}
+.global-footer-link > span:last-child {
+  display: block;
+  line-height: 1.2;
+  margin: 0;
+}
+@media (max-width: 700px) {
+  .global-footer-link { gap: 10px; }
+  .global-footer-link .global-footer-icon { width: 21px !important; height: 21px !important; flex-basis: 21px !important; }
+}
+@media (max-width: 430px) {
+  .global-footer-link { gap: 9px; }
+  .global-footer-link .global-footer-icon { width: 20px !important; height: 20px !important; flex-basis: 20px !important; }
+}

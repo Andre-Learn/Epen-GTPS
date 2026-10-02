@@ -226,14 +226,45 @@ function renderActionButtons() {
 function applySiteMetadata() {
   const site = SITE_CONFIG.site || {};
   const name = String(site.name || 'Epen GTPS').trim();
-  const description = String(site.description || '').trim();
+  const key = getCurrentPageKey();
+  const pageSEO = site.pageSEO?.[key] || {};
+  const description = String(pageSEO.description || site.description || '').trim();
+  const title = String(pageSEO.title || document.title || name).trim();
+  const ogTitle = String(pageSEO.ogTitle || title).trim();
+  const ogDescription = String(pageSEO.ogDescription || description).trim();
+  const keywords = String(pageSEO.keywords || '').trim();
   const faviconUrl = safeImageUrl(site.faviconUrl || site.logoUrl);
   const ogImageUrl = safeImageUrl(site.ogImageUrl || site.bannerUrl || site.logoUrl);
+  const canonical = document.querySelector('link[rel="canonical"]')?.href || window.location.href;
 
-  document.title = name;
+  document.title = title;
 
-  const metaDescription = document.querySelector('meta[name="description"]');
-  if (metaDescription && description) metaDescription.setAttribute('content', description);
+  const setMeta = (selector, attr, value) => {
+    if (!value) return;
+    let el = document.querySelector(selector);
+    if (!el) {
+      el = document.createElement('meta');
+      const match = selector.match(/\[(?:name|property)="([^"]+)"\]/);
+      if (!match) return;
+      el.setAttribute(attr, match[1]);
+      document.head.appendChild(el);
+    }
+    el.setAttribute('content', value);
+  };
+
+  setMeta('meta[name="description"]', 'name', description);
+  setMeta('meta[name="keywords"]', 'name', keywords);
+  setMeta('meta[property="og:title"]', 'property', ogTitle);
+  setMeta('meta[property="og:description"]', 'property', ogDescription);
+  setMeta('meta[property="og:url"]', 'property', canonical);
+  setMeta('meta[property="og:site_name"]', 'property', name);
+  setMeta('meta[property="og:image"]', 'property', ogImageUrl);
+  setMeta('meta[property="og:type"]', 'property', 'website');
+  setMeta('meta[name="twitter:card"]', 'name', ogImageUrl ? 'summary_large_image' : 'summary');
+  setMeta('meta[name="twitter:title"]', 'name', ogTitle);
+  setMeta('meta[name="twitter:description"]', 'name', ogDescription);
+  setMeta('meta[name="twitter:image"]', 'name', ogImageUrl);
+  setMeta('meta[name="twitter:url"]', 'name', canonical);
 
   const themeMeta = document.querySelector('meta[name="theme-color"]');
   if (themeMeta) themeMeta.setAttribute('content', '#6d28d9');
@@ -246,28 +277,10 @@ function applySiteMetadata() {
       icon.rel = 'icon';
       document.head.appendChild(icon);
     }
+    icon.type = 'image/png';
+    icon.sizes = '48x48';
     icon.href = faviconUrl;
   }
-
-  const setMeta = (selector, attr, value) => {
-    if (!value) return;
-    let el = document.querySelector(selector);
-    if (!el) {
-      el = document.createElement('meta');
-      el.setAttribute(attr, selector.includes('[property=') ? selector.match(/property=\"([^\"]+)/)?.[1] || '' : selector.match(/name=\"([^\"]+)/)?.[1] || '');
-      document.head.appendChild(el);
-    }
-    el.setAttribute('content', value);
-  };
-
-  setMeta('meta[property="og:title"]', 'property', name);
-  setMeta('meta[property="og:description"]', 'property', description);
-  setMeta('meta[property="og:image"]', 'property', ogImageUrl);
-  setMeta('meta[property="og:type"]', 'property', 'website');
-  setMeta('meta[name="twitter:card"]', 'name', ogImageUrl ? 'summary_large_image' : 'summary');
-  setMeta('meta[name="twitter:title"]', 'name', name);
-  setMeta('meta[name="twitter:description"]', 'name', description);
-  setMeta('meta[name="twitter:image"]', 'name', ogImageUrl);
 }
 
 

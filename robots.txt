@@ -1,4 +1,10 @@
 User-agent: *
 Allow: /
 
+# Main public pages
+Allow: /
+Allow: /promote
+Allow: /partners
+Allow: /servers
+
 Sitemap: https://epengtps.web.id/sitemap.xml

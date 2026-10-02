@@ -48,8 +48,42 @@ window.EPEN_CONFIG = {
     // =====================================
     description: 'Epen GTPS — channel YouTube dan platform jasa promote GTPS, jaringan promoter, serta direktori server Growtopia Private Server Indonesia.',
     footerDescription: 'Jasa promote GTPS, jaringan promoter, dan direktori server Growtopia.',
-    faviconUrl: '/assets/logo.png',
+    faviconUrl: '/assets/favicon-48.png',
     ogImageUrl: '/assets/banner.png',
+
+    // =====================================
+    // SEO PER HALAMAN
+    // =====================================
+    pageSEO: {
+      home: {
+        title: 'Epen GTPS — Promote GTPS & Server GTPS Indonesia',
+        description: 'Epen GTPS adalah platform promosi GTPS Indonesia untuk membantu pemilik Growtopia Private Server mempromosikan server, menemukan partner, dan menjelajahi daftar server GTPS.',
+        keywords: 'Epen GTPS, promote GTPS, jasa promote GTPS, GTPS Indonesia, server GTPS, Growtopia Private Server, promoter GTPS',
+        ogTitle: 'Epen GTPS — Promote GTPS & Server GTPS Indonesia',
+        ogDescription: 'Platform Epen GTPS untuk promosi server GTPS, menemukan partner dan promoter, serta menjelajahi daftar Growtopia Private Server Indonesia.'
+      },
+      promote: {
+        title: 'Jasa Promote GTPS Indonesia — Epen GTPS',
+        description: 'Promosikan server Growtopia Private Server kamu bersama Epen GTPS. Pilih paket jasa promote GTPS dan hubungi Epen GTPS untuk memulai promosi.',
+        keywords: 'jasa promote GTPS, promote GTPS, promote server GTPS, jasa promosi GTPS, GTPS Indonesia, Epen GTPS',
+        ogTitle: 'Jasa Promote GTPS Indonesia — Epen GTPS',
+        ogDescription: 'Pilih paket jasa promote GTPS untuk membantu server Growtopia Private Server kamu dikenal oleh pemain dan komunitas.'
+      },
+      partners: {
+        title: 'Partner & Promoter GTPS Indonesia — Epen GTPS',
+        description: 'Temukan partner dan promoter GTPS di Epen GTPS beserta profil, komunitas, dan konten mereka untuk kebutuhan promosi Growtopia Private Server.',
+        keywords: 'partner GTPS, promoter GTPS, creator GTPS, promoter Growtopia, Epen GTPS',
+        ogTitle: 'Partner & Promoter GTPS Indonesia — Epen GTPS',
+        ogDescription: 'Daftar partner dan promoter GTPS Epen GTPS beserta profil, komunitas, dan konten yang tersedia.'
+      },
+      servers: {
+        title: 'Daftar Server GTPS Indonesia — Growtopia Private Server | Epen GTPS',
+        description: 'Cari dan jelajahi daftar server GTPS Indonesia di Epen GTPS. Lihat status, deskripsi, dan tautan komunitas server yang tersedia.',
+        keywords: 'server GTPS, server GTPS Indonesia, daftar GTPS, Growtopia Private Server, GTPS Indonesia, Epen GTPS',
+        ogTitle: 'Daftar Server GTPS Indonesia — Epen GTPS',
+        ogDescription: 'Direktori server GTPS Epen GTPS untuk membantu pemain menemukan Growtopia Private Server dan informasi komunitasnya.'
+      }
+    },
 
     // =====================================
     // GLOBAL FOOTER
@@ -225,7 +259,7 @@ window.EPEN_CONFIG = {
         category: 'Server',
         title: 'List Server GTPS',
         url: '/servers',
-        iconUrl: '',
+        iconUrl: '/assets/icons/servers.png',
         icon: 'network',
         target: '_self'
       }
