@@ -301,11 +301,13 @@ function applySiteImages() {
 }
 
 function iconSvg(type) {
-  const common = 'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
-  if (type === 'whatsapp') return `<svg ${common}><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4.1A8 8 0 1 1 20 11.5Z"/><path d="M9 8.5c.3 1.9 1.5 3.4 3.2 4.4l1.2-.9c.2-.2.5-.2.8-.1l1.5.7c.3.1.4.4.3.7-.2.8-.9 1.3-1.7 1.3-3.6-.2-6.6-3.2-6.8-6.8 0-.8.5-1.5 1.3-1.7.3-.1.6 0 .7.3l.7 1.5c.1.3.1.6-.1.8L9 8.5Z"/></svg>`;
-  if (type === 'discord') return `<svg ${common}><path d="M7.5 7.2A15 15 0 0 1 12 6a15 15 0 0 1 4.5 1.2 13.5 13.5 0 0 1 2.3 9.1 15 15 0 0 1-4.2 2.1l-.9-1.4"/><path d="M7.5 7.2a13.5 13.5 0 0 0-2.3 9.1 15 15 0 0 0 4.2 2.1l.9-1.4"/><circle cx="9.2" cy="12.4" r="1"/><circle cx="14.8" cy="12.4" r="1"/></svg>`;
-  if (type === 'youtube') return `<svg ${common}><rect x="3" y="6" width="18" height="12" rx="3"/><path d="m10 9 5 3-5 3V9Z"/></svg>`;
-  return `<svg ${common}><path d="M5 4h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"/><path d="M8 8h8M8 12h5M8 16h7"/></svg>`;
+  const iconMap = {
+    whatsapp: '/assets/icons/whatsapp.png',
+    discord: '/assets/icons/discord.png',
+    youtube: '/assets/icons/youtube.png'
+  };
+  const src = iconMap[type] || '/assets/icons/partners.png';
+  return `<img class="detail-link-icon" src="${escapeHtml(src)}" alt="" aria-hidden="true" loading="lazy" decoding="async">`;
 }
 
 function youtubeThumb(videoId) {
