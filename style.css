@@ -1041,3 +1041,48 @@ img, svg { max-width: 100%; }
 .about-epen-main p{margin:8px 0 0;color:var(--muted);font-size:13px;line-height:1.78;max-width:820px}
 .about-epen-main p strong{color:var(--text)}
 @media(max-width:760px){.about-epen{margin:0 auto 28px}.about-epen-main{padding:0 2px}.about-epen-main h2{font-size:20px;margin-top:6px}.about-epen-main p{font-size:12px;line-height:1.72}}
+
+/* Promote page — full service landing layout */
+.promote-page .site-header .header-page-title{font-size:14px;font-weight:800;letter-spacing:-.01em}
+.promote-page .promote-hero{margin-top:34px;margin-bottom:34px;padding:28px 30px;border:1px solid var(--line);border-radius:24px;background:var(--surface);box-shadow:var(--shadow-sm)}
+.promote-hero h1{font:700 clamp(32px,7vw,48px)/1.05 "Space Grotesk";letter-spacing:-.055em;margin:12px 0 16px}
+.promote-hero p{max-width:760px;margin:7px 0;color:var(--muted);font-size:13px;line-height:1.8}
+.promote-hero .promote-hero-lead{color:var(--text);font-size:15px;margin-top:0}
+.promote-section{padding-top:0;padding-bottom:52px}
+.promote-heading{margin-bottom:18px}
+.promote-section-heading{margin-bottom:18px}
+.promote-section-heading h2{font:700 25px/1.2 "Space Grotesk";margin:7px 0 7px;letter-spacing:-.03em}
+.promote-section-heading p{margin:0;color:var(--muted);font-size:12px;line-height:1.65;max-width:720px}
+.promote-process,.promote-requirements,.promote-rules{padding-bottom:52px}
+.process-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.process-card{display:flex;gap:14px;align-items:flex-start;padding:18px;border:1px solid var(--line);border-radius:18px;background:var(--surface);box-shadow:var(--shadow-sm)}
+.process-number{width:36px;height:36px;display:grid;place-items:center;flex:none;border-radius:11px;background:var(--purple-soft);color:var(--purple);font:800 11px "Space Grotesk"}
+.process-card h3{margin:1px 0 5px;font:700 14px "Space Grotesk"}
+.process-card p{margin:0;color:var(--muted);font-size:11px;line-height:1.6}
+.requirements-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.requirements-list>div{display:grid;grid-template-columns:30px minmax(0,1fr);column-gap:10px;align-items:start;padding:15px;border:1px solid var(--line);border-radius:16px;background:var(--surface);box-shadow:var(--shadow-sm)}
+.requirements-list>div>span{grid-row:span 2;width:30px;height:30px;display:grid;place-items:center;border-radius:10px;background:var(--purple-soft);color:var(--purple);font-weight:900}
+.requirements-list strong{font-size:12px;line-height:1.35}
+.requirements-list small{margin-top:3px;color:var(--muted);font-size:10px;line-height:1.5}
+.rules-box{padding:19px 21px;border-left:3px solid var(--purple);border-radius:0 16px 16px 0;background:var(--purple-soft)}
+.rules-box p{margin:0;padding:6px 0;color:var(--muted);font-size:11px;line-height:1.65}
+.rules-box p:first-child{padding-top:0}.rules-box p:last-child{padding-bottom:0}
+.promote-final-cta{margin-bottom:34px;padding:27px 25px;border-radius:22px;background:linear-gradient(105deg,#6d28d9,#8b5cf6);color:#fff;box-shadow:0 12px 30px rgba(109,40,217,.18)}
+.promote-final-cta .section-kicker{color:rgba(255,255,255,.78)}
+.promote-final-cta h2{margin:7px 0 7px;font:700 24px/1.2 "Space Grotesk";letter-spacing:-.03em}
+.promote-final-cta p{margin:0;color:rgba(255,255,255,.82);font-size:11px;line-height:1.6}
+html[data-theme=dark] .promote-hero,
+html[data-theme=dark] .process-card,
+html[data-theme=dark] .requirements-list>div{box-shadow:none}
+@media(max-width:560px){
+  .promote-page .promote-hero{margin-top:24px;margin-bottom:28px;padding:22px 20px;border-radius:20px}
+  .promote-hero h1{font-size:31px}
+  .promote-hero .promote-hero-lead{font-size:13px}
+  .promote-hero p{font-size:12px;line-height:1.72}
+  .promote-section-heading h2{font-size:21px}
+  .process-grid,.requirements-list{grid-template-columns:1fr}
+  .process-card{padding:15px}
+  .promote-process,.promote-requirements,.promote-rules{padding-bottom:40px}
+  .promote-final-cta{padding:23px 20px;border-radius:20px}
+  .promote-final-cta h2{font-size:21px}
+}

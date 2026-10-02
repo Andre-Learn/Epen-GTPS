@@ -59,8 +59,8 @@ window.EPEN_CONFIG = {
           id: 'normal',
           name: 'Normal',
           price: 'Rp5.000',
-          description: 'Harga terjangkau dan cocok untuk server baru.',
-          features: ['Slowlest upload', 'Di proses sesuai antrian', 'Harga paling terjangkau'],
+          description: 'Pilihan hemat untuk memperkenalkan server kamu kepada pemain dan komunitas GTPS.',
+          features: ['Promosi melalui antrean reguler', 'Diproses sesuai urutan pembelian', 'Pilihan hemat untuk memperkenalkan server', 'Server ditampilkan di website Epen GTPS'],
           popular: false,
           url: 'https://discord.gg/aWBz8tn6QK',
           button: 'Pesan Sekarang'
@@ -69,8 +69,8 @@ window.EPEN_CONFIG = {
           id: 'skip',
           name: 'Skip',
           price: 'Rp7.000',
-          description: 'Mendapatkan prioritas terlebih dahulu.',
-          features: ['Faster upload', 'Di proses lebih cepat', 'Prioritas upload'],
+          description: 'Dapatkan prioritas lebih tinggi agar promosi server kamu dapat diproses lebih cepat.',
+          features: ['Promosi dengan prioritas lebih tinggi', 'Diproses lebih cepat dari antrean reguler', 'Cocok untuk server yang ingin segera dipromosikan', 'Server ditampilkan di website Epen GTPS'],
           popular: true,
           url: 'https://discord.gg/aWBz8tn6QK',
           button: 'Pesan Sekarang'
@@ -79,8 +79,8 @@ window.EPEN_CONFIG = {
           id: 'ms',
           name: 'Mega Skip',
           price: 'Rp15.000',
-          description: 'Mendapatkan prioritas upload paling tinggi.',
-          features: ['High faster uploaf ', 'Di proses paling cepat', 'Prioritas upload lebih tinggi'],
+          description: 'Pilihan untuk server yang ingin mendapatkan exposure lebih cepat dengan prioritas tinggi.',
+          features: ['Promosi dengan prioritas tinggi', 'Proses lebih cepat untuk mengurangi waktu antre', 'Cocok untuk server yang ingin mendapatkan exposure lebih cepat', 'Server ditampilkan di website Epen GTPS'],
           popular: true,
           url: 'https://discord.gg/aWBz8tn6QK',
           button: 'Pesan Sekarang'
@@ -89,8 +89,8 @@ window.EPEN_CONFIG = {
           id: 'skipall',
           name: 'Skip All',
           price: 'Rp??.000',
-          description: 'Skip semua antrian, untuk harga chat Epen.',
-          features: ['Super faster uploaf ', 'Skip semua antrian', 'Prioritas upload paling tinggi'],
+          description: 'Pilihan dengan prioritas tertinggi untuk proses promosi secepat mungkin.',
+          features: ['Promosi dengan prioritas tertinggi', 'Lewati antrean promosi yang tersedia', 'Proses diprioritaskan untuk publikasi lebih cepat', 'Server ditampilkan di website Epen GTPS'],
           popular: true,
           url: 'https://discord.gg/aWBz8tn6QK',
           button: 'Pesan Sekarang'
