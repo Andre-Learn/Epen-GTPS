@@ -5,7 +5,7 @@ const CONFIG_PATH = 'epen/site-config.json';
 
 async function readConfig() {
   try {
-    const result = await get(CONFIG_PATH, { access: 'private' });
+    const result = await get(CONFIG_PATH, { access: 'private', useCache: false });
     if (result && result.statusCode === 200) {
       const text = await new Response(result.stream).text();
       const parsed = JSON.parse(text);

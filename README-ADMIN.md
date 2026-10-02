@@ -40,3 +40,8 @@ Untuk perubahan lengkap gunakan tab **Advanced JSON**.
 ## Catatan keamanan
 
 Jangan memasukkan API key, password, token, atau secret ke site config. Secret tetap gunakan Environment Variables dan server-side API.
+
+
+## Update fix
+- Admin config writes use `allowOverwrite: true` so saving an existing `epen/site-config.json` updates it instead of returning a BlobError.
+- Config reads use `useCache: false` so the public config endpoint reflects the latest admin save immediately.
