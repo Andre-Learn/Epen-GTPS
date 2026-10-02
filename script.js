@@ -61,17 +61,91 @@ function actionFallbackSvg(name) {
   return icons[name] || icons.link;
 }
 
+function pageKeyFromUrl(value) {
+  const raw = String(value ?? '').trim();
+  if (!raw || raw.startsWith('#')) return '';
+  try {
+    const url = new URL(raw, window.location.origin);
+    if (url.origin !== window.location.origin) return '';
+    const path = url.pathname.replace(/\/+$/, '') || '/';
+    const map = {
+      '/': 'home',
+      '/index.html': 'home',
+      '/promote': 'promote',
+      '/promote.html': 'promote',
+      '/partners': 'partners',
+      '/partners.html': 'partners',
+      '/servers': 'servers',
+      '/servers.html': 'servers'
+    };
+    return map[path] || '';
+  } catch (_) {
+    return '';
+  }
+}
+
+function isPageEnabled(key) {
+  if (!key) return true;
+  const pages = SITE_CONFIG.pages || {};
+  return pages[key]?.enabled !== false;
+}
+
+function isUrlEnabled(value) {
+  const key = pageKeyFromUrl(value);
+  return !key || isPageEnabled(key);
+}
+
+function getCurrentPageKey() {
+  const fromBody = String(document.body?.dataset?.pageKey || '').trim();
+  if (fromBody) return fromBody;
+  return pageKeyFromUrl(window.location.href) || 'home';
+}
+
+function applyPageAvailability() {
+  const key = getCurrentPageKey();
+  const page = SITE_CONFIG.pages?.[key];
+  if (!page || page.enabled !== false) return false;
+
+  document.body.classList.add('is-maintenance-page');
+
+  const title = String(page.maintenanceTitle || 'Segera Tersedia');
+  const description = String(page.maintenanceDescription || 'Halaman ini sedang dalam tahap persiapan. Silakan kembali lagi nanti.');
+  const main = document.querySelector('main');
+  if (main) {
+    main.innerHTML = `
+      <section class="maintenance-page page-width" aria-labelledby="maintenanceTitle">
+        <div class="maintenance-content">
+          <span class="section-kicker">EPEN GTPS</span>
+          <h1 id="maintenanceTitle">${escapeHtml(title)}</h1>
+          <p>${escapeHtml(description)}</p>
+          ${key !== 'home' && isPageEnabled('home') ? '<a class="maintenance-button" href="/">Kembali ke Home</a>' : ''}
+        </div>
+      </section>`;
+  }
+
+  let robots = document.querySelector('meta[name="robots"]');
+  if (!robots) {
+    robots = document.createElement('meta');
+    robots.name = 'robots';
+    document.head.appendChild(robots);
+  }
+  robots.setAttribute('content', 'noindex, nofollow');
+
+  document.title = `${title} — ${SITE_CONFIG.site?.name || 'Epen GTPS'}`;
+  return true;
+}
+
 function footerIcon(id) {
-  const common = 'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
-  const icons = {
-    home: `<svg ${common}><path d="m3 10 9-7 9 7"/><path d="M5 9v11h14V9"/><path d="M9 20v-6h6v6"/></svg>`,
-    partners: `<svg ${common}><circle cx="9" cy="8" r="3"/><path d="M3 20v-1.5A4.5 4.5 0 0 1 7.5 14h3A4.5 4.5 0 0 1 15 18.5V20"/><path d="M16 5.2a3 3 0 0 1 0 5.6M18 14.2a4.5 4.5 0 0 1 3 4.3V20"/></svg>`,
-    discord: `<svg ${common}><path d="M8.2 8.2A8 8 0 0 1 12 7.3a8 8 0 0 1 3.8.9"/><path d="M6.5 17.1c1.6 1.1 3.4 1.7 5.5 1.7s3.9-.6 5.5-1.7c.6-2.2.7-4.7.1-7.1-1.2-.8-2.4-1.2-3.8-1.4l-.5 1.1a8 8 0 0 0-2.6 0l-.5-1.1c-1.4.2-2.6.6-3.8 1.4-.6 2.4-.5 4.9.1 7.1Z"/><circle cx="9.2" cy="13.7" r=".7" fill="currentColor" stroke="none"/><circle cx="14.8" cy="13.7" r=".7" fill="currentColor" stroke="none"/></svg>`,
-    whatsapp: `<svg ${common}><path d="M20 11.5a8 8 0 0 1-11.9 7L4 20l1.5-4A8 8 0 1 1 20 11.5Z"/><path d="M9.1 9.1c.2-.4.4-.5.7-.5h.5c.2 0 .4.1.5.4l.5 1.2c.1.2.1.4-.1.6l-.5.6c.5.9 1.2 1.6 2.1 2.1l.6-.5c.2-.2.4-.2.6-.1l1.2.5c.3.1.4.3.4.5v.5c0 .3-.1.5-.5.7-1 .4-2.4-.1-3.8-1.3-1.4-1.2-2.5-2.5-2.2-4.7Z"/></svg>`,
-    promote: `<svg ${common}><path d="M4 16.5V20h3.5L18 9.5 14.5 6 4 16.5Z"/><path d="m13.5 7 3.5 3.5"/><path d="M4 4h6"/></svg>`,
-    servers: `<svg ${common}><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><path d="M7 7h.01M7 17h.01"/></svg>`
+  const iconMap = {
+    home: '/assets/icons/home.png',
+    promote: '/assets/icons/promote.png',
+    partners: '/assets/icons/partners.png',
+    servers: '/assets/icons/servers.png',
+    discord: '/assets/icons/discord.png',
+    whatsapp: '/assets/icons/whatsapp.png'
   };
-  return icons[id] || icons.home;
+  const src = iconMap[id] || iconMap.home;
+  return `<img class="global-footer-icon" src="${escapeHtml(src)}" alt="" aria-hidden="true" loading="lazy" decoding="async">`;
 }
 
 function renderGlobalFooter() {
@@ -88,7 +162,7 @@ function renderGlobalFooter() {
     ? `<img class="global-footer-logo" src="${escapeHtml(logoUrl)}" alt="${escapeHtml(name)} logo" loading="lazy">`
     : `<span class="global-footer-logo-fallback">E</span>`;
 
-  const links = nav.map((item, index) => {
+  const links = nav.filter(item => isUrlEnabled(item?.url)).map((item, index) => {
     const id = String(item?.id || `footer-${index + 1}`);
     const label = String(item?.label || 'Link');
     const url = safeUrl(item?.url) || '#';
@@ -124,7 +198,7 @@ function renderActionButtons() {
   const site = SITE_CONFIG.site || {};
   const configured = Array.isArray(site.actionButtons) ? site.actionButtons : [];
 
-  const buttons = configured;
+  const buttons = configured.filter(item => isUrlEnabled(item?.url));
 
   container.innerHTML = buttons.map((button, index) => {
     const item = button && typeof button === 'object' ? button : {};
@@ -448,13 +522,27 @@ function partnerDetailMarkup(partner) {
     : `<span>${escapeHtml(partner.short)}</span>`;
 
   const partnerBanner = safeImageUrl(partner.banner);
-  const banner = partnerBanner
+  const bannerMode = partner.bannerMode === 'custom' && partnerBanner ? 'custom' : 'template';
+  const template = partner.bannerTemplate || {};
+  const templateStyle = ['signature', 'midnight'].includes(template.style) ? template.style : 'signature';
+  const templateLogo = template.showLogo && partnerLogo
+    ? `<img class="partner-banner-template-logo" src="${escapeHtml(partnerLogo)}" alt="" loading="lazy">`
+    : '';
+  const banner = bannerMode === 'custom'
     ? `<img src="${escapeHtml(partnerBanner)}" alt="Banner ${escapeHtml(partner.name)}" loading="lazy"><div class="partner-expand-banner-overlay"></div>`
-    : `<div class="partner-expand-banner-fallback"><span>${escapeHtml(partner.name)}</span></div>`;
+    : `<div class="partner-banner-template partner-banner-template-${templateStyle}">
+        <div class="partner-banner-template-grid"></div>
+        <div class="partner-banner-template-glow"></div>
+        <div class="partner-banner-template-copy">
+          <strong>${escapeHtml(partner.name)}</strong>
+          <span>${escapeHtml(partner.tagline || 'Partner & Promoter GTPS')}</span>
+        </div>
+        ${templateLogo}
+      </div>`;
 
   return `
     <div class="partner-expand" aria-hidden="true">
-      <div class="partner-expand-banner${partnerBanner ? ' has-partner-banner' : ''}">${banner}</div>
+      <div class="partner-expand-banner${bannerMode === 'custom' ? ' has-partner-banner' : ' is-template-banner'}">${banner}</div>
       <div class="partner-expand-content">
         <div class="partner-expand-logo">${logo}</div>
         <span class="section-kicker">PARTNER PROFILE</span>
@@ -733,6 +821,12 @@ function renderPromoteSection() {
 
 function init() {
   renderGlobalFooter();
+  try { applySiteMetadata(); } catch (error) { console.warn('Site metadata skipped:', error); }
+  try { applySiteImages(); } catch (error) { console.warn('Site images skipped:', error); }
+  try { initTheme(); } catch (error) { console.warn('Theme init skipped:', error); }
+
+  if (applyPageAvailability()) return;
+
   renderActionButtons();
   renderPromoteSection();
   try { initServerDirectory(); } catch (error) { console.warn('Server directory skipped:', error); }
@@ -743,9 +837,6 @@ function init() {
       if (requested) requestAnimationFrame(() => openServerModal(requested));
     }
   }
-  try { applySiteMetadata(); } catch (error) { console.warn('Site metadata skipped:', error); }
-  try { applySiteImages(); } catch (error) { console.warn('Site images skipped:', error); }
-  try { initTheme(); } catch (error) { console.warn('Theme init skipped:', error); }
   try { renderHomeVideos(); } catch (error) { console.warn('Home video render skipped:', error); }
 
   document.addEventListener('click', (event) => {

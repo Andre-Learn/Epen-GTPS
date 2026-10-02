@@ -28,3 +28,26 @@ Setelah mengubah Environment Variables di Vercel, lakukan redeploy agar Function
 - Security headers tambahan di Vercel.
 - CSP diperketat untuk menolak iframe dan inline event handler.
 - Output konfigurasi tetap di-escape sebelum dimasukkan ke HTML.
+
+
+## Mengaktifkan / menonaktifkan halaman
+Atur `pages` di `settings.js`. Contoh `promote: { enabled: false }` akan membuat `/promote` menampilkan halaman **Segera Tersedia** dan otomatis memakai `noindex, nofollow`. Link footer dan tombol internal menuju halaman yang dimatikan juga otomatis disembunyikan.
+
+
+## Partner Banner Template
+Partner banner mendukung dua mode melalui `settings.js`: `custom` untuk gambar sendiri dan `template` untuk banner otomatis Epen GTPS. Template memakai rasio **1600x500** dan otomatis menampilkan nama partner serta tagline.
+
+Contoh:
+```js
+bannerMode: 'template',
+bannerTemplate: {
+  style: 'signature', // signature atau midnight
+  eyebrow: 'EPEN GTPS PARTNER',
+  showLogo: true
+}
+```
+Untuk banner sendiri:
+```js
+bannerMode: 'custom',
+banner: '/assets/partners/nama-banner.png'
+```

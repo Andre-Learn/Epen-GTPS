@@ -1,4 +1,34 @@
 window.EPEN_CONFIG = {
+  // =====================================
+  // STATUS HALAMAN
+  // =====================================
+  // Atur halaman mana yang sedang aktif.
+  // enabled: false akan menampilkan halaman
+  // "Segera Tersedia" dan otomatis memberi noindex.
+  // Kamu cukup mengubah true/false di sini.
+  pages: {
+    home: {
+      enabled: true,
+      maintenanceTitle: 'Segera Tersedia',
+      maintenanceDescription: 'Halaman utama Epen GTPS sedang disiapkan. Silakan kembali lagi nanti.'
+    },
+    promote: {
+      enabled: true,
+      maintenanceTitle: 'Promote GTPS Segera Tersedia',
+      maintenanceDescription: 'Halaman jasa promote GTPS sedang dalam tahap persiapan. Silakan kembali lagi nanti.'
+    },
+    partners: {
+      enabled: true,
+      maintenanceTitle: 'Partner Segera Tersedia',
+      maintenanceDescription: 'Halaman partner dan promoter GTPS sedang dalam tahap persiapan. Silakan kembali lagi nanti.'
+    },
+    servers: {
+      enabled: true,
+      maintenanceTitle: 'Server GTPS Segera Tersedia',
+      maintenanceDescription: 'Direktori server GTPS sedang dalam tahap persiapan. Silakan kembali lagi nanti.'
+    }
+  },
+
   site: {
     name: 'Epen GTPS',
 
@@ -249,6 +279,9 @@ window.EPEN_CONFIG = {
       description: 'Subscribe = 1 Account Free.',
       logo: '/assets/partners/vincent-logo.png',
       banner: '/assets/partners/vincent-banner.png',
+      // custom = gunakan gambar banner sendiri | template = gunakan banner bawaan Epen GTPS
+      bannerMode: 'custom',
+      bannerTemplate: { style: 'signature', showLogo: true },
       links: {
         whatsapp: 'https://wa.me/',
         discord: 'https://discord.com/',
@@ -269,6 +302,9 @@ window.EPEN_CONFIG = {
       description: '',
       logo: '',
       banner: '',
+      // Pilih 'template' agar banner 1600x500 dibuat otomatis dari desain Epen GTPS.
+      bannerMode: 'template',
+      bannerTemplate: { style: 'signature', showLogo: true },
       links: {
         whatsapp: 'https://wa.me/',
         discord: 'https://discord.com/',
@@ -289,6 +325,8 @@ window.EPEN_CONFIG = {
       description: 'Kumpulan creator yang membagikan tutorial, resource, dan konten GTPS.',
       logo: '',
       banner: '',
+      bannerMode: 'template',
+      bannerTemplate: { style: 'midnight', showLogo: false },
       links: {
         whatsapp: 'https://wa.me/',
         discord: 'https://discord.com/',
