@@ -67,8 +67,10 @@ function footerIcon(id) {
     home: `<svg ${common}><path d="m3 10 9-7 9 7"/><path d="M5 9v11h14V9"/><path d="M9 20v-6h6v6"/></svg>`,
     partners: `<svg ${common}><circle cx="9" cy="8" r="3"/><path d="M3 20v-1.5A4.5 4.5 0 0 1 7.5 14h3A4.5 4.5 0 0 1 15 18.5V20"/><path d="M16 5.2a3 3 0 0 1 0 5.6M18 14.2a4.5 4.5 0 0 1 3 4.3V20"/></svg>`,
     discord: `<svg ${common}><path d="M8.2 8.2A8 8 0 0 1 12 7.3a8 8 0 0 1 3.8.9"/><path d="M6.5 17.1c1.6 1.1 3.4 1.7 5.5 1.7s3.9-.6 5.5-1.7c.6-2.2.7-4.7.1-7.1-1.2-.8-2.4-1.2-3.8-1.4l-.5 1.1a8 8 0 0 0-2.6 0l-.5-1.1c-1.4.2-2.6.6-3.8 1.4-.6 2.4-.5 4.9.1 7.1Z"/><circle cx="9.2" cy="13.7" r=".7" fill="currentColor" stroke="none"/><circle cx="14.8" cy="13.7" r=".7" fill="currentColor" stroke="none"/></svg>`,
-    whatsapp: `<svg ${common}><path d="M20 11.5a8 8 0 0 1-11.9 7L4 20l1.5-4A8 8 0 1 1 20 11.5Z"/><path d="M9.1 9.1c.2-.4.4-.5.7-.5h.5c.2 0 .4.1.5.4l.5 1.2c.1.2.1.4-.1.6l-.5.6c.5.9 1.2 1.6 2.1 2.1l.6-.5c.2-.2.4-.2.6-.1l1.2.5c.3.1.4.3.4.5v.5c0 .3-.1.5-.5.7-1 .4-2.4-.1-3.8-1.3-1.4-1.2-2.5-2.5-2.2-4.7Z"/></svg>`
-  };
+    whatsapp: `<svg ${common}><path d="M20 11.5a8 8 0 0 1-11.9 7L4 20l1.5-4A8 8 0 1 1 20 11.5Z"/><path d="M9.1 9.1c.2-.4.4-.5.7-.5h.5c.2 0 .4.1.5.4l.5 1.2c.1.2.1.4-.1.6l-.5.6c.5.9 1.2 1.6 2.1 2.1l.6-.5c.2-.2.4-.2.6-.1l1.2.5c.3.1.4.3.4.5v.5c0 .3-.1.5-.5.7-1 .4-2.4-.1-3.8-1.3-1.4-1.2-2.5-2.5-2.2-4.7Z"/></svg>`,
+    promote: `<svg ${common}><path d="M4 16.5V20h3.5L18 9.5 14.5 6 4 16.5Z"/><path d="m13.5 7 3.5 3.5"/><path d="M4 4h6"/></svg>`,
+    servers: `<svg ${common}><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><path d="M7 7h.01M7 17h.01"/></svg>`
+}  };
   return icons[id] || icons.home;
 }
 
@@ -729,98 +731,10 @@ function renderPromoteSection() {
   `;
 }
 
-
-function renderPromoteLanding() {
-  const root = document.querySelector('#promoteLanding');
-  const promote = SITE_CONFIG.site?.promote;
-  if (!root || !promote?.enabled) return;
-  const landing = promote.landing || {};
-  const packages = Array.isArray(promote.packages) ? promote.packages : [];
-  const benefits = Array.isArray(landing.benefits) ? landing.benefits : [];
-  const requirements = Array.isArray(landing.requirements) ? landing.requirements : [];
-  const terms = Array.isArray(landing.terms) ? landing.terms : [];
-  const faq = Array.isArray(landing.faq) ? landing.faq : [];
-  const safeContact = safeUrl(landing.contactUrl || packages[0]?.url || '#') || '#';
-
-  root.innerHTML = `
-    <section class="promote-hero">
-      <div class="promote-hero-copy">
-        <span class="section-kicker">${escapeHtml(landing.badge || 'JASA PROMOTE GTPS')}</span>
-        <h1>${escapeHtml(landing.title || 'Promosikan server GTPS kamu.')}</h1>
-        <p>${escapeHtml(landing.description || promote.description || '')}</p>
-        <div class="promote-hero-actions">
-          <a class="promote-main-cta" href="#packages">${escapeHtml(landing.primaryLabel || 'Pilih Paket Promote')}</a>
-          <a class="promote-secondary-cta" href="${escapeHtml(safeContact)}" target="_blank" rel="noopener noreferrer">${escapeHtml(landing.contactLabel || 'Hubungi Epen GTPS')}</a>
-        </div>
-      </div>
-      <div class="promote-hero-panel">
-        <span class="promote-panel-label">EPEN GTPS</span>
-        <strong>Promote server.<br>Reach more players.</strong>
-        <span>Channel YouTube + platform promosi GTPS.</span>
-      </div>
-    </section>
-
-    <section class="promote-process-section">
-      <div class="promote-section-heading">
-        <span class="section-kicker">CARA KERJA</span>
-        <h2>Dari order sampai promote.</h2>
-        <p>Alurnya dibuat sederhana supaya pemilik server tahu apa yang harus disiapkan.</p>
-      </div>
-      <div class="promote-process-grid">
-        ${benefits.map(item => `<article class="promote-process-card"><span>${escapeHtml(item.icon || '')}</span><h3>${escapeHtml(item.title || '')}</h3><p>${escapeHtml(item.text || '')}</p></article>`).join('')}
-      </div>
-    </section>
-
-    <section class="promote-packages-section" id="packages">
-      <div class="promote-section-heading">
-        <span class="section-kicker">PRICE LIST</span>
-        <h2>${escapeHtml(promote.title || 'Paket Promote GTPS')}</h2>
-        <p>${escapeHtml(promote.description || '')}</p>
-      </div>
-      <div class="promote-grid promote-page-grid">
-        ${packages.map((item, index) => `
-          <article class="promote-card${item.popular ? ' is-popular' : ''}">
-            ${item.popular ? '<span class="promote-badge">POPULAR</span>' : ''}
-            <div class="promote-card-head"><span class="promote-plan">${escapeHtml(item.name || `Paket ${index + 1}`)}</span>${item.description ? `<span class="promote-description">${escapeHtml(item.description)}</span>` : ''}</div>
-            <div class="promote-price">${escapeHtml(item.price || '')}</div>
-            <ul class="promote-features">${(Array.isArray(item.features) ? item.features : []).map(feature => `<li><span class="promote-feature-icon" aria-hidden="true">+</span>${escapeHtml(feature)}</li>`).join('')}</ul>
-            <a class="promote-cta" href="${escapeHtml(safeUrl(item.url) || '#')}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.button || 'Pesan Sekarang')}</a>
-          </article>`).join('')}
-      </div>
-    </section>
-
-    <section class="promote-info-grid">
-      <article class="promote-info-card">
-        <span class="section-kicker">SIAPKAN INI</span>
-        <h2>Data yang perlu dikirim</h2>
-        <ul>${requirements.map(item => `<li><span>+</span>${escapeHtml(item)}</li>`).join('')}</ul>
-      </article>
-      <article class="promote-info-card">
-        <span class="section-kicker">ATURAN</span>
-        <h2>Sebelum melakukan order</h2>
-        <ul>${terms.map(item => `<li><span>+</span>${escapeHtml(item)}</li>`).join('')}</ul>
-      </article>
-    </section>
-
-    <section class="promote-faq-section">
-      <div class="promote-section-heading"><span class="section-kicker">FAQ</span><h2>Pertanyaan yang sering ditanyakan.</h2></div>
-      <div class="promote-faq-list">${faq.map(item => `<details><summary>${escapeHtml(item.q || '')}</summary><p>${escapeHtml(item.a || '')}</p></details>`).join('')}</div>
-    </section>
-
-    <section class="promote-final-cta">
-      <span class="section-kicker">SIAP PROMOSI?</span>
-      <h2>Mulai kenalkan server kamu bersama Epen GTPS.</h2>
-      <p>Pilih paket yang sesuai atau hubungi Epen GTPS jika kamu masih ingin bertanya sebelum order.</p>
-      <a class="promote-main-cta" href="#packages">Lihat Paket Promote</a>
-    </section>
-  `;
-}
-
 function init() {
   renderGlobalFooter();
   renderActionButtons();
   renderPromoteSection();
-  try { renderPromoteLanding(); } catch (error) { console.warn('Promote landing skipped:', error); }
   try { initServerDirectory(); } catch (error) { console.warn('Server directory skipped:', error); }
   if (document.querySelector('#serverList')) {
     const requestedServer = new URLSearchParams(location.search).get('server');
