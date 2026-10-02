@@ -1237,3 +1237,179 @@ html[data-theme=dark] .promote-card.is-popular{box-shadow:0 14px 34px rgba(0,0,0
   .promote-final-cta h2{font-size:21px}
   .requirements-list{grid-template-columns:1fr}
 }
+
+/* =========================================================
+   Promote v6 — quieter requirements + stronger final CTA
+   Less decorative UI, more editorial hierarchy.
+   ========================================================= */
+.requirements-list{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.requirements-list>article{
+  min-height:112px;
+  display:grid;
+  grid-template-columns:44px minmax(0,1fr);
+  gap:18px;
+  align-items:start;
+  padding:24px 20px 24px 0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+}
+.requirements-list>article:nth-child(odd){
+  padding-right:30px;
+  border-right:1px solid var(--line);
+}
+.requirements-list>article:nth-child(even){
+  padding-left:30px;
+}
+.requirements-list>article:nth-child(n+3){border-top:1px solid var(--line)}
+.requirements-list .requirement-index{
+  display:block;
+  width:auto;
+  height:auto;
+  margin:2px 0 0;
+  padding:0;
+  border-radius:0;
+  background:none;
+  color:var(--purple);
+  font:600 11px/1 "Space Grotesk";
+  letter-spacing:.12em;
+}
+.requirements-list strong{
+  display:block;
+  font:700 15px/1.35 "Space Grotesk";
+  letter-spacing:-.015em;
+}
+.requirements-list small{
+  display:block;
+  margin-top:7px;
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.65;
+  max-width:360px;
+}
+
+.promote-final-cta{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:28px;
+  min-height:190px;
+  margin-bottom:42px;
+  padding:34px 36px;
+  border:1px solid rgba(124,58,237,.55);
+  border-radius:28px;
+  background:#6d28d9;
+  box-shadow:0 18px 45px rgba(109,40,217,.18);
+}
+.promote-final-cta::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  width:330px;
+  height:330px;
+  right:-95px;
+  top:-170px;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:50%;
+}
+.promote-final-cta::after{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  width:210px;
+  height:210px;
+  right:95px;
+  bottom:-155px;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:50%;
+}
+.promote-final-copy{max-width:720px}
+.promote-final-cta .section-kicker{
+  display:block;
+  color:rgba(255,255,255,.72);
+}
+.promote-final-cta h2{
+  margin:9px 0 9px;
+  font:700 clamp(25px,4vw,36px)/1.12 "Space Grotesk";
+  letter-spacing:-.045em;
+  max-width:650px;
+}
+.promote-final-cta p{
+  margin:0;
+  max-width:610px;
+  color:rgba(255,255,255,.78);
+  font-size:12px;
+  line-height:1.7;
+}
+.promote-final-cta-button{
+  flex:0 0 auto;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:46px;
+  padding:0 20px;
+  border:1px solid rgba(255,255,255,.24);
+  border-radius:12px;
+  background:#fff;
+  color:#4c1d95;
+  font:700 12px/1 "Space Grotesk";
+  text-decoration:none;
+  white-space:nowrap;
+  box-shadow:0 8px 20px rgba(0,0,0,.1);
+  transition:transform .2s ease,box-shadow .2s ease,background .2s ease;
+}
+.promote-final-cta-button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 24px rgba(0,0,0,.15);
+}
+
+@media(max-width:760px){
+  .requirements-list{grid-template-columns:1fr}
+  .requirements-list>article,
+  .requirements-list>article:nth-child(odd),
+  .requirements-list>article:nth-child(even){
+    grid-template-columns:38px minmax(0,1fr);
+    padding:20px 0;
+    border-right:0;
+  }
+  .requirements-list>article:nth-child(n+2){border-top:1px solid var(--line)}
+  .requirements-list strong{font-size:14px}
+  .requirements-list small{font-size:10.5px}
+
+  .promote-final-cta{
+    display:block;
+    min-height:0;
+    padding:29px 24px;
+    border-radius:23px;
+  }
+  .promote-final-cta h2{font-size:25px}
+  .promote-final-cta p{font-size:11px}
+  .promote-final-cta-button{
+    margin-top:22px;
+    width:100%;
+  }
+}
+
+@media(max-width:560px){
+  .requirements-list>article,
+  .requirements-list>article:nth-child(odd),
+  .requirements-list>article:nth-child(even){
+    grid-template-columns:34px minmax(0,1fr);
+    padding:19px 0;
+  }
+  .requirements-list .requirement-index{font-size:10px}
+  .requirements-list strong{font-size:13px}
+  .requirements-list small{margin-top:5px;font-size:10px;line-height:1.55}
+  .promote-final-cta{margin-bottom:30px;padding:26px 20px;border-radius:20px}
+  .promote-final-cta h2{font-size:22px}
+}
