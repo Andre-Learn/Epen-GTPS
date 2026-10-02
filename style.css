@@ -1033,3 +1033,20 @@ img, svg { max-width: 100%; }
 .faq-list details p{margin:0;padding:0 18px 17px;color:var(--muted);font-size:12px;line-height:1.75}
 .faq-list a{color:var(--purple);font-weight:700}
 @media(max-width:560px){.seo-intro{margin-top:20px;margin-bottom:26px;padding:18px;border-radius:18px}.seo-intro h2{font-size:20px}.seo-intro p{font-size:12px}.faq-list summary{padding:14px;font-size:12px}.faq-list details p{padding:0 14px 14px;font-size:11px}}
+
+/* Epen GTPS about section — compact, editorial, and mobile friendly */
+.about-epen{margin:2px auto 34px;padding:0;border:1px solid var(--line);border-radius:24px;background:var(--surface);box-shadow:var(--shadow-sm);overflow:hidden;display:grid;grid-template-columns:minmax(0,1.45fr) minmax(250px,.85fr)}
+.about-epen-main{padding:25px 25px 24px}
+.about-epen-main h2{font:700 25px/1.18 "Space Grotesk";letter-spacing:-.035em;margin:7px 0 13px;max-width:720px}
+.about-epen-main p{margin:8px 0 0;color:var(--muted);font-size:13px;line-height:1.75;max-width:760px}
+.about-epen-main p strong{color:var(--text)}
+.about-epen-points{padding:15px;background:linear-gradient(180deg,var(--purple-soft),transparent);border-left:1px solid var(--line);display:grid;align-content:center;gap:8px}
+.about-point{display:flex;align-items:center;gap:11px;padding:11px 12px;border:1px solid var(--line);border-radius:15px;background:color-mix(in srgb,var(--surface) 88%, transparent);text-decoration:none;color:var(--text);transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+.about-point:hover{transform:translateY(-2px);border-color:rgba(124,58,237,.35);box-shadow:0 8px 20px rgba(91,33,182,.08)}
+.about-point-icon{width:35px;height:35px;display:grid;place-items:center;flex:none;border-radius:11px;background:var(--purple);color:#fff;font-size:17px;font-weight:800;box-shadow:0 6px 14px rgba(109,40,217,.2)}
+.about-point span:last-child{min-width:0;display:grid;gap:2px}
+.about-point strong{font-size:12px;font-weight:800}
+.about-point small{font-size:10px;line-height:1.45;color:var(--muted)}
+html[data-theme=dark] .about-epen-points{background:linear-gradient(180deg,rgba(124,58,237,.12),transparent)}
+html[data-theme=dark] .about-point{background:rgba(255,255,255,.025)}
+@media(max-width:760px){.about-epen{grid-template-columns:1fr;border-radius:20px;margin-bottom:28px}.about-epen-main{padding:20px 18px 18px}.about-epen-main h2{font-size:20px;margin-top:6px}.about-epen-main p{font-size:12px;line-height:1.7}.about-epen-points{border-left:0;border-top:1px solid var(--line);padding:12px}.about-point{padding:10px}.about-point-icon{width:32px;height:32px;border-radius:10px;font-size:15px}}
