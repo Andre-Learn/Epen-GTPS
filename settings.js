@@ -259,8 +259,8 @@ window.EPEN_CONFIG = {
         category: 'Server',
         title: 'List Server GTPS',
         url: '/servers',
-        iconUrl: '/assets/icons/servers.png',
-        icon: 'network',
+        iconUrl: '',
+        icon: 'globe',
         target: '_self'
       }
     ]
