@@ -14,6 +14,11 @@
       "source": "/servers.html",
       "destination": "/servers",
       "permanent": true
+    },
+    {
+      "source": "/promote.html",
+      "destination": "/promote",
+      "permanent": true
     }
   ],
   "rewrites": [
@@ -24,6 +29,10 @@
     {
       "source": "/servers",
       "destination": "/servers.html"
+    },
+    {
+      "source": "/promote",
+      "destination": "/promote.html"
     }
   ],
   "headers": [

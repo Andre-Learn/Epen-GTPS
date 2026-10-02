@@ -16,8 +16,8 @@ window.EPEN_CONFIG = {
      // =====================================
     // SEO / SOCIAL PREVIEW
     // =====================================
-    description: 'Epen GTPS — Growtopia private server creator, community, videos, promoter, and partner network.',
-    footerDescription: 'Community, creator, dan partner network.',
+    description: 'Epen GTPS — channel YouTube dan platform jasa promote GTPS, jaringan promoter, serta direktori server Growtopia Private Server Indonesia.',
+    footerDescription: 'Jasa promote GTPS, jaringan promoter, dan direktori server Growtopia.',
     faviconUrl: '/assets/logo.png',
     ogImageUrl: '/assets/banner.png',
 
@@ -29,6 +29,7 @@ window.EPEN_CONFIG = {
     // Untuk menambah/mengubah menu, cukup edit daftar di bawah.
     footerNav: [
       { id: 'home', label: 'Home', url: '/', target: '_self' },
+      { id: 'promote', label: 'Promote', url: '/promote', target: '_self' },
       { id: 'partners', label: 'Partner', url: '/partners', target: '_self' },
       { id: 'discord', label: 'Discord', url: 'https://discord.gg/aWBz8tn6QK', target: '_blank' },
       { id: 'whatsapp', label: 'WhatsApp', url: 'https://whatsapp.com/channel/0029VbDsLl9LNSZxidjstX2E', target: '_blank' }
@@ -52,6 +53,38 @@ window.EPEN_CONFIG = {
       enabled: true,
       title: 'Price Promote GTPS',
       description: 'Promosikan server GTPS kamu bersama Epen GTPS.',
+      landing: {
+        badge: 'JASA PROMOTE GTPS',
+        title: 'Bantu server kamu lebih dikenal.',
+        description: 'Epen GTPS membantu pemilik Growtopia Private Server mempromosikan server mereka kepada pemain dan komunitas melalui channel YouTube serta jaringan Epen GTPS.',
+        primaryLabel: 'Pilih Paket Promote',
+        contactLabel: 'Tanya Sebelum Order',
+        contactUrl: 'https://discord.gg/aWBz8tn6QK',
+        benefits: [
+          { icon: '01', title: 'Pilih paket', text: 'Sesuaikan promote dengan kebutuhan dan budget server kamu.' },
+          { icon: '02', title: 'Kirim data server', text: 'Siapkan nama, logo, deskripsi, link komunitas, dan materi promosi.' },
+          { icon: '03', title: 'Proses promote', text: 'Setelah order dikonfirmasi, promosi diproses sesuai antrean atau prioritas paket.' }
+        ],
+        requirements: [
+          'Nama dan identitas server yang jelas',
+          'Logo atau materi visual server',
+          'Deskripsi singkat server',
+          'Link komunitas atau cara bermain yang aktif',
+          'Materi tambahan jika paket promote membutuhkannya'
+        ],
+        terms: [
+          'Materi promosi harus sesuai ketentuan Epen GTPS.',
+          'Waktu proses mengikuti antrean dan paket yang dipilih.',
+          'Detail layanan setiap paket mengikuti informasi yang tercantum pada price list.',
+          'Ketentuan pembayaran dan refund mengikuti kebijakan Epen GTPS saat pemesanan.'
+        ],
+        faq: [
+          { q: 'Apa itu Promote GTPS?', a: 'Promote GTPS adalah layanan promosi untuk membantu pemilik Growtopia Private Server memperkenalkan server kepada pemain dan komunitas melalui media promosi Epen GTPS.' },
+          { q: 'Bagaimana cara order?', a: 'Pilih paket yang sesuai, lalu klik tombol Pesan Sekarang atau hubungi Epen GTPS jika ingin bertanya sebelum melakukan order.' },
+          { q: 'Data apa yang perlu disiapkan?', a: 'Siapkan identitas server, logo atau banner, deskripsi, link komunitas, serta materi lain yang diminta untuk paket yang dipilih.' },
+          { q: 'Apakah semua paket memiliki proses yang sama?', a: 'Tidak selalu. Kecepatan dan bentuk layanan mengikuti fitur yang tercantum pada masing-masing paket.' }
+        ]
+      },
       packages: [
         {
           id: 'normal',
@@ -162,10 +195,10 @@ window.EPEN_CONFIG = {
 
     actionButtons: [
       {
-        id: 'discord',
+        id: 'promote',
         category: 'Promote',
-        title: 'Buy Promote GTPS',
-        url: 'https://discord.gg/aWBz8tn6QK',
+        title: 'Jasa Promote GTPS',
+        url: '/promote',
         iconUrl: '/assets/icons/discord.png',
         icon: 'discord',
         target: '_blank'
