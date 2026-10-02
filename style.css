@@ -1122,11 +1122,8 @@ html[data-theme=dark] .requirements-list>div{box-shadow:none}
   transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease,background .2s ease;
 }
 .promote-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
-.promote-card:nth-child(n+2){border-color:rgba(124,58,237,.22)}
-.promote-card:nth-child(n+2)::before{
-  content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,#6d28d9,#a78bfa);opacity:.85
-}
-.promote-card.is-popular{border-color:rgba(124,58,237,.52);box-shadow:0 14px 34px rgba(109,40,217,.13)}
+.promote-card:nth-child(n+2){border-color:var(--border)}
+.promote-card.is-popular{border-color:var(--border);box-shadow:var(--shadow-sm)}
 .promote-badge{top:12px;right:12px}
 .promote-card-head{padding-right:0;min-height:74px}
 .promote-plan{font-size:16px}
