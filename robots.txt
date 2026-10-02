@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://epengtps.web.id/sitemap.xml

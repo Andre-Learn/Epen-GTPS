@@ -28,8 +28,8 @@ window.EPEN_CONFIG = {
     // <footer data-site-footer></footer>.
     // Untuk menambah/mengubah menu, cukup edit daftar di bawah.
     footerNav: [
-      { id: 'home', label: 'Home', url: 'index.html', target: '_self' },
-      { id: 'partners', label: 'Partner', url: 'partners.html', target: '_self' },
+      { id: 'home', label: 'Home', url: '/', target: '_self' },
+      { id: 'partners', label: 'Partner', url: '/partners', target: '_self' },
       { id: 'discord', label: 'Discord', url: 'https://discord.gg/aWBz8tn6QK', target: '_blank' },
       { id: 'whatsapp', label: 'WhatsApp', url: 'https://whatsapp.com/channel/0029VbDsLl9LNSZxidjstX2E', target: '_blank' }
     ],
@@ -183,7 +183,7 @@ window.EPEN_CONFIG = {
         id: 'partners',
         category: 'Network',
         title: 'Lihat Partner Kami',
-        url: 'partners.html',
+        url: '/partners',
         iconUrl: '/assets/icons/partners.png',
         icon: 'users',
         target: '_self'
@@ -192,7 +192,7 @@ window.EPEN_CONFIG = {
         id: 'servers',
         category: 'Network',
         title: 'Lihat Server GTPS',
-        url: 'servers.html',
+        url: '/servers',
         iconUrl: '',
         icon: 'network',
         target: '_self'

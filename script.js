@@ -98,7 +98,7 @@ function renderGlobalFooter() {
   footer.innerHTML = `
     <div class="global-footer-inner page-width">
       <div class="global-footer-top">
-        <a class="global-footer-brand" href="index.html" aria-label="${escapeHtml(name)} home">
+        <a class="global-footer-brand" href="/" aria-label="${escapeHtml(name)} home">
           ${logo}
           <span>${escapeHtml(name)}</span>
         </a>

@@ -1,4 +1,31 @@
 {
+  "redirects": [
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/partners.html",
+      "destination": "/partners",
+      "permanent": true
+    },
+    {
+      "source": "/servers.html",
+      "destination": "/servers",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/partners",
+      "destination": "/partners.html"
+    },
+    {
+      "source": "/servers",
+      "destination": "/servers.html"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
