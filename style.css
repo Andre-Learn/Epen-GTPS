@@ -1086,3 +1086,154 @@ html[data-theme=dark] .requirements-list>div{box-shadow:none}
   .promote-final-cta{padding:23px 20px;border-radius:20px}
   .promote-final-cta h2{font-size:21px}
 }
+
+
+/* =========================================================
+   Promote UI refinement — SkillUI-inspired design-system pass
+   Hybrid surface: editorial hero, focused price cards, light utility surfaces.
+   ========================================================= */
+.promote-page .promote-hero{
+  margin-top:42px;
+  margin-bottom:46px;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+}
+.promote-page .promote-hero .section-kicker{display:inline-flex;align-items:center;gap:8px}
+.promote-page .promote-hero .section-kicker::before{
+  content:"";width:22px;height:2px;border-radius:99px;background:var(--purple)
+}
+.promote-hero h1{max-width:820px;margin:13px 0 13px;font-size:clamp(38px,6vw,58px);letter-spacing:-.065em}
+.promote-hero p{max-width:760px;font-size:13px;line-height:1.78}
+.promote-hero .promote-hero-lead{font-size:16px;line-height:1.55;margin-bottom:9px}
+
+.promote-section{padding-bottom:62px}
+.promote-heading{margin-bottom:20px}
+.promote-heading h2{font-size:27px;letter-spacing:-.04em}
+.promote-heading p{font-size:12px;max-width:640px}
+.promote-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.promote-card{
+  min-width:0;
+  padding:19px;
+  border-radius:18px;
+  box-shadow:var(--shadow-sm);
+  transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease,background .2s ease;
+}
+.promote-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.promote-card:nth-child(n+2){border-color:rgba(124,58,237,.22)}
+.promote-card:nth-child(n+2)::before{
+  content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,#6d28d9,#a78bfa);opacity:.85
+}
+.promote-card.is-popular{border-color:rgba(124,58,237,.52);box-shadow:0 14px 34px rgba(109,40,217,.13)}
+.promote-badge{top:12px;right:12px}
+.promote-card-head{padding-right:0;min-height:74px}
+.promote-plan{font-size:16px}
+.promote-description{font-size:10px;line-height:1.5}
+.promote-price{margin:18px 0 15px;font-size:27px}
+.promote-features{gap:9px;min-height:118px}
+.promote-features li{align-items:flex-start;font-size:10px;line-height:1.45}
+.promote-features li .promote-feature-icon{margin-top:1px}
+.promote-cta{min-height:41px;border-radius:11px}
+
+.promote-process,.promote-requirements,.promote-rules{padding-bottom:60px}
+.promote-section-heading{margin-bottom:19px}
+.promote-section-heading h2{font-size:27px;letter-spacing:-.04em}
+.promote-section-heading p{max-width:650px}
+.process-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:0;position:relative}
+.process-grid::before{
+  content:"";position:absolute;left:11%;right:11%;top:18px;height:1px;background:var(--line);z-index:0
+}
+.process-card{
+  position:relative;z-index:1;
+  display:block;
+  padding:0 14px 0 0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+}
+.process-card:not(:first-child){padding-left:14px}
+.process-number{
+  width:36px;height:36px;margin-bottom:13px;
+  border:1px solid var(--line);
+  background:var(--bg);
+  box-shadow:0 0 0 5px var(--bg);
+}
+.process-card h3{font-size:14px;margin-bottom:6px}
+.process-card p{font-size:11px;max-width:190px;line-height:1.62}
+
+.requirements-list{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.requirements-list>div{
+  display:block;
+  min-height:118px;
+  padding:16px;
+  border-radius:16px;
+  box-shadow:none;
+}
+.requirements-list>div>span{margin-bottom:13px}
+.requirements-list strong{display:block;font-size:12px}
+.requirements-list small{display:block;margin-top:5px;font-size:10px;line-height:1.55}
+
+.rules-box{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:0 28px;
+  padding:12px 18px;
+  border:1px solid var(--line);
+  border-left:1px solid rgba(124,58,237,.35);
+  border-radius:16px;
+  background:var(--purple-soft);
+}
+.rules-box p{padding:8px 0;font-size:11px}
+
+.seo-faq{padding-bottom:60px}
+.seo-section-heading h2{font-size:27px;letter-spacing:-.04em}
+.faq-list{gap:8px}
+.faq-list details{box-shadow:none;border-radius:14px}
+.faq-list summary{padding:15px 17px;font-size:12px}
+.faq-list details p{padding:0 17px 16px;font-size:11px;line-height:1.7}
+
+.promote-final-cta{
+  margin-bottom:42px;
+  padding:30px 28px;
+  border-radius:20px;
+  background:linear-gradient(105deg,#6d28d9,#8b5cf6);
+  box-shadow:0 14px 34px rgba(109,40,217,.16);
+}
+.promote-final-cta h2{font-size:26px;letter-spacing:-.04em;max-width:720px}
+.promote-final-cta p{font-size:12px}
+
+html[data-theme=dark] .process-number{background:var(--surface)}
+html[data-theme=dark] .promote-card{box-shadow:none}
+html[data-theme=dark] .promote-card.is-popular{box-shadow:0 14px 34px rgba(0,0,0,.22)}
+
+@media(max-width:1000px){
+  .promote-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .requirements-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:760px){
+  .promote-page .promote-hero{margin-top:30px;margin-bottom:34px}
+  .promote-hero h1{font-size:clamp(34px,10vw,46px)}
+  .promote-hero .promote-hero-lead{font-size:14px}
+  .promote-grid{grid-template-columns:1fr}
+  .promote-card-head{min-height:0}
+  .promote-features{min-height:0}
+  .process-grid{grid-template-columns:1fr;gap:18px}
+  .process-grid::before{left:18px;right:auto;top:18px;bottom:18px;width:1px;height:auto}
+  .process-card,.process-card:not(:first-child){padding:0 0 0 54px}
+  .process-number{position:absolute;left:0;top:0;margin:0}
+  .process-card h3{padding-top:1px}
+  .requirements-list{grid-template-columns:1fr 1fr}
+  .rules-box{grid-template-columns:1fr;padding:10px 16px}
+}
+@media(max-width:560px){
+  .promote-page .promote-hero{padding:0;margin-top:24px;margin-bottom:32px}
+  .promote-heading h2,.promote-section-heading h2,.seo-section-heading h2{font-size:21px}
+  .promote-card{padding:17px;border-radius:17px}
+  .promote-price{font-size:24px}
+  .promote-final-cta{padding:24px 20px;border-radius:18px}
+  .promote-final-cta h2{font-size:21px}
+  .requirements-list{grid-template-columns:1fr}
+}

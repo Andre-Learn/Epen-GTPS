@@ -81,7 +81,7 @@ window.EPEN_CONFIG = {
           price: 'Rp15.000',
           description: 'Pilihan untuk server yang ingin mendapatkan exposure lebih cepat dengan prioritas tinggi.',
           features: ['Promosi dengan prioritas tinggi', 'Proses lebih cepat untuk mengurangi waktu antre', 'Cocok untuk server yang ingin mendapatkan exposure lebih cepat', 'Server ditampilkan di website Epen GTPS'],
-          popular: true,
+          popular: false,
           url: 'https://discord.gg/aWBz8tn6QK',
           button: 'Pesan Sekarang'
         },
@@ -91,7 +91,7 @@ window.EPEN_CONFIG = {
           price: 'Rp??.000',
           description: 'Pilihan dengan prioritas tertinggi untuk proses promosi secepat mungkin.',
           features: ['Promosi dengan prioritas tertinggi', 'Lewati antrean promosi yang tersedia', 'Proses diprioritaskan untuk publikasi lebih cepat', 'Server ditampilkan di website Epen GTPS'],
-          popular: true,
+          popular: false,
           url: 'https://discord.gg/aWBz8tn6QK',
           button: 'Pesan Sekarang'
         }
