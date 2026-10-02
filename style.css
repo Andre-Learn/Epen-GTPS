@@ -593,7 +593,7 @@ body > main { flex: 1 0 auto; }
   transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
 }
 .global-footer-link svg { width: 17px; height: 17px; flex: 0 0 17px; }
-.global-footer-link img.global-footer-icon { width: 17px; height: 17px; flex: 0 0 17px; object-fit: contain; display: block; filter: brightness(0) saturate(100%) invert(13%) sepia(10%) saturate(1220%) hue-rotate(214deg) brightness(92%) contrast(93%); }
+.global-footer-link img.global-footer-icon { width: 18px; height: 18px; flex: 0 0 17px; object-fit: contain; display: block; filter: brightness(0) saturate(100%) invert(13%) sepia(10%) saturate(1220%) hue-rotate(214deg) brightness(92%) contrast(93%); }
 .global-footer-link:hover {
   transform: translateY(-2px);
   background: #fff;
@@ -626,7 +626,7 @@ body > main { flex: 1 0 auto; }
   .global-footer-nav { gap: 8px; }
   .global-footer-link { min-height: 45px; padding: 9px 8px; border-radius: 14px; font-size: 11px; }
   .global-footer-link svg { width: 16px; height: 16px; flex-basis: 16px; }
-  .global-footer-link img.global-footer-icon { width: 16px; height: 16px; flex-basis: 16px; }
+  .global-footer-link img.global-footer-icon { width: 17px; height: 17px; flex-basis: 16px; }
   .global-footer-bottom { flex-direction: column; align-items: flex-start; font-size: 9px; }
 }
 
@@ -1569,3 +1569,6 @@ html[data-theme=dark] .promote-card.is-popular{box-shadow:0 14px 34px rgba(0,0,0
     border-radius: 15px;
   }
 }
+
+/* Partner social icon correction: YouTube uses its local colored mark. */
+.detail-link-icon-youtube{filter:none!important;object-fit:contain}

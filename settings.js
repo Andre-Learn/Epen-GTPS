@@ -173,7 +173,7 @@ window.EPEN_CONFIG = {
       {
         id: 'growy',
         name: 'Growy',
-        logo: 'https://d.uguu.se/yywAMbxZ.jpg',
+        logo: 'https://f.top4top.io/p_39270cpcr1.jpg',
         status: 'Online',
         description: 'Growtopia private server terbaru 2026.',
         whatsapp: 'https://chat.whatsapp.com/JQDaqkILa8i6k6v45Xod7K',
@@ -194,18 +194,18 @@ window.EPEN_CONFIG = {
 
     actionButtons: [
       {
-        id: 'discord',
+        id: 'promote',
         category: 'Promote',
-        title: 'Jasa Promote GTPS',
+        title: 'Order Promote GTPS',
         url: '/promote',
-        iconUrl: '/assets/icons/discord.png',
-        icon: 'discord',
+        iconUrl: '/assets/icons/promote.png',
+        icon: '',
         target: '_self'
       },
       {
         id: 'whatsapp',
         category: 'Information',
-        title: 'Information Giveaway',
+        title: 'Informasi Giveaway Role',
         url: 'https://whatsapp.com/channel/0029VbDsLl9LNSZxidjstX2E',
         iconUrl: '/assets/icons/whatsapp.png',
         icon: 'whatsapp',
@@ -213,8 +213,8 @@ window.EPEN_CONFIG = {
       },
       {
         id: 'partners',
-        category: 'Network',
-        title: 'Lihat Partner Kami',
+        category: 'Partner',
+        title: 'Partner Epen GTPS',
         url: '/partners',
         iconUrl: '/assets/icons/partners.png',
         icon: 'users',
@@ -222,20 +222,11 @@ window.EPEN_CONFIG = {
       },
       {
         id: 'servers',
-        category: 'Network',
-        title: 'Lihat Server GTPS',
+        category: 'Server',
+        title: 'List Server GTPS',
         url: '/servers',
         iconUrl: '',
         icon: 'network',
-        target: '_self'
-      },
-      {
-        id: 'videos',
-        category: 'Content',
-        title: 'Lihat Video Epen GTPS',
-        url: '#videos',
-        iconUrl: '',
-        icon: 'play',
         target: '_self'
       }
     ]
@@ -274,13 +265,13 @@ window.EPEN_CONFIG = {
     {
       id: 'Vincent',
       name: 'Vincent GTPS',
-      short: 'GN',
+      short: 'V',
       tagline: 'Promoter GTPS',
       description: 'Subscribe = 1 Account Free.',
-      logo: '/assets/partners/vincent-logo.png',
-      banner: '/assets/partners/vincent-banner.png',
+      logo: '',
+      banner: '',
       // custom = gunakan gambar banner sendiri | template = gunakan banner bawaan Epen GTPS
-      bannerMode: 'custom',
+      bannerMode: 'template',
       bannerTemplate: { style: 'signature', showLogo: true },
       links: {
         whatsapp: 'https://wa.me/',
@@ -315,28 +306,6 @@ window.EPEN_CONFIG = {
       videos: [
         { title: 'Project Showcase', videoId: 'dQw4w9WgXcQ', meta: 'Growtopia Project' },
         { title: 'Community Highlights', videoId: 'dQw4w9WgXcQ', meta: 'Growtopia Project' }
-      ]
-    },
-    {
-      id: 'gtps-creator',
-      name: 'GTPS Creator',
-      short: 'GC',
-      tagline: 'Creator & tutorial network',
-      description: 'Kumpulan creator yang membagikan tutorial, resource, dan konten GTPS.',
-      logo: '',
-      banner: '',
-      bannerMode: 'template',
-      bannerTemplate: { style: 'midnight', showLogo: false },
-      links: {
-        whatsapp: 'https://wa.me/',
-        discord: 'https://discord.com/',
-        youtube: 'https://youtube.com/'
-      },
-      videoLimit: 4,
-      youtubeChannelId: '',
-      videos: [
-        { title: 'Creator Tutorial', videoId: 'dQw4w9WgXcQ', meta: 'GTPS Creator' },
-        { title: 'GTPS Tips', videoId: 'dQw4w9WgXcQ', meta: 'GTPS Creator' }
       ]
     }
   ]

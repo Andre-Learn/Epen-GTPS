@@ -136,13 +136,15 @@ function applyPageAvailability() {
 }
 
 function footerIcon(id) {
+  // Footer uses tightly-cropped local icon copies so transparent padding
+  // inside source PNGs does not make some icons look smaller than others.
   const iconMap = {
-    home: '/assets/icons/home.png',
-    promote: '/assets/icons/promote.png',
-    partners: '/assets/icons/partners.png',
-    servers: '/assets/icons/servers.png',
-    discord: '/assets/icons/discord.png',
-    whatsapp: '/assets/icons/whatsapp.png'
+    home: '/assets/icons/footer/home.png',
+    promote: '/assets/icons/footer/promote.png',
+    partners: '/assets/icons/footer/partners.png',
+    servers: '/assets/icons/footer/servers.png',
+    discord: '/assets/icons/footer/discord.png',
+    whatsapp: '/assets/icons/footer/whatsapp.png'
   };
   const src = iconMap[id] || iconMap.home;
   return `<img class="global-footer-icon" src="${escapeHtml(src)}" alt="" aria-hidden="true" loading="lazy" decoding="async">`;
@@ -307,7 +309,7 @@ function iconSvg(type) {
     youtube: '/assets/icons/youtube.png'
   };
   const src = iconMap[type] || '/assets/icons/partners.png';
-  return `<img class="detail-link-icon" src="${escapeHtml(src)}" alt="" aria-hidden="true" loading="lazy" decoding="async">`;
+  return `<img class="detail-link-icon detail-link-icon-${escapeHtml(type)}" src="${escapeHtml(src)}" alt="" aria-hidden="true" loading="lazy" decoding="async">`;
 }
 
 function youtubeThumb(videoId) {
