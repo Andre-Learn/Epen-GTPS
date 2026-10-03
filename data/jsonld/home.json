@@ -1,0 +1,63 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://epengtps.web.id/#website",
+      "url": "https://epengtps.web.id/",
+      "name": "Epen GTPS",
+      "alternateName": [
+        "Epen GTPS",
+        "Epen GTPS Indonesia"
+      ],
+      "description": "Platform Epen GTPS untuk promosi server GTPS, menemukan server Growtopia Private Server, dan mengenal partner serta promoter GTPS",
+      "inLanguage": "id-ID",
+      "publisher": {
+        "@id": "https://epengtps.web.id/#organization"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://epengtps.web.id/#organization",
+      "name": "Epen GTPS",
+      "url": "https://epengtps.web.id/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://epengtps.web.id/assets/logo.png",
+        "contentUrl": "https://epengtps.web.id/assets/logo.png",
+        "width": 512,
+        "height": 512,
+        "caption": "Epen GTPS"
+      },
+      "sameAs": [
+        "https://youtube.com/@epengtps"
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://epengtps.web.id/#webpage",
+      "url": "https://epengtps.web.id/",
+      "name": "Epen GTPS — Jasa Promote GTPS & Server GTPS Indonesia",
+      "description": "Epen GTPS menyediakan jasa promote GTPS, direktori server Growtopia Private Server, serta jaringan partner dan promoter GTPS Indonesia.",
+      "isPartOf": {
+        "@id": "https://epengtps.web.id/#website"
+      },
+      "inLanguage": "id-ID"
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "name": "Jasa Promote GTPS",
+      "url": "https://epengtps.web.id/promote"
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "name": "Partner & Promoter GTPS",
+      "url": "https://epengtps.web.id/partners"
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "name": "Daftar Server GTPS",
+      "url": "https://epengtps.web.id/servers"
+    }
+  ]
+}
