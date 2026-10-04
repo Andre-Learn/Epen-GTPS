@@ -1,0 +1,655 @@
+/* =========================================================
+   design.css — lapisan desain, dimuat SETELAH globals.css.
+
+   1. Token: warna (mode gelap beraksen ungu pucat) dan skala tipografi
+   2. Mode gelap: elemen yang di globals.css berwarna ungu pekat
+   3. Tipografi: Instrument Sans, judul besar berjarak rapat
+   4. Promote: paket Populer vs kartu polos
+   5. Detail server: panel dari bawah (ponsel) / dialog (layar lebar)
+   6. Gerakan: satu animasi saat halaman dibuka, sisanya respons aksi
+   ========================================================= */
+
+
+/* ---------- 1. Token ---------- */
+:root{
+  --font:"Instrument Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+
+  /* Skala ukuran: display > judul > lead > heading > isi > kecil > keterangan */
+  --fs-display:clamp(2.75rem,9.5vw,4.5rem);
+  --fs-title:clamp(1.5rem,3.8vw,2rem);
+  --fs-lead:1.25rem;
+  --fs-heading:1.125rem;
+  --fs-body:.9375rem;
+  --fs-small:.8125rem;
+  --fs-caption:.75rem;
+
+  --ease:cubic-bezier(.22,1,.36,1);
+
+  --on-accent:#fff;          /* teks di atas isian aksen */
+  --accent-hover:#5b21b6;
+  --accent-glow:rgba(109,40,217,.28);
+  --icon-filter:brightness(0) saturate(100%) invert(13%) sepia(10%) saturate(1220%) hue-rotate(214deg) brightness(92%) contrast(93%);
+  --icon-accent-filter:brightness(0) saturate(100%) invert(34%) sepia(96%) saturate(3014%) hue-rotate(247deg) brightness(92%) contrast(93%);
+}
+
+html[data-theme=dark]{
+  color-scheme:dark;
+  --bg:#0e0c13;
+  --surface:#16131d;
+  --surface-2:#1e1a28;
+  --line:#2b2536;
+  --text:#f4f0f9;
+  --muted:#a9a1b6;
+
+  /* Ungu pucat */
+  --purple:#c9b8f6;
+  --purple-2:#b6a1f0;
+  --purple-3:#e2d8fb;
+  --purple-soft:rgba(201,184,246,.1);
+  --on-accent:#1b1130;
+  --accent-hover:#e2d8fb;
+  --accent-glow:rgba(201,184,246,.3);
+
+  --shadow-sm:0 1px 2px rgba(0,0,0,.3);
+  --shadow-md:0 14px 34px rgba(0,0,0,.4);
+
+  --icon-filter:brightness(0) invert(1);
+  --icon-accent-filter:brightness(0) saturate(100%) invert(63%) sepia(44%) saturate(2809%) hue-rotate(208deg) brightness(129%) contrast(94%);
+}
+
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--font);
+  font-size:var(--fs-body);
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+}
+button,input,summary{font-family:inherit}
+
+/* Fokus keyboard yang selalu terlihat */
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{
+  outline:2px solid var(--purple);
+  outline-offset:3px;
+}
+.site-header :focus-visible{outline-color:#fff}
+html[data-theme=dark] .site-header :focus-visible{outline-color:var(--purple)}
+
+
+/* ---------- 2. Mode gelap ---------- */
+
+/* Header kaca: gelap, bukan ungu pekat */
+html[data-theme=dark] .site-header{
+  background:rgba(22,19,29,.8);
+  border-color:var(--line);
+  box-shadow:0 10px 30px rgba(0,0,0,.42);
+  color:var(--text);
+}
+html[data-theme=dark] .header-back{background:transparent;border-color:var(--line);color:var(--text)}
+html[data-theme=dark] .header-back:hover{background:var(--purple-soft);border-color:var(--purple)}
+html[data-theme=dark] .header-page-title{color:var(--text)}
+html[data-theme=dark] .theme-switch{color:var(--text)}
+html[data-theme=dark] .theme-switch-track{background:rgba(201,184,246,.2);border-color:rgba(201,184,246,.42)}
+html[data-theme=dark] .theme-switch:hover .theme-switch-track{background:rgba(201,184,246,.3)}
+html[data-theme=dark] .theme-switch-knob{background:var(--purple)}
+html[data-theme=dark] .theme-switch-knob span,
+html[data-theme=dark] .theme-switch-knob i{background:var(--on-accent);opacity:.45}
+
+/* Logo / avatar */
+html[data-theme=dark] .avatar{
+  background:linear-gradient(145deg,var(--purple-3),var(--purple-2));
+  color:var(--on-accent);
+  border-color:var(--bg);
+  box-shadow:none;
+}
+html[data-theme=dark] .site-header .avatar{border-color:var(--line)}
+
+/* Banner bawaan (kalau belum ada banner dari admin). Hanya background-image
+   yang diganti supaya banner kustom tidak ikut terpengaruh. */
+html[data-theme=dark] .cover-art{box-shadow:none}
+html[data-theme=dark] .cover-art:not(.has-site-banner){
+  background-image:linear-gradient(135deg,#17111f 0%,#251c3d 55%,#4c3d82 100%);
+}
+html[data-theme=dark] .cover-glow{background:var(--purple-3);opacity:.14}
+html[data-theme=dark] .cover-orb{
+  background:radial-gradient(circle at 35% 30%,#f0e9fe,#a28bea 58%,#251c3d);
+  border-color:rgba(255,255,255,.7);
+  color:var(--on-accent);
+}
+
+/* Tombol menu di beranda: permukaan gelap, aksen ungu pucat */
+html[data-theme=dark] .action-list .action-card{
+  background:var(--surface);
+  border:1px solid var(--line);
+  color:var(--text);
+  box-shadow:none;
+  filter:none;
+}
+html[data-theme=dark] .action-list .action-card:hover{
+  background:var(--surface-2);
+  border-color:var(--purple);
+  box-shadow:none;
+  filter:none;
+}
+html[data-theme=dark] .action-logo{background:var(--purple-soft);border-color:transparent;color:var(--purple)}
+html[data-theme=dark] .action-copy small{color:var(--muted);opacity:1}
+
+/* Tombol muat ulang */
+html[data-theme=dark] .section-refresh{background:var(--surface);border-color:var(--line);box-shadow:none;color:var(--purple)}
+html[data-theme=dark] .section-refresh:hover{background:var(--purple-soft);border-color:var(--purple);box-shadow:none}
+html[data-theme=dark] .section-refresh img,
+html[data-theme=dark] .section-refresh:not(.is-refreshing) img{filter:var(--icon-accent-filter)}
+html[data-theme=dark] .section-refresh.is-refreshing{background:var(--purple);border-color:var(--purple)}
+html[data-theme=dark] .section-refresh.is-refreshing img{filter:brightness(0) saturate(100%) invert(8%) sepia(40%) saturate(2800%) hue-rotate(250deg)}
+
+/* Ikon tautan (partner & server) */
+html[data-theme=dark] .detail-link-icon:not(.detail-link-icon-youtube){filter:var(--icon-filter)}
+html[data-theme=dark] .server-modal-link-icon .server-link-icon{filter:var(--icon-accent-filter)}
+html[data-theme=dark] .server-modal-link-icon svg{color:var(--purple)}
+html[data-theme=dark] .server-modal-link-icon{background:var(--purple-soft);border-color:transparent}
+
+/* Logo kartu partner & server */
+html[data-theme=dark] .partner-item-logo,
+html[data-theme=dark] .server-card-logo,
+html[data-theme=dark] .server-modal-logo{
+  background:var(--surface-2);
+  color:var(--purple);
+  border:1px solid var(--line);
+  box-shadow:none;
+}
+
+/* Halaman Partner & Server: tanpa semburat gradien di belakang judul */
+.partners-page,.servers-page,
+html[data-theme=dark] .partners-page,
+html[data-theme=dark] .servers-page{background:var(--bg)}
+
+.server-search:focus-within{
+  border-color:var(--purple);
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--purple) 22%,transparent);
+}
+html[data-theme=dark] .server-search{box-shadow:none}
+
+/* Footer: permukaan gelap, tidak lagi blok ungu */
+html[data-theme=dark] .global-footer-inner{
+  background:var(--surface);
+  border-top:1px solid var(--line);
+  box-shadow:none;
+  color:var(--text);
+}
+html[data-theme=dark] .global-footer-inner::before,
+html[data-theme=dark] .global-footer-inner::after{display:none}
+html[data-theme=dark] .global-footer-brand{color:var(--text)}
+html[data-theme=dark] .global-footer-logo,
+html[data-theme=dark] .global-footer-logo-fallback{border-color:var(--line);box-shadow:none;background:var(--surface-2);color:var(--purple)}
+html[data-theme=dark] .global-footer-description,
+html[data-theme=dark] .global-footer-bottom{color:var(--muted)}
+html[data-theme=dark] .global-footer-divider{background:var(--line)}
+html[data-theme=dark] .global-footer-link{
+  background:var(--surface-2);
+  border-color:var(--line);
+  color:var(--text);
+  box-shadow:none;
+}
+html[data-theme=dark] .global-footer-link:hover{background:var(--purple-soft);border-color:var(--purple);box-shadow:none}
+html[data-theme=dark] .global-footer-link img.global-footer-icon{filter:var(--icon-filter)}
+
+/* Tombol halaman pemeliharaan */
+html[data-theme=dark] .maintenance-button{
+  background:var(--purple);
+  color:var(--on-accent);
+  border-color:var(--purple);
+  box-shadow:none;
+}
+
+/* Skeleton video: diam, tanpa kilau */
+.video-skeleton-thumb,.skeleton-line,.skeleton-shimmer{animation:none;background:var(--surface-2);background-size:auto}
+html[data-theme=dark] .video-skeleton-thumb,
+html[data-theme=dark] .skeleton-line{background:var(--surface-2);background-size:auto}
+
+
+/* ---------- 3. Tipografi ---------- */
+h1,h2,h3,h4{font-family:var(--font);text-wrap:balance}
+p{text-wrap:pretty}
+
+/* Display: judul halaman */
+.profile-info h1,
+.partners-intro h1,
+.server-intro h1,
+.promote-hero h1,
+.maintenance-content h1{
+  font-size:var(--fs-display);
+  font-weight:650;
+  line-height:.98;
+  letter-spacing:-.055em;
+  margin:0 0 .3em;
+}
+.partners-intro h1 span,
+.server-intro h1 span{color:inherit}
+.profile-info h1{margin-bottom:0}
+.partners-intro h1,.server-intro h1{margin-top:.2em}
+.promote-hero h1{margin-top:.25em}
+
+/* Jarak setelah nama situs di beranda */
+.about-epen{margin-top:40px}
+.about-epen-main{margin-left:0;margin-right:0}
+
+/* Judul bagian */
+.section-title-row h2,
+.promote-heading h2,
+.promote-section-heading h2,
+.seo-section-heading h2,
+.about-epen-main h2,
+.seo-intro h2,
+.promote-final-cta h2{
+  font-size:var(--fs-title);
+  font-weight:650;
+  line-height:1.08;
+  letter-spacing:-.04em;
+}
+.about-epen-main h2{max-width:22ch}
+
+/* Judul kartu / item */
+.promote-plan,
+.process-card h3,
+.partner-expand-videos h4,
+.detail-profile-content h2{
+  font-size:var(--fs-heading);
+  font-weight:650;
+  letter-spacing:-.02em;
+  line-height:1.2;
+}
+.partner-expand-content h3,
+.server-modal-content h2{
+  font-size:var(--fs-title);
+  font-weight:650;
+  line-height:1.05;
+  letter-spacing:-.04em;
+}
+.action-copy strong,
+.partner-item-copy strong,
+.server-card-copy strong{font-size:1rem;font-weight:600;letter-spacing:-.01em}
+
+/* Penanda bagian: kalimat biasa, tanpa huruf kapital melebar */
+.section-kicker{
+  font-size:var(--fs-caption);
+  font-weight:600;
+  letter-spacing:0;
+  text-transform:none;
+  color:var(--muted);
+}
+.promote-page .promote-hero .section-kicker::before{display:none}
+.promote-final-cta .section-kicker{font-weight:600}
+
+/* Isi teks */
+.about-epen-main p,
+.promote-hero p{
+  font-size:var(--fs-body);
+  line-height:1.65;
+  max-width:62ch;
+}
+.promote-hero .promote-hero-lead{
+  font-size:var(--fs-lead);
+  line-height:1.35;
+  letter-spacing:-.02em;
+  max-width:34ch;
+}
+.promote-heading p,
+.promote-section-heading p,
+.server-intro p,
+.partners-intro p{font-size:var(--fs-body);line-height:1.6;max-width:56ch}
+.promote-final-cta p{font-size:var(--fs-body);line-height:1.6;max-width:52ch}
+.promote-final-cta h2{max-width:22ch}
+
+/* Teks kecil: batas bawah 12px supaya terbaca */
+.header-brand-copy small{font-size:var(--fs-caption)}
+.action-copy small,
+.server-card-copy small,
+.partner-item-copy small,
+.video-info small,
+.server-count,
+.server-card-meta,
+.global-footer-bottom,
+.global-footer-description{font-size:var(--fs-caption)}
+.process-card p,
+.faq-list details p{font-size:var(--fs-small);line-height:1.65}
+.process-card p{max-width:24ch}
+
+.video-grid-inner .video-info strong,
+.partner-video-container .video-info strong,
+.partner-expand .video-info strong,
+.video-info strong{font-size:var(--fs-small);line-height:1.35;font-weight:600}
+.video-grid-inner .video-info small,
+.partner-video-container .video-info small,
+.partner-expand .video-info small{font-size:var(--fs-caption)}
+
+.global-footer-link{font-size:var(--fs-small);font-weight:600}
+.global-footer-brand > span:last-child{font-weight:650;letter-spacing:-.04em}
+
+/* FAQ: daftar bergaris, bukan tumpukan kartu */
+.faq-list{gap:0;border-top:1px solid var(--line)}
+.faq-list details{border:0;border-bottom:1px solid var(--line);border-radius:0;background:transparent;box-shadow:none}
+.faq-list summary{padding:18px 2px;font-size:var(--fs-body);font-weight:600;letter-spacing:-.01em}
+.faq-list details p{padding:0 2px 18px;max-width:62ch}
+.faq-list summary::after{font-size:1.25rem;font-weight:400}
+
+/* Buka-tutup FAQ bergerak halus di browser yang mendukung ::details-content */
+@supports selector(::details-content){
+  :root{interpolate-size:allow-keywords}
+  .faq-list details::details-content{
+    block-size:0;
+    overflow:clip;
+    transition:block-size .3s var(--ease),content-visibility .3s allow-discrete;
+  }
+  .faq-list details[open]::details-content{block-size:auto}
+}
+
+
+/* ---------- 4. Promote ---------- */
+.promote-heading{margin-bottom:6px}
+.promote-grid{padding-top:16px;column-gap:14px;row-gap:30px}
+
+/* Kartu biasa: polos */
+.promote-grid .promote-card{
+  display:flex;
+  flex-direction:column;
+  overflow:visible;
+  padding:22px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:var(--surface);
+  box-shadow:none;
+  transition:border-color .2s var(--ease);
+}
+.promote-grid .promote-card:hover{
+  transform:none;
+  box-shadow:none;
+  border-color:color-mix(in srgb,var(--purple) 50%,var(--line));
+}
+.promote-grid .promote-card-head{padding-right:0;min-height:0;gap:6px}
+@media(min-width:761px){.promote-grid .promote-card-head{min-height:4.5rem}}
+.promote-description{font-size:var(--fs-small);line-height:1.45;color:var(--muted)}
+.promote-price{
+  margin:20px 0 18px;
+  font-size:2rem;
+  font-weight:650;
+  line-height:1;
+  letter-spacing:-.05em;
+}
+.promote-grid .promote-features{flex:1;min-height:0;gap:10px;margin-bottom:22px}
+.promote-features li{font-size:var(--fs-small);line-height:1.4;gap:10px}
+.promote-features li .promote-feature-icon{
+  position:relative;
+  width:14px;height:14px;
+  margin-top:2px;
+  border:0;border-radius:0;
+  font-size:0;
+}
+.promote-features li .promote-feature-icon::after{
+  content:"";
+  position:absolute;left:4px;top:0;
+  width:5px;height:9px;
+  border:solid var(--purple);
+  border-width:0 1.75px 1.75px 0;
+  transform:rotate(45deg);
+}
+
+/* Tombol: kartu biasa = garis, kartu Populer = isian ungu */
+.promote-grid .promote-cta{
+  min-height:44px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:transparent;
+  color:var(--text);
+  font-size:var(--fs-small);
+  font-weight:600;
+  box-shadow:none;
+  filter:none;
+  transition:background .2s var(--ease),border-color .2s var(--ease),transform .12s var(--ease);
+}
+.promote-grid .promote-cta:hover{
+  transform:none;
+  background:var(--purple-soft);
+  border-color:var(--purple);
+  color:var(--text);
+  box-shadow:none;
+  filter:none;
+}
+.promote-grid .promote-cta:active{transform:scale(.98)}
+.promote-grid .is-popular .promote-cta{background:var(--purple);border-color:var(--purple);color:var(--on-accent)}
+.promote-grid .is-popular .promote-cta:hover{background:var(--accent-hover);border-color:var(--accent-hover);color:var(--on-accent)}
+html[data-theme=dark] .promote-grid .is-popular .promote-cta:hover{color:var(--on-accent)}
+
+/* Paket Populer: garis ungu + bayangan lembut + label ungu sendiri */
+.promote-grid .promote-card.is-popular{
+  border-color:var(--purple);
+  box-shadow:0 0 0 1px var(--purple),0 20px 44px -18px var(--accent-glow);
+}
+.promote-grid .promote-card.is-popular:hover{
+  border-color:var(--purple);
+  box-shadow:0 0 0 1px var(--purple),0 24px 50px -18px var(--accent-glow);
+}
+.promote-card .promote-badge{
+  position:absolute;
+  top:0;left:20px;right:auto;
+  transform:translateY(-50%);
+  padding:5px 12px;
+  border-radius:8px;
+  background:var(--purple);
+  color:var(--on-accent);
+  font-size:var(--fs-caption);
+  font-weight:650;
+  line-height:1.2;
+  letter-spacing:0;
+  text-transform:none;
+  box-shadow:0 6px 14px -6px var(--accent-glow);
+}
+
+/* CTA akhir: kalem di mode gelap */
+html[data-theme=dark] .promote-final-cta{
+  background:var(--surface);
+  border-color:var(--line);
+  box-shadow:none;
+  color:var(--text);
+}
+html[data-theme=dark] .promote-final-cta::before,
+html[data-theme=dark] .promote-final-cta::after{border-color:var(--line)}
+html[data-theme=dark] .promote-final-cta p{color:var(--muted)}
+html[data-theme=dark] .promote-final-cta .section-kicker{color:var(--muted)}
+html[data-theme=dark] .promote-final-cta-button{
+  background:var(--purple);
+  border-color:var(--purple);
+  color:var(--on-accent);
+  box-shadow:none;
+}
+.promote-final-cta-button{font-weight:650}
+
+/* Harga, daftar fitur, dan tombol sejajar antar kartu walau panjang deskripsi beda */
+@supports (grid-template-rows:subgrid){
+  @media(min-width:761px){
+    .promote-grid{row-gap:0}
+    .promote-grid .promote-card{
+      display:grid;
+      grid-row:span 4;
+      grid-template-rows:subgrid;
+      row-gap:0;
+      margin-bottom:30px;
+    }
+    .promote-grid .promote-card-head{min-height:0}
+  }
+}
+
+
+/* ---------- 5. Detail server: panel dari bawah / dialog ---------- */
+.server-modal{
+  position:fixed;
+  inset:0;
+  z-index:500;
+  display:grid;
+  opacity:1;
+  visibility:hidden;
+  /* tetap terlihat sampai animasi tutup selesai */
+  transition:visibility 0s linear .34s;
+}
+.server-modal.is-open{visibility:visible;opacity:1;transition-delay:0s}
+
+.server-modal-backdrop{
+  background:rgba(8,6,12,.55);
+  -webkit-backdrop-filter:none;
+  backdrop-filter:none;
+  opacity:0;
+  transition:opacity .3s var(--ease);
+}
+.server-modal.is-open .server-modal-backdrop{opacity:1}
+
+.server-modal-card{
+  background:var(--surface);
+  border:1px solid var(--line);
+  color:var(--text);
+  -webkit-backdrop-filter:none;
+  backdrop-filter:none;
+  box-shadow:0 24px 70px rgba(10,6,20,.3);
+}
+html[data-theme=dark] .server-modal-card{
+  background:var(--surface);
+  border-color:var(--line);
+  box-shadow:0 24px 70px rgba(0,0,0,.55);
+}
+
+/* Ponsel: panel menempel di bawah layar */
+@media(max-width:639.98px){
+  .server-modal{place-items:end stretch;padding:0}
+  .server-modal-card{
+    width:100%;
+    max-width:none;
+    max-height:88vh;
+    max-height:88dvh;
+    border-width:1px 0 0;
+    border-radius:20px 20px 0 0;
+    padding-bottom:env(safe-area-inset-bottom,0px);
+    opacity:1;
+    transform:translateY(100%);
+    transition:transform .38s var(--ease);
+  }
+  .server-modal.is-open .server-modal-card{transform:none}
+}
+
+/* Layar lebar: dialog di tengah */
+@media(min-width:640px){
+  .server-modal{place-items:center;padding:24px}
+  .server-modal-card{
+    width:min(480px,100%);
+    max-height:calc(100vh - 48px);
+    max-height:calc(100dvh - 48px);
+    border-radius:16px;
+    opacity:0;
+    transform:translateY(10px) scale(.98);
+    transition:opacity .22s var(--ease),transform .22s var(--ease);
+  }
+  .server-modal.is-open .server-modal-card{opacity:1;transform:none}
+}
+
+/* Isi panel: rata kiri, logo di samping nama */
+.server-modal-close{
+  top:12px;right:12px;
+  width:36px;height:36px;
+  border:1px solid var(--line);
+  background:var(--surface);
+  color:var(--text);
+  box-shadow:none;
+  transition:background .2s var(--ease),border-color .2s var(--ease),transform .12s var(--ease);
+}
+html[data-theme=dark] .server-modal-close{background:var(--surface);border-color:var(--line)}
+.server-modal-close:hover{background:var(--purple-soft);border-color:var(--purple)}
+.server-modal-close:active{transform:scale(.94)}
+
+.server-modal-content{
+  display:grid;
+  grid-template-columns:64px minmax(0,1fr);
+  grid-template-areas:
+    "logo title"
+    "logo status"
+    "desc desc"
+    "links links";
+  column-gap:16px;
+  align-items:center;
+  padding:28px 22px 24px;
+  text-align:left;
+}
+.server-modal-logo{
+  grid-area:logo;
+  width:64px;height:64px;
+  margin:0;
+  border-radius:16px;
+  border:1px solid var(--line);
+  font-size:1.5rem;
+  box-shadow:none;
+}
+.server-modal-content h2{
+  grid-area:title;
+  align-self:end;
+  margin:0;
+  padding-right:40px;
+}
+.server-modal-status{
+  grid-area:status;
+  align-self:start;
+  justify-self:start;
+  margin-top:8px;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:none;
+  color:var(--muted);
+  font-size:var(--fs-small);
+  font-weight:500;
+  animation:none;
+}
+html[data-theme=dark] .server-modal-status{background:none;border:0}
+.server-modal-content>p{
+  grid-area:desc;
+  margin:20px 0 22px;
+  max-width:none;
+  font-size:var(--fs-body);
+  line-height:1.6;
+  color:var(--muted);
+}
+.server-modal-links{grid-area:links;gap:8px}
+.server-modal-link{
+  min-height:52px;
+  border-radius:12px;
+  background:var(--surface-2);
+  border:1px solid var(--line);
+  box-shadow:none;
+}
+html[data-theme=dark] .server-modal-link{background:var(--surface-2);border-color:var(--line)}
+.server-modal-link:hover{transform:none;background:var(--purple-soft);border-color:var(--purple)}
+html[data-theme=dark] .server-modal-link:hover{background:var(--purple-soft);border-color:var(--purple)}
+.server-modal-link-label{font-size:var(--fs-small);font-weight:600}
+
+/* Status server: titik diam, tanpa berdenyut */
+.server-status-dot,
+.server-status-dot.is-offline{animation:none}
+
+
+/* ---------- 6. Gerakan ----------
+   Satu rangkaian saat beranda dibuka: banner, logo, lalu nama.
+   Selain itu hanya respons aksi (buka-tutup, hover, tekan).
+   Elemen tampil normal tanpa animasi, jadi aman kalau animasi dimatikan. */
+@keyframes intro-banner{from{opacity:0;transform:translateY(18px) scale(.985)}}
+@keyframes intro-logo{from{opacity:0;transform:scale(.86)}}
+@keyframes intro-name{from{opacity:0;transform:translateY(12px)}}
+
+[data-page-key=home] .cover-art{animation:intro-banner .8s var(--ease) both}
+[data-page-key=home] .profile-avatar{animation:intro-logo .6s var(--ease) .4s both}
+[data-page-key=home] .profile-info h1{animation:intro-name .7s var(--ease) .7s both}
+
+/* Pengguna yang memilih mengurangi gerakan: semua animasi & transisi mati */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{
+    animation:none !important;
+    transition:none !important;
+    scroll-behavior:auto !important;
+  }
+}

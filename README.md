@@ -70,8 +70,6 @@ next.config.mjs        security header + CSP + redirect (pengganti vercel.json)
 - `/api/youtube`: 30 permintaan/menit per IP; muat ulang paksa 5/menit.
 - Dengan Upstash Redis hitungan dibagi ke semua instance. Tanpa Upstash dipakai memori per-instance (kurang kuat). Kalau Redis down, otomatis kembali ke memori.
 
-**Desain.** Semua gaya ada di satu file, `app/globals.css`: token warna (terang dan gelap) di bagian atas, komponen di bawahnya. Untuk mengganti warna ungu cukup ubah `--accent`, `--accent-solid`, dan `--accent-soft`. Font memakai Instrument Sans (dimuat di `app/layout.js`). Animasi dimatikan otomatis untuk pengguna dengan `prefers-reduced-motion`. Halaman admin (`app/admin`) punya CSS sendiri dan tidak ikut berubah.
-
 **Gambar.** Ikon, logo, dan banner di `public/assets` sudah diperkecil sesuai ukuran tampilnya. Logo lokal memakai `next/image` dan banner memakai optimizer Next (`/_next/image`, WebP). Gambar dari URL luar tetap `<img>` biasa.
 
 **Gerbang admin** (`middleware.js`). Halaman admin dan `/api/admin` hanya ada untuk browser yang membawa cookie gerbang; selain itu jawabannya 404 biasa. Alamat `/admin` asli juga ditutup kalau `ADMIN_PATH` diganti. Cara masuk: buka `/<ADMIN_PATH>?key=<ADMIN_GATE_KEY>` sekali, lalu cookie `httpOnly` berlaku 7 hari dan kamu diarahkan ke `/<ADMIN_PATH>` tanpa kode di URL. Tebakan kode dibatasi 10 kali per 15 menit per IP. Mengganti `ADMIN_GATE_KEY` atau `ADMIN_PATH` mencabut semua cookie gerbang yang sudah ada. Setelah itu tetap ada login password dan batas percobaannya.

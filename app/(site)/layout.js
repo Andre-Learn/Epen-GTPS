@@ -1,4 +1,5 @@
 import '../globals.css';
+import '../design.css';
 
 // Halaman publik dibuat statis lalu diperbarui (ISR):
 //  - langsung saat admin menyimpan (revalidateTag('site-config') di /api/admin)

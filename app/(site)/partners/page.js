@@ -43,6 +43,7 @@ export default async function PartnersPage() {
       {header}
       <main className="page-width partner-page-main">
         <section className="partners-intro" id="partnersIntro">
+          <span className="section-kicker">Epen GTPS partners</span>
           <h1>Partner &amp; Promoter GTPS Indonesia</h1>
           <p>
             Temukan <strong>promoter GTPS</strong>, creator, dan partner yang di rekomendasikan <strong>Epen GTPS</strong> untuk

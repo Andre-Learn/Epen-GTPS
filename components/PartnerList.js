@@ -27,7 +27,7 @@ function PartnerVideos({ partner, fetchLimit }) {
   return (
     <div className="partner-expand-videos">
       <div className="section-title-row">
-        <div><h4>Video Partner</h4></div>
+        <div><span className="section-kicker">Partner content</span><h4>Video Partner</h4></div>
         <RefreshButton label={`Muat ulang video partner ${partner.name}`} refreshing={refreshing} onClick={refresh} />
       </div>
       <div className="partner-video-container">
@@ -117,6 +117,7 @@ function PartnerAccordion({ partner, open, loaded, onToggle, fetchLimit }) {
                 ? <img src={partner.logo} alt={`Logo ${partner.name}`} loading="lazy" />
                 : <span>{partner.short}</span>}
             </div>
+            <span className="section-kicker">Partner profile</span>
             <h3>{partner.name}</h3>
             <p className="partner-expand-tagline">{partner.tagline}</p>
             <p className="partner-expand-description">{partner.description}</p>

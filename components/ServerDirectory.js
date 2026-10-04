@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ServerLinkIcon } from './Icons';
 
 const isOffline = status => String(status || '').toLowerCase().includes('offline');
@@ -14,7 +14,10 @@ function ServerLogo({ server }) {
 export default function ServerDirectory({ servers, linkIcons }) {
   const [query, setQuery] = useState('');
   const [selected, setSelected] = useState(null); // server yang sedang terbuka
-  const [shown, setShown] = useState(null); // isi modal tetap ada selama animasi tutup
+  const [shown, setShown] = useState(null); // isi panel tetap ada selama animasi tutup
+  const triggerRef = useRef(null); // elemen yang membuka panel, fokus dikembalikan ke sini saat ditutup
+  const cardRef = useRef(null);
+  const closeRef = useRef(null);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -25,10 +28,16 @@ export default function ServerDirectory({ servers, linkIcons }) {
   }, [servers, query]);
 
   const openServer = useCallback(server => {
+    triggerRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     setShown(server);
     setSelected(server);
   }, []);
-  const close = useCallback(() => setSelected(null), []);
+  const close = useCallback(() => {
+    setSelected(null);
+    const trigger = triggerRef.current;
+    triggerRef.current = null;
+    if (trigger && trigger.isConnected) trigger.focus({ preventScroll: true });
+  }, []);
 
   // Deep link: /servers?server=<id>
   useEffect(() => {
@@ -40,13 +49,35 @@ export default function ServerDirectory({ servers, linkIcons }) {
     return () => cancelAnimationFrame(frame);
   }, [servers, openServer]);
 
-  // Kunci scroll halaman + tutup dengan Escape saat modal terbuka.
+  // Saat panel terbuka: kunci scroll halaman, pindahkan fokus ke dalam panel,
+  // jaga Tab tetap di dalam panel, dan tutup dengan Escape.
   useEffect(() => {
     if (!selected) return undefined;
     document.body.classList.add('modal-open');
-    const onKey = event => { if (event.key === 'Escape') close(); };
+    const frame = requestAnimationFrame(() => closeRef.current?.focus({ preventScroll: true }));
+
+    const onKey = event => {
+      if (event.key === 'Escape') { close(); return; }
+      if (event.key !== 'Tab' || !cardRef.current) return;
+      const items = cardRef.current.querySelectorAll('a[href], button:not([disabled])');
+      if (!items.length) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      const active = document.activeElement;
+      if (!cardRef.current.contains(active)) {
+        event.preventDefault();
+        first.focus();
+      } else if (event.shiftKey && active === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && active === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
     document.addEventListener('keydown', onKey);
     return () => {
+      cancelAnimationFrame(frame);
       document.body.classList.remove('modal-open');
       document.removeEventListener('keydown', onKey);
     };
@@ -96,8 +127,8 @@ export default function ServerDirectory({ servers, linkIcons }) {
 
       <div className={`server-modal${selected ? ' is-open' : ''}`} id="serverModal" aria-hidden={!selected}>
         <div className="server-modal-backdrop" onClick={close} />
-        <section className="server-modal-card" role="dialog" aria-modal="true" aria-labelledby="serverModalTitle">
-          <button className="server-modal-close" type="button" onClick={close} aria-label="Tutup">×</button>
+        <section ref={cardRef} className="server-modal-card" role="dialog" aria-modal="true" aria-labelledby="serverModalTitle">
+          <button ref={closeRef} className="server-modal-close" type="button" onClick={close} aria-label="Tutup">×</button>
           <div className="server-modal-content" id="serverModalContent">
             {shown ? (
               <>

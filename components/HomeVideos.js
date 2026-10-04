@@ -18,7 +18,7 @@ export default function HomeVideos({ channelId, initialVideos, initialLimit, fet
   return (
     <section className="content-section page-width" id="videos">
       <div className="section-title-row">
-        <div><h2>Video Epen GTPS</h2></div>
+        <div><span className="section-kicker">Latest content</span><h2>Video Epen GTPS</h2></div>
         <RefreshButton label="Muat ulang video terbaru" refreshing={refreshing} onClick={refresh} />
       </div>
       <div className="home-video-grid" id="homeVideoGrid">

@@ -12,6 +12,7 @@ export default function PromoteSection({ config }) {
     <section className="promote-section page-width" id="promote">
       <div className="promote-heading">
         <div>
+          <span className="section-kicker">Promote server</span>
           <h2>{promote.title || 'Promote GTPS'}</h2>
           <p>{promote.description || ''}</p>
         </div>
@@ -22,7 +23,7 @@ export default function PromoteSection({ config }) {
           const features = Array.isArray(item.features) ? item.features : [];
           return (
             <article key={item.id ?? index} className={`promote-card${item.popular ? ' is-popular' : ''}`}>
-              {item.popular ? <span className="promote-badge">Paling populer</span> : null}
+              {item.popular ? <span className="promote-badge">Populer</span> : null}
               <div className="promote-card-head">
                 <span className="promote-plan">{item.name || `Paket ${index + 1}`}</span>
                 {item.description ? <span className="promote-description">{item.description}</span> : null}
