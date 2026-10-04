@@ -1,4 +1,4 @@
-import { SITE_URL, THEME_COLOR } from '@/lib/site';
+import { SITE_URL } from '@/lib/site';
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
@@ -9,7 +9,10 @@ export const metadata = {
 export const viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: THEME_COLOR
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#faf9fe' },
+    { media: '(prefers-color-scheme: dark)', color: '#0d0918' }
+  ]
 };
 
 // Set tema sebelum paint supaya tidak berkedip (sama seperti versi lama).
@@ -23,7 +26,7 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap"
         />
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
       </head>

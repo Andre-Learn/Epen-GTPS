@@ -60,7 +60,6 @@ export default async function HomePage() {
 
         <section className="about-epen page-width" aria-labelledby="aboutEpenTitle">
           <div className="about-epen-main">
-            <span className="section-kicker">TENTANG EPEN GTPS</span>
             <h2 id="aboutEpenTitle">Epen GTPS — Promoter Growtopia Private Server</h2>
             <p>
               <strong>Epen GTPS</strong> adalah channel YouTube dan platform yang berfokus pada <strong>promote GTPS</strong>.

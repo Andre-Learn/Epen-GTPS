@@ -37,8 +37,7 @@ export default async function ServersPage() {
       {header}
       <main className="page-width server-page-main">
         <section className="server-intro">
-          <span className="section-kicker">GTPS DIRECTORY</span>
-          <h1>List Server <span>GTPS.</span></h1>
+          <h1>List Server GTPS</h1>
           <p>
             Temukan <strong>server GTPS</strong> atau Growtopia Private Server yang ada pada website Epen GTPS. Cari berdasarkan
             nama, lalu lihat status, deskripsi, dan tautan komunitasnya.

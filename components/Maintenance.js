@@ -10,7 +10,6 @@ export default function Maintenance({ config, pageKey }) {
     <main>
       <section className="maintenance-page page-width" aria-labelledby="maintenanceTitle">
         <div className="maintenance-content">
-          <span className="section-kicker">EPEN GTPS</span>
           <h1 id="maintenanceTitle">{title}</h1>
           <p>{description}</p>
           {showHomeLink ? <Link className="maintenance-button" href="/">Kembali ke Home</Link> : null}

@@ -40,7 +40,6 @@ export default async function PromotePage() {
       {header}
       <main>
         <section className="promote-hero page-width" aria-labelledby="promoteTitle">
-          <span className="section-kicker">Price Promote</span>
           <h1 id="promoteTitle">Promote GTPS</h1>
           <p className="promote-hero-lead"><strong>Promosikan GTPS kamu bersama Epen GTPS.</strong></p>
           <p>
@@ -54,7 +53,6 @@ export default async function PromotePage() {
         <section className="promote-process page-width" aria-labelledby="processTitle">
           <div className="section-title-row promote-section-heading">
             <div>
-              <span className="section-kicker">CARA KERJA</span>
               <h2 id="processTitle">Cara Promote di Epen GTPS</h2>
               <p>Pilih paket, kirim informasi server, lalu biarkan proses promote berjalan sesuai paket yang dipilih.</p>
             </div>
@@ -71,7 +69,7 @@ export default async function PromotePage() {
 
         <section className="seo-faq page-width" aria-labelledby="faqTitle">
           <div className="section-title-row seo-section-heading">
-            <div><span className="section-kicker">FAQ</span><h2 id="faqTitle">Pertanyaan tentang Promote GTPS</h2></div>
+            <div><h2 id="faqTitle">Pertanyaan tentang Promote GTPS</h2></div>
           </div>
           <div className="faq-list">
             <details>
@@ -103,7 +101,6 @@ export default async function PromotePage() {
 
         <section className="promote-final-cta page-width" aria-labelledby="finalPromoteTitle">
           <div className="promote-final-copy">
-            <span className="section-kicker">SIAP PROMOSI?</span>
             <h2 id="finalPromoteTitle">Bawa server kamu lebih dikenal pemain Growtopia.</h2>
             <p>Pilih paket promote yang sesuai, siapkan data server, lalu hubungi Epen GTPS untuk memulai proses.</p>
           </div>
