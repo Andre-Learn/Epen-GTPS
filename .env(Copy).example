@@ -1,0 +1,33 @@
+# ---- Wajib (Vercel → Project Settings → Environment Variables) ----
+
+# YouTube Data API v3 (dipakai /api/youtube, hanya di server)
+YOUTUBE_API_KEY=
+# Channel ID yang boleh diproses, pisahkan dengan koma
+YOUTUBE_ALLOWED_CHANNELS=UCg8u_12KwZlZn9ZhWM_TExw,UCz9raHwx9TleY6VcZiIjmDA,UCakFHiJ1Q_3zoc81-71EMJQ
+
+# Admin panel
+ADMIN_PASSWORD=
+ADMIN_SESSION_SECRET=
+
+# Gerbang admin (middleware.js). Tanpa ADMIN_GATE_KEY, halaman dan API admin tertutup total (404).
+# Kode rahasia, minimal 16 karakter, acak. Buka admin sekali lewat:  /<ADMIN_PATH>?key=<ADMIN_GATE_KEY>
+ADMIN_GATE_KEY=
+# Alamat admin (tanpa "/"), huruf/angka/-/_ minimal 5 karakter, contoh: panel-7k2xq9. Kosong = "admin".
+# Jangan diawali: partners, servers, promote, api, assets, favicon, robots, sitemap.
+ADMIN_PATH=
+
+# Vercel Blob (otomatis ada kalau Blob Storage sudah di-connect ke project)
+BLOB_READ_WRITE_TOKEN=
+
+# ---- Opsional tapi disarankan ----
+
+# Rate limit yang berlaku lintas-instance (login admin & /api/youtube).
+# Cara termudah: Vercel → Storage → Marketplace → Upstash Redis → connect ke project.
+# Variabel di bawah (atau KV_REST_API_URL / KV_REST_API_TOKEN) terisi otomatis.
+# Tanpa ini, batasan tetap jalan tapi hanya per-instance (kurang kuat).
+UPSTASH_REDIS_REST_URL=
+UPSTASH_REDIS_REST_TOKEN=
+
+# ---- Opsional ----
+# Domain utama untuk canonical, Open Graph, dan sitemap
+NEXT_PUBLIC_SITE_URL=https://epengtps.web.id
