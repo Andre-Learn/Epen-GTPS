@@ -23,6 +23,8 @@ Sama seperti versi lama (lihat `.env.example`):
 | `YOUTUBE_ALLOWED_CHANNELS` | Channel ID yang boleh diproses `/api/youtube`, pisahkan dengan koma |
 | `ADMIN_PASSWORD` | Password login `/admin` |
 | `ADMIN_SESSION_SECRET` | Secret panjang untuk menandatangani cookie sesi admin |
+| `ADMIN_GATE_KEY` | Kode rahasia gerbang admin (min. 16 karakter). **Wajib**: tanpa ini admin tertutup total |
+| `ADMIN_PATH` | Alamat admin, mis. `panel-7k2xq9`. Kosong = `admin` |
 | `BLOB_READ_WRITE_TOKEN` | Otomatis ada setelah Vercel Blob di-connect ke project |
 | `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN` | (disarankan) penyimpan hitungan rate limit yang dipakai bersama semua instance. `KV_REST_API_URL`/`KV_REST_API_TOKEN` juga dikenali |
 | `NEXT_PUBLIC_SITE_URL` | (opsional) domain utama, default `https://epengtps.web.id` |
@@ -42,7 +44,7 @@ app/
   layout.js            root layout (font, script tema)
   globals.css          CSS lama (style.css)
   (site)/              halaman publik: /, /promote, /partners, /servers
-  admin/               admin panel berbasis form (React)
+  admin/               admin panel berbasis form (React), dibuka lewat ADMIN_PATH
   api/config           config publik
   api/admin            login/logout + baca/simpan config (Vercel Blob)
   api/youtube          muat ulang video (allowlist channel + rate limit)
@@ -53,6 +55,7 @@ data/
   default-config.json  config bawaan (dipakai kalau Blob belum diisi)
   jsonld/              structured data per halaman
 public/                logo, banner, ikon, site.webmanifest
+middleware.js          gerbang admin (kode rahasia + cookie)
 next.config.mjs        security header + CSP + redirect (pengganti vercel.json)
 ```
 
@@ -69,6 +72,8 @@ next.config.mjs        security header + CSP + redirect (pengganti vercel.json)
 
 **Gambar.** Ikon, logo, dan banner di `public/assets` sudah diperkecil sesuai ukuran tampilnya. Logo lokal memakai `next/image` dan banner memakai optimizer Next (`/_next/image`, WebP). Gambar dari URL luar tetap `<img>` biasa.
 
-**Admin (`/admin`).** Form per bagian: Halaman, Situs & SEO, Promote, Server, Partner, Video, plus Advanced JSON untuk sisanya (tombol menu beranda, navigasi footer, ikon link server, video cadangan). Isian divalidasi (URL aman, ID unik, Channel ID) dan ada peringatan kalau menutup halaman sebelum menyimpan.
+**Gerbang admin** (`middleware.js`). Halaman admin dan `/api/admin` hanya ada untuk browser yang membawa cookie gerbang; selain itu jawabannya 404 biasa. Alamat `/admin` asli juga ditutup kalau `ADMIN_PATH` diganti. Cara masuk: buka `/<ADMIN_PATH>?key=<ADMIN_GATE_KEY>` sekali, lalu cookie `httpOnly` berlaku 7 hari dan kamu diarahkan ke `/<ADMIN_PATH>` tanpa kode di URL. Tebakan kode dibatasi 10 kali per 15 menit per IP. Mengganti `ADMIN_GATE_KEY` atau `ADMIN_PATH` mencabut semua cookie gerbang yang sudah ada. Setelah itu tetap ada login password dan batas percobaannya.
+
+**Admin.** Form per bagian: Halaman, Situs & SEO, Promote, Server, Partner, Video, plus Advanced JSON untuk sisanya (tombol menu beranda, navigasi footer, ikon link server, video cadangan). Isian divalidasi (URL aman, ID unik, Channel ID) dan ada peringatan kalau menutup halaman sebelum menyimpan.
 
 **Keamanan.** Semua URL dari config dibersihkan di server (`lib/safe-url.js`) sebelum masuk ke HTML. Halaman yang dimatikan menampilkan "Segera Tersedia", `noindex`, dan keluar dari `sitemap.xml`. `/api/config` tetap ada (isinya sama seperti sebelumnya).
