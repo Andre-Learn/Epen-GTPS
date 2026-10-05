@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ServerLinkIcon } from './Icons';
+import ShareButtons from './ShareButtons';
 
 const isOffline = status => String(status || '').toLowerCase().includes('offline');
 const statusLabel = status => (isOffline(status) ? 'Offline' : String(status || 'Online'));
@@ -120,12 +121,22 @@ export default function ServerDirectory({ servers, linkIcons }) {
       <section className="server-list" id="serverList" aria-label="Daftar server GTPS">
         {filtered.length ? (
           filtered.map((server, index) => (
-            <button key={server.id || index} className="server-card" type="button" onClick={() => openServer(server)}>
+            <a
+              key={server.id || index}
+              className="server-card"
+              href={server.id ? `/servers/${encodeURIComponent(server.id)}` : '/servers'}
+              onClick={event => {
+                // Klik biasa membuka panel; klik tengah / Ctrl / Cmd tetap membuka halaman server.
+                if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
+                event.preventDefault();
+                openServer(server);
+              }}
+            >
               <span className="server-card-logo"><ServerLogo server={server} /></span>
               <span className="server-card-copy"><strong>{server.name}</strong><small>{server.description}</small></span>
               <StatusBadge status={server.status} className="server-card-meta" />
               <span className="server-card-arrow" aria-hidden="true">›</span>
-            </button>
+            </a>
           ))
         ) : (
           <div className="server-empty"><strong>Server tidak ditemukan</strong><span>Coba kata kunci lain.</span></div>
@@ -158,6 +169,16 @@ export default function ServerDirectory({ servers, linkIcons }) {
                     </a>
                   ))}
                 </div>
+                {shown.id ? (
+                  <>
+                    <ShareButtons
+                      path={`/servers/${encodeURIComponent(shown.id)}`}
+                      title={`${shown.name} — GTPS Terbaru 2026`}
+                      text={`${shown.name}: ${shown.description}`}
+                    />
+                    <a className="server-modal-page-link" href={`/servers/${encodeURIComponent(shown.id)}`}>Buka halaman server ›</a>
+                  </>
+                ) : null}
               </>
             ) : null}
           </div>

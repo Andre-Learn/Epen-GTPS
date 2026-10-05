@@ -163,11 +163,11 @@ export function ServersEditor({ config, errors, change }) {
         onChange={next => change(base, next)}
         itemTitle={server => server?.name}
         itemMeta={server => server?.status}
-        makeItem={items => ({ id: makeId(items, 'server'), name: '', logo: '', status: 'Online', description: 'Growtopia private server', whatsapp: '', discord: '', host: '' })}
+        makeItem={items => ({ id: makeId(items, 'server'), name: '', logo: '', status: 'Online', description: 'Growtopia private server', about: '', whatsapp: '', discord: '', host: '' })}
         renderItem={(server, set, index) => (
           <>
             <TextField label="Nama server" value={server.name} onChange={v => set({ ...server, name: v })} />
-            <TextField label="ID" value={server.id} onChange={v => set({ ...server, id: v })} error={errAt(errors, ...base, index, 'id')} hint="Dipakai di link /servers?server=ID." />
+            <TextField label="ID" value={server.id} onChange={v => set({ ...server, id: v })} error={errAt(errors, ...base, index, 'id')} hint="Dipakai di alamat halaman server: /servers/ID." />
             <SelectField
               label="Status"
               value={String(server.status || 'Online')}
@@ -180,6 +180,7 @@ export function ServersEditor({ config, errors, change }) {
             />
             <TextField label="Logo" value={server.logo} onChange={v => set({ ...server, logo: v })} error={errAt(errors, ...base, index, 'logo')} placeholder="https://…" />
             <TextField label="Deskripsi" multiline rows={2} value={server.description} onChange={v => set({ ...server, description: v })} />
+            <TextField label="Tentang server (opsional, untuk SEO)" multiline rows={4} value={server.about} onChange={v => set({ ...server, about: v })} hint="Teks lengkap di halaman /servers/ID. Kosong = dibuat otomatis." />
             <TextField label="WhatsApp" value={server.whatsapp} onChange={v => set({ ...server, whatsapp: v })} error={errAt(errors, ...base, index, 'whatsapp')} />
             <TextField label="Discord" value={server.discord} onChange={v => set({ ...server, discord: v })} error={errAt(errors, ...base, index, 'discord')} />
             <TextField label="Host / cara main" value={server.host} onChange={v => set({ ...server, host: v })} error={errAt(errors, ...base, index, 'host')} />
