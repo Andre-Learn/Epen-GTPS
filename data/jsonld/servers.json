@@ -28,16 +28,18 @@
     {
       "@type": "CollectionPage",
       "@id": "https://epengtps.web.id/servers#webpage",
-      "name": "Server GTPS — Epen GTPS",
+      "name": "Server GTPS Terbaru 2026 — Epen GTPS",
       "url": "https://epengtps.web.id/servers",
-      "description": "Cari dan jelajahi daftar server GTPS Indonesia di Epen GTPS. Lihat status, deskripsi, dan tautan komunitas server yang tersedia.",
+      "description": "Daftar server GTPS terbaru 2026 di Indonesia. Cek status online/offline, deskripsi, dan tautan komunitas Growtopia Private Server.",
       "isPartOf": {
         "@id": "https://epengtps.web.id/#website"
       },
       "inLanguage": "id-ID",
       "breadcrumb": {
         "@id": "https://epengtps.web.id/servers#breadcrumb"
-      }
+      },
+      "keywords": "GTPS terbaru 2026, server GTPS terbaru 2026, daftar GTPS Indonesia, Growtopia private server",
+      "dateModified": "2026-10-05"
     },
     {
       "@type": "BreadcrumbList",

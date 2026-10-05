@@ -4,6 +4,16 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ServerLinkIcon } from './Icons';
 
 const isOffline = status => String(status || '').toLowerCase().includes('offline');
+const statusLabel = status => (isOffline(status) ? 'Offline' : String(status || 'Online'));
+
+function StatusBadge({ status, className = '' }) {
+  return (
+    <span className={`server-status-badge${isOffline(status) ? ' is-offline' : ''}${className ? ` ${className}` : ''}`}>
+      <i className={`server-status-dot${isOffline(status) ? ' is-offline' : ''}`} />
+      {statusLabel(status)}
+    </span>
+  );
+}
 
 function ServerLogo({ server }) {
   return server.logo
@@ -113,10 +123,7 @@ export default function ServerDirectory({ servers, linkIcons }) {
             <button key={server.id || index} className="server-card" type="button" onClick={() => openServer(server)}>
               <span className="server-card-logo"><ServerLogo server={server} /></span>
               <span className="server-card-copy"><strong>{server.name}</strong><small>{server.description}</small></span>
-              <span className="server-card-meta">
-                <i className={`server-status-dot${isOffline(server.status) ? ' is-offline' : ''}`} />
-                {server.status}
-              </span>
+              <StatusBadge status={server.status} className="server-card-meta" />
               <span className="server-card-arrow" aria-hidden="true">›</span>
             </button>
           ))
@@ -137,10 +144,7 @@ export default function ServerDirectory({ servers, linkIcons }) {
                     ? <img src={shown.logo} alt={`${shown.name || 'Server'} logo`} />
                     : <span>{String(shown.name || 'G').slice(0, 1).toUpperCase()}</span>}
                 </div>
-                <span className="server-modal-status">
-                  <i className={`server-status-dot${isOffline(shown.status) ? ' is-offline' : ''}`} />
-                  {shown.status}
-                </span>
+                <StatusBadge status={shown.status} className="server-modal-status" />
                 <h2 id="serverModalTitle">{shown.name}</h2>
                 <p>{shown.description}</p>
                 <div className="server-modal-links">

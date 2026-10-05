@@ -872,7 +872,7 @@ body.modal-open{overflow:hidden}
    ========================================================= */
 
 /* Prevent tiny-screen horizontal overflow from long labels/URLs. */
-html, body { overflow-x: hidden; }
+html, body { overflow-x: hidden; overflow-x: clip; }
 img, svg { max-width: 100%; }
 
 /* Tablet: give the layout a little more breathing room. */

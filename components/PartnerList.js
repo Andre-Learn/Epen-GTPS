@@ -60,9 +60,6 @@ function PartnerBanner({ partner }) {
         <strong>{partner.name}</strong>
         <span>{partner.tagline || 'Partner & Promoter GTPS'}</span>
       </div>
-      {partner.bannerShowLogo
-        ? <img className="partner-banner-template-logo" src={partner.logo} alt="" loading="lazy" />
-        : null}
     </div>
   );
 }
