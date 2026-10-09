@@ -191,6 +191,59 @@ export function ServersEditor({ config, errors, change }) {
   );
 }
 
+/* ---------- Tombol beranda ---------- */
+const ICON_OPTIONS = [
+  { value: '', label: 'Otomatis (link)' },
+  { value: 'whatsapp', label: 'WhatsApp' },
+  { value: 'discord', label: 'Discord' },
+  { value: 'users', label: 'Pengguna' },
+  { value: 'network', label: 'Jaringan' },
+  { value: 'play', label: 'Play' },
+  { value: 'video', label: 'Video' },
+  { value: 'link', label: 'Link' }
+];
+
+export function ButtonsEditor({ config, errors, change }) {
+  const buttons = asArray(config.site?.actionButtons);
+  const base = ['site', 'actionButtons'];
+  return (
+    <Section
+      title="Tombol beranda"
+      hint="Tombol menu di halaman utama. Urutan di sini = urutan tampil. Tombol yang mengarah ke halaman yang dimatikan otomatis disembunyikan."
+    >
+      <ListEditor
+        noun="tombol"
+        addLabel="Tambah tombol"
+        emptyText="Belum ada tombol."
+        items={buttons}
+        onChange={next => change(base, next)}
+        itemTitle={button => button?.title}
+        itemMeta={button => button?.category}
+        makeItem={items => ({ id: makeId(items, 'tombol'), category: 'Link', title: '', url: '', iconUrl: '', icon: '', target: '_blank' })}
+        renderItem={(button, set, index) => (
+          <>
+            <TextField label="Judul" value={button.title} onChange={v => set({ ...button, title: v })} />
+            <TextField label="Kategori (teks kecil di atas judul)" value={button.category} onChange={v => set({ ...button, category: v })} placeholder="Promote / Information / Community" />
+            <TextField label="Link tujuan" value={button.url} onChange={v => set({ ...button, url: v })} error={errAt(errors, ...base, index, 'url')} placeholder="/promote atau https://…" />
+            <SelectField
+              label="Buka link di"
+              value={button.target === '_blank' ? '_blank' : '_self'}
+              onChange={v => set({ ...button, target: v })}
+              options={[
+                { value: '_self', label: 'Tab yang sama' },
+                { value: '_blank', label: 'Tab baru' }
+              ]}
+            />
+            <TextField label="Gambar ikon (opsional)" value={button.iconUrl} onChange={v => set({ ...button, iconUrl: v })} error={errAt(errors, ...base, index, 'iconUrl')} placeholder="/assets/icons/promote.png" hint="Kalau diisi, dipakai menggantikan ikon bawaan di bawah." />
+            <SelectField label="Ikon bawaan" value={String(button.icon || '')} onChange={v => set({ ...button, icon: v })} options={ICON_OPTIONS} />
+            <TextField label="ID" value={button.id} onChange={v => set({ ...button, id: v })} error={errAt(errors, ...base, index, 'id')} hint="Pengenal unik, huruf/angka/-/_ saja." />
+          </>
+        )}
+      />
+    </Section>
+  );
+}
+
 /* ---------- Partner ---------- */
 export function PartnersEditor({ config, errors, change }) {
   const partners = asArray(config.partners);

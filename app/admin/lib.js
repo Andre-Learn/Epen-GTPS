@@ -68,6 +68,13 @@ export function validate(config) {
   const packages = Array.isArray(site.promote?.packages) ? site.promote.packages : [];
   packages.forEach((pkg, index) => link(['site', 'promote', 'packages', index, 'url'], pkg?.url));
 
+  const buttons = Array.isArray(site.actionButtons) ? site.actionButtons : [];
+  ids(['site', 'actionButtons'], buttons, 'tombol');
+  buttons.forEach((button, index) => {
+    link(['site', 'actionButtons', index, 'url'], button?.url);
+    image(['site', 'actionButtons', index, 'iconUrl'], button?.iconUrl);
+  });
+
   const servers = Array.isArray(site.servers) ? site.servers : [];
   ids(['site', 'servers'], servers, 'server');
   servers.forEach((server, index) => {
@@ -117,6 +124,7 @@ export function prepareForSave(config) {
       };
     }
     if (Array.isArray(site.servers)) site.servers = site.servers.map(trimId);
+    if (Array.isArray(site.actionButtons)) site.actionButtons = site.actionButtons.map(trimId);
     next.site = site;
   }
   if (Array.isArray(next.partners)) next.partners = next.partners.map(trimId);

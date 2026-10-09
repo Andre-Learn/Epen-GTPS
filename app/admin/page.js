@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import styles from './admin.module.css';
 import { isPlainObject, prepareForSave, pretty, setIn, validate } from './lib';
-import { PagesEditor, PartnersEditor, PromoteEditor, ServersEditor, SiteEditor, VideoEditor } from './editors';
+import { ButtonsEditor, PagesEditor, PartnersEditor, PromoteEditor, ServersEditor, SiteEditor, VideoEditor } from './editors';
 
 async function api(url, options = {}) {
   const response = await fetch(url, {
@@ -19,6 +19,7 @@ async function api(url, options = {}) {
 const TABS = [
   { id: 'pages', label: 'Halaman', Editor: PagesEditor },
   { id: 'site', label: 'Situs & SEO', Editor: SiteEditor },
+  { id: 'buttons', label: 'Tombol', Editor: ButtonsEditor },
   { id: 'promote', label: 'Promote', Editor: PromoteEditor },
   { id: 'servers', label: 'Server', Editor: ServersEditor },
   { id: 'partners', label: 'Partner', Editor: PartnersEditor },
