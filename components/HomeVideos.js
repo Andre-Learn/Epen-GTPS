@@ -2,10 +2,10 @@
 
 import { useRef, useState } from 'react';
 import { useVideoFeed } from '@/lib/use-video-feed';
-import { RefreshButton, VideoCard } from './VideoParts';
+import { FeedError, RefreshButton, VideoCard } from './VideoParts';
 
 export default function HomeVideos({ channelId, initialVideos, initialLimit, fetchLimit }) {
-  const { videos, refreshing, refresh } = useVideoFeed({ channelId, fetchLimit, initialVideos });
+  const { videos, refreshing, refresh, error } = useVideoFeed({ channelId, fetchLimit, initialVideos });
   const [expanded, setExpanded] = useState(false);
   const moreRef = useRef(null);
 
@@ -21,7 +21,9 @@ export default function HomeVideos({ channelId, initialVideos, initialLimit, fet
         <div><span className="section-kicker">Latest content</span><h2>Video Epen GTPS</h2></div>
         <RefreshButton label="Muat ulang video terbaru" refreshing={refreshing} onClick={refresh} />
       </div>
+      <FeedError message={error} />
       <div className="home-video-grid" id="homeVideoGrid">
+        {videos.length ? null : <p className="empty-content">Belum ada video. Coba muat ulang sebentar lagi.</p>}
         <div className="video-grid-inner">
           {videos.map((video, index) => (
             <VideoCard

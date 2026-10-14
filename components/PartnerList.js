@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useVideoFeed } from '@/lib/use-video-feed';
-import { RefreshButton, VideoCard } from './VideoParts';
+import { FeedError, RefreshButton, VideoCard } from './VideoParts';
 
 const LINK_LABELS = { whatsapp: 'WhatsApp', discord: 'Discord', youtube: 'YouTube' };
 
@@ -17,7 +17,7 @@ function scrollToPartner(id) {
 // ditampilkan setelah panelnya pertama kali dibuka, dan bisa dimuat ulang lewat tombol.
 function PartnerVideos({ partner, fetchLimit }) {
   const limit = partner.videoLimit;
-  const { videos, refreshing, refresh } = useVideoFeed({
+  const { videos, refreshing, refresh, error } = useVideoFeed({
     channelId: partner.youtubeChannelId,
     fetchLimit,
     initialVideos: partner.feed
@@ -30,6 +30,7 @@ function PartnerVideos({ partner, fetchLimit }) {
         <div><span className="section-kicker">Partner content</span><h4>Video Partner</h4></div>
         <RefreshButton label={`Muat ulang video partner ${partner.name}`} refreshing={refreshing} onClick={refresh} />
       </div>
+      <FeedError message={error} />
       <div className="partner-video-container">
         <div className="video-grid-inner">
           {shown.length

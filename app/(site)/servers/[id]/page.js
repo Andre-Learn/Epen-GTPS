@@ -23,7 +23,7 @@ export async function generateMetadata({ params }) {
   const { id } = await params;
   const config = await getConfig();
   const server = findServer(config, id);
-  if (!server) return { title: 'Server tidak ditemukan — Epen GTPS', robots: { index: false, follow: false } };
+  if (!server) return { title: 'Server tidak ditemukan | Epen GTPS', robots: { index: false, follow: false } };
 
   const seoConfig = {
     ...config,

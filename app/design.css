@@ -169,6 +169,14 @@ html[data-theme=dark] .servers-page{background:var(--bg)}
   box-shadow:0 0 0 3px color-mix(in srgb,var(--purple) 22%,transparent);
 }
 html[data-theme=dark] .server-search{box-shadow:none}
+/* Ulang untuk mode gelap: aturan di atas lebih spesifik dan menghapus cincin fokus. */
+html[data-theme=dark] .server-search:focus-within{
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--purple) 30%,transparent);
+}
+/* Mode kontras tinggi membuang box-shadow; pakai outline sebagai gantinya. */
+@media (forced-colors:active){
+  .server-search:focus-within{outline:2px solid CanvasText;outline-offset:2px}
+}
 
 /* Footer: permukaan gelap, tidak lagi blok ungu */
 html[data-theme=dark] .global-footer-inner{
@@ -713,12 +721,12 @@ html[data-theme=dark] .server-modal-status.server-status-badge.is-offline{backgr
 /* HP: badge status tetap tampil, grid kartu 4 kolom (logo | teks | status | panah) */
 @media(max-width:760px){
   .server-card{grid-template-columns:46px minmax(0,1fr) auto 14px;gap:10px;padding:10px}
-  .server-card-meta.server-status-badge{padding:3px 8px;gap:5px;font-size:11px}
+  .server-card-meta.server-status-badge{padding:3px 8px;gap:5px;font-size:12px}
 }
 @media(max-width:380px){
   .server-card{grid-template-columns:42px minmax(0,1fr) auto 12px;gap:8px;padding:8px}
   .server-card-logo{width:42px;height:42px}
-  .server-card-meta.server-status-badge{padding:3px 7px;font-size:10px}
+  .server-card-meta.server-status-badge{padding:3px 7px;font-size:12px}
 }
 
 /* ---------- 8. Halaman server, bagikan, kartu sebagai link ---------- */
@@ -781,3 +789,23 @@ html[data-theme=dark] .server-detail-logo{background:var(--surface-2);color:var(
   .server-detail-head{gap:12px}
   .server-detail-logo{width:68px;height:68px;border-radius:16px}
 }
+
+
+/* ---------- 7. Area sentuh minimal 44px ---------- */
+/* Tombol kecil tetap terlihat kecil; area sentuhnya diperluas lewat ::after. */
+.section-refresh{position:relative}
+.section-refresh::after,
+.server-modal-close::after{
+  content:"";position:absolute;left:50%;top:50%;
+  width:max(100%,44px);height:max(100%,44px);
+  transform:translate(-50%,-50%);
+}
+.header-back,
+.share-btn{min-height:44px}
+.header-back{align-items:center}
+.theme-switch{min-height:44px;min-width:44px}
+
+/* Pesan gagal muat ulang video. Elemen tetap ada walau kosong supaya aria-live bekerja. */
+.feed-error{margin:-6px 0 14px;font-size:var(--fs-small);font-weight:600;color:#b91c1c}
+.feed-error:empty{margin:0}
+html[data-theme=dark] .feed-error{color:#fca5a5}

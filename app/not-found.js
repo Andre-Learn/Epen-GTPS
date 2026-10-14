@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: { absolute: '404 — Epen GTPS' },
+  title: { absolute: '404 | Epen GTPS' },
   robots: { index: false, follow: false }
 };
 

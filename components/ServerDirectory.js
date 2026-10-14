@@ -143,7 +143,7 @@ export default function ServerDirectory({ servers, linkIcons }) {
         )}
       </section>
 
-      <div className={`server-modal${selected ? ' is-open' : ''}`} id="serverModal" aria-hidden={!selected}>
+      <div className={`server-modal${selected ? ' is-open' : ''}`} id="serverModal" aria-hidden={!selected} inert={!selected}>
         <div className="server-modal-backdrop" onClick={close} />
         <section ref={cardRef} className="server-modal-card" role="dialog" aria-modal="true" aria-labelledby="serverModalTitle">
           <button ref={closeRef} className="server-modal-close" type="button" onClick={close} aria-label="Tutup">×</button>
@@ -173,7 +173,7 @@ export default function ServerDirectory({ servers, linkIcons }) {
                   <>
                     <ShareButtons
                       path={`/servers/${encodeURIComponent(shown.id)}`}
-                      title={`${shown.name} — GTPS Terbaru 2026`}
+                      title={`${shown.name} | GTPS Terbaru 2026`}
                       text={`${shown.name}: ${shown.description}`}
                     />
                     <a className="server-modal-page-link" href={`/servers/${encodeURIComponent(shown.id)}`}>Buka halaman server ›</a>

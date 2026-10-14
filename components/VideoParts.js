@@ -30,9 +30,15 @@ export function RefreshButton({ label = 'Muat ulang video', refreshing = false, 
       className={`section-refresh${refreshing ? ' is-refreshing' : ''}`}
       type="button"
       aria-label={label}
+      aria-busy={refreshing}
       onClick={onClick}
     >
       <img src="/assets/icons/refresh-loop.png" alt="" aria-hidden="true" />
     </button>
   );
+}
+
+// Selalu dirender (walau kosong) supaya pembaca layar mengumumkan pesan saat muncul.
+export function FeedError({ message }) {
+  return <p className="feed-error" role="status" aria-live="polite">{message}</p>;
 }
