@@ -67,7 +67,7 @@ html[data-theme=dark] .theme-switch:active .theme-switch-knob{transform:translat
 .partner-detail{scroll-margin-top:92px}
 .empty-content{padding:18px 0;color:var(--muted);font-size:13px}
 
-/* v5.1 — expandable partner cards, inspired by API-style accordion interaction */
+/* Expandable partner cards, inspired by API-style accordion interaction */
 .partner-list{gap:12px}
 .partner-accordion{display:block}
 .partner-item{position:relative;min-height:78px;padding:12px 14px;border-radius:18px}
@@ -122,7 +122,7 @@ html[data-theme=dark] .partner-item{background:var(--surface)}
   .partner-expand-videos h4{font-size:24px}
 }
 
-/* v5.2 fix: explicit accordion symbols */
+/* Explicit accordion symbols */
 .partner-item-toggle .toggle-minus{display:none}
 .partner-accordion.is-open .partner-item-toggle .toggle-plus{display:none}
 .partner-accordion.is-open .partner-item-toggle .toggle-minus{display:inline}
@@ -131,21 +131,21 @@ html[data-theme=dark] .partner-item{background:var(--surface)}
 .partner-accordion.is-open .partner-panel{visibility:visible}
 
 
-/* v5.3 partner header */
+/* Partner header */
 .partner-header-inner{position:relative;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px}
 .partner-header-inner .theme-button{justify-self:end}
 .header-back{display:inline-flex;align-items:center;justify-self:start;color:#fff;text-decoration:none;font-weight:700;font-size:13px;padding:9px 12px;border:1px solid rgba(255,255,255,.18);border-radius:12px;background:rgba(255,255,255,.08);transition:background .2s ease,border-color .2s ease,transform .2s ease}
 .header-back:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.28);transform:translateY(-1px)}
 .header-page-title{justify-self:center;color:#fff;font:700 16px/1 var(--font);letter-spacing:-.02em}
 
-/* v5.3: keep expanded detail inside a white card with inset banner */
+/* Keep expanded detail inside a white card with inset banner */
 .partner-panel{padding:10px 0 0}
 .partner-expand{padding:12px;background:var(--surface);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow-md)}
 .partner-expand-banner{height:180px;border-radius:17px}
 .partner-expand-content{padding:0 8px 18px}
 .partner-expand-logo{margin-top:-38px}
 
-/* allow several partner accordions to remain expanded */
+/* Allow several partner accordions to remain expanded */
 .partner-accordion.is-open + .partner-accordion{margin-top:0}
 
 @media(max-width:640px){
@@ -159,7 +159,7 @@ html[data-theme=dark] .partner-item{background:var(--surface)}
   .partner-expand-content{padding:0 7px 18px}
 }
 
-/* v5.4 compact glass header */
+/* Compact glass header */
 .profile-mini{gap:8px}.profile-mini .avatar-small{width:34px;height:34px;font-size:16px}.profile-mini-copy strong{font-size:13px}.profile-mini-copy small{font-size:12px}.theme-button,.header-link{padding:8px 11px;border-radius:12px}.header-page-title{font-size:14px}.header-back{padding:8px 10px;border-radius:11px;background:rgba(255,255,255,.08)}
 @media(max-width:899px){.site-header{margin-left:8px;margin-right:8px}.header-inner{padding:0 10px}.profile-mini-copy strong{font-size:12px}.profile-mini-copy small{font-size:12px}.theme-button{font-size:12px;padding:8px 9px}}
 
@@ -174,7 +174,7 @@ html[data-theme=dark] .partner-item{background:var(--surface)}
 }
 
 
-/* v5.6 — unified glass header + soft-glass social buttons */
+/* Unified glass header + soft-glass social buttons */
 .site-header{
   display:block;
   width:auto;
@@ -322,17 +322,17 @@ html[data-theme=dark] .socials a:hover{
   html[data-theme=dark] .theme-switch:active .theme-switch-knob{transform:translateX(20px) scale(.93)}
 }
 
-/* v5.9: keep the home theme switch pinned to the same right position after removing the center title. */
+/* Keep the home theme switch pinned to the same right position after removing the center title. */
 .home-header-inner{position:relative;display:flex;align-items:center;justify-content:flex-start}
 .home-header-inner .theme-switch{position:absolute;right:10px;top:50%;transform:translateY(-50%)}
 @media(max-width:420px){.home-header-inner .theme-switch{right:8px}}
 
-/* v6.0 — YouTube-like 16:9 thumbnails, refresh action, and progressive Show More */
+/* YouTube-like 16:9 thumbnails, refresh action, and progressive Show More */
 .video-grid-inner{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.partner-video-container{width:100%}.partner-video-container .video-grid-inner{grid-template-columns:repeat(2,minmax(0,1fr))}
 @media(max-width:560px){.video-grid-inner,.partner-video-container .video-grid-inner{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:start}.youtube-play{width:46px;height:32px;border-radius:9px}.youtube-play svg{width:18px;height:18px}.section-refresh{width:32px;height:32px;border-radius:11px}.section-refresh svg{width:17px;height:17px}}
 
 
-/* v6.3 — configurable site logo + banner from settings.js */
+/* Configurable site logo + banner from settings.js */
 [data-site-logo]{position:relative;overflow:hidden}
 [data-site-logo] img{width:100%;height:100%;display:block;object-fit:cover}
 [data-site-logo].has-site-logo{padding:0}
@@ -344,7 +344,7 @@ html[data-theme=dark] .socials a:hover{
 .cover-art.has-site-banner .cover-copy,.cover-art.has-site-banner .cover-orb{z-index:1}
 
 
-/* v6.4 — custom main banner uses the image's natural ratio, with zero crop/letterbox.
+/* Custom main banner uses the image's natural ratio, with zero crop/letterbox.
    When bannerUrl is set, the uploaded banner is the complete visual; built-in
    EPEN text/orb/grid are hidden so they cannot overlap the custom artwork. */
 .cover-art.has-site-banner {
@@ -371,7 +371,7 @@ html[data-theme=dark] .socials a:hover{
   }
 }
 
-/* v6.4 — partner custom banners are also shown fully without cropping. */
+/* Partner custom banners are also shown fully without cropping. */
 .partner-expand-banner.has-partner-banner {
   height:auto;
   aspect-ratio:16 / 5;
@@ -390,7 +390,7 @@ html[data-theme=dark] .socials a:hover{
 }
 
 
-/* v6.5 — configurable action-card icons from settings.js */
+/* Configurable action-card icons from settings.js */
 .action-logo.has-action-icon {
   padding: 7px;
 }
@@ -401,13 +401,13 @@ html[data-theme=dark] .socials a:hover{
   object-fit: contain;
   border-radius: 9px;
 }
-/* Social buttons removed from the profile area in v6.5. */
+/* Social buttons removed from the profile area */
 .profile-info > .socials {
   display: none !important;
 }
 
 
-/* v6.6 — SVG fallback icons when actionIcons URL is empty */
+/* SVG fallback icons when actionIcons URL is empty */
 .action-logo.has-fallback-icon {
   display: grid;
   place-items: center;
@@ -419,13 +419,13 @@ html[data-theme=dark] .socials a:hover{
   display: block;
 }
 
-/* v6.7 — action buttons are generated entirely from settings.js */
+/* Action buttons are generated entirely from settings.js */
 .action-list:empty{display:none}
 .action-logo.has-action-icon img{object-fit:contain}
 .action-card[data-action-id]{text-decoration:none}
 
 
-/* v6.9 — partner video cards: thumbnail stays inside the white card frame. */
+/* Partner video cards: thumbnail stays inside the white card frame. */
 .partner-video-container .video-grid-inner {
   align-items: start;
 }
@@ -472,11 +472,11 @@ html[data-theme=dark] .socials a:hover{
 }
 
 
-/* v7.1 — YouTube cache + loading skeleton */
+/* YouTube cache + loading skeleton */
 .video-grid-inner.is-loading{pointer-events:none}.video-skeleton-card{overflow:hidden!important}.video-skeleton-thumb{aspect-ratio:16/9;border-radius:0;background:linear-gradient(90deg,var(--surface-2,#eee),rgba(255,255,255,.72),var(--surface-2,#eee));background-size:200% 100%;animation:skeletonShimmer 1.25s ease-in-out infinite}.video-skeleton-info{padding:12px 13px 14px;display:grid;gap:9px}.skeleton-line{display:block;height:10px;border-radius:999px;background:linear-gradient(90deg,var(--surface-2,#eee),rgba(255,255,255,.72),var(--surface-2,#eee));background-size:200% 100%;animation:skeletonShimmer 1.25s ease-in-out infinite}.skeleton-line-lg{width:88%}.skeleton-line-sm{width:48%;height:8px}.skeleton-shimmer{animation:skeletonShimmer 1.25s ease-in-out infinite}@keyframes skeletonShimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}html[data-theme=dark] .video-skeleton-thumb,html[data-theme=dark] .skeleton-line{background:linear-gradient(90deg,#27202f,#3a3045,#27202f);background-size:200% 100%}
 @media(max-width:560px){.video-skeleton-info{padding:10px}.skeleton-line{height:9px}.skeleton-line-sm{height:7px}}
 
-/* v7.8 — Global footer: purple wrapper + clean surface navigation */
+/* Global footer: purple wrapper + clean surface navigation */
 html, body { min-height: 100%; }
 body {
   min-height: 100vh;
@@ -630,7 +630,7 @@ body > main { flex: 1 0 auto; }
   .global-footer-bottom { flex-direction: column; align-items: flex-start; font-size: 12px; }
 }
 
-/* v7.9 — true sticky page footer: footer stays at the bottom without creating a blank area below it */
+/* True sticky page footer: footer stays at the bottom without creating a blank area below it */
 html, body { min-height: 100%; }
 body { min-height: 100vh; display: flex; flex-direction: column; }
 body > main { flex: 1 0 auto; width: 100%; }
@@ -644,7 +644,7 @@ body > main { flex: 1 0 auto; width: 100%; }
   .global-footer-inner { width: min(680px, calc(100% - 32px)); }
 }
 
-/* v8.0 — full-bleed global footer: no side gaps, no rounded outer shell */
+/* Full-bleed global footer: no side gaps, no rounded outer shell */
 .footer {
   width: 100%;
   margin-top: 28px;
@@ -685,7 +685,7 @@ body > main { flex: 1 0 auto; width: 100%; }
   .global-footer-bottom { width: 100%; }
 }
 
-/* v8.2 — unified YouTube video cards + global refresh icon */
+/* Unified YouTube video cards + global refresh icon */
 .video-grid-inner .video-card,
 .partner-video-container .video-card {
   padding: 8px;
@@ -765,9 +765,7 @@ body > main { flex: 1 0 auto; width: 100%; }
   .partner-video-container .video-info strong { font-size: 12px; line-height: 1.4; }
 }
 
-/* ================================
-   PROMOTE GTPS / PRICE LIST
-   ================================ */
+/* Promote price list */
 .promote-section{padding-top:8px;padding-bottom:56px}
 .promote-heading{display:flex;justify-content:space-between;align-items:end;margin-bottom:18px}
 .promote-heading h2{font:700 22px var(--font);margin:5px 0 5px;letter-spacing:-.025em}
@@ -789,13 +787,13 @@ body > main { flex: 1 0 auto; width: 100%; }
 .promote-cta:active{transform:translateY(0) scale(.98)}
 @media(max-width:560px){.promote-section{padding-top:2px;padding-bottom:44px}.promote-grid{grid-template-columns:1fr;gap:11px}.promote-card{padding:17px;border-radius:18px}.promote-heading{margin-bottom:14px}.promote-heading h2{font-size:20px}.promote-heading p{font-size:12px}.promote-price{font-size:23px}}
 
-/* v8.6 — Promote CTA uses the same purple treatment as the main action buttons. */
+/* Promote CTA uses the same purple treatment as the main action buttons. */
 .promote-cta{background:linear-gradient(105deg,#6d28d9,#7c3aed);color:#fff;box-shadow:0 8px 20px rgba(109,40,217,.15);transition:transform .2s ease,box-shadow .2s ease,filter .2s ease}
 .promote-cta:hover{background:linear-gradient(105deg,#6d28d9,#7c3aed);color:#fff;transform:translateY(-2px);box-shadow:0 11px 25px rgba(109,40,217,.23);filter:saturate(1.04)}
 .promote-cta:active{transform:translateY(0)}
 .promote-cta span{display:none}
 
-/* v8.7 — Server GTPS directory + glass detail modal */
+/* Server GTPS directory + glass detail modal */
 .servers-page{background:radial-gradient(circle at 50% -10%,#eee6ff,transparent 34%),var(--bg)}
 html[data-theme=dark] .servers-page{background:radial-gradient(circle at 50% -10%,#2b1b40,transparent 36%),var(--bg)}
 .server-page-main{padding:42px 0 56px}
@@ -806,7 +804,7 @@ html[data-theme=dark] .servers-page{background:radial-gradient(circle at 50% -10
 .server-search{display:flex;align-items:center;gap:10px;min-height:50px;padding:0 14px;border:1px solid var(--line);border-radius:16px;background:var(--surface);box-shadow:var(--shadow-sm);margin-bottom:16px;transition:border-color .2s,box-shadow .2s}
 .server-search:focus-within{border-color:#b79be9;box-shadow:0 8px 24px rgba(109,40,217,.1)}
 .server-search svg{width:19px;height:19px;flex:none;fill:none;stroke:var(--muted);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-/* outline:0 aman: cincin fokus ada di pembungkus (.server-search:focus-within, design.css). */
+/* Outline:0 aman: cincin fokus ada di pembungkus (.server-search:focus-within, design.css). */
 .server-search input{width:100%;min-width:0;border:0;outline:0;background:transparent;color:var(--text);font:500 13px var(--font)}
 .server-search input::placeholder{color:var(--muted)}
 .server-count{font-size:12px;color:var(--muted);white-space:nowrap}
@@ -867,10 +865,7 @@ body.modal-open{overflow:hidden}
 
 
 
-/* =========================================================
-   v9.4 — Responsive polish
-   Mobile-first layout with dedicated tablet/desktop scaling.
-   ========================================================= */
+/* Responsive layout: mobile first, scaled up for tablet and desktop. */
 
 /* Prevent tiny-screen horizontal overflow from long labels/URLs. */
 html, body { overflow-x: hidden; overflow-x: clip; }
@@ -1048,7 +1043,7 @@ img, svg { max-width: 100%; }
 .faq-list a{color:var(--purple);font-weight:700}
 @media(max-width:560px){.seo-intro{margin-top:20px;margin-bottom:26px;padding:18px;border-radius:18px}.seo-intro h2{font-size:20px}.seo-intro p{font-size:12px}.faq-list summary{padding:14px;font-size:12px}.faq-list details p{padding:0 14px 14px;font-size:12px}}
 
-/* Epen GTPS about section — plain editorial text */
+/* Epen GTPS about section: plain editorial text */
 .about-epen{margin:4px auto 34px;padding:0;background:transparent;border:0;box-shadow:none}
 .about-epen-main{padding:0;max-width:900px;margin:0 auto}
 .about-epen-main h2{font:700 25px/1.2 var(--font);letter-spacing:-.035em;margin:7px 0 13px;max-width:760px}
@@ -1056,7 +1051,7 @@ img, svg { max-width: 100%; }
 .about-epen-main p strong{color:var(--text)}
 @media(max-width:760px){.about-epen{margin:0 auto 28px}.about-epen-main{padding:0 2px}.about-epen-main h2{font-size:20px;margin-top:6px}.about-epen-main p{font-size:12px;line-height:1.72}}
 
-/* Promote page — full service landing layout */
+/* Promote page: full service landing layout */
 .promote-page .site-header .header-page-title{font-size:14px;font-weight:800;letter-spacing:-.01em}
 .promote-page .promote-hero{margin-top:34px;margin-bottom:34px;padding:28px 30px;border:1px solid var(--line);border-radius:24px;background:var(--surface);box-shadow:var(--shadow-sm)}
 .promote-hero h1{font:700 clamp(32px,7vw,48px)/1.05 var(--font);letter-spacing:-.055em;margin:12px 0 16px}
@@ -1102,10 +1097,7 @@ html[data-theme=dark] .requirements-list>div{box-shadow:none}
 }
 
 
-/* =========================================================
-   Promote UI refinement — SkillUI-inspired design-system pass
-   Hybrid surface: editorial hero, focused price cards, light utility surfaces.
-   ========================================================= */
+/* Promote page: editorial hero, price cards, light utility surfaces. */
 .promote-page .promote-hero{
   margin-top:42px;
   margin-bottom:46px;
@@ -1249,10 +1241,7 @@ html[data-theme=dark] .promote-card.is-popular{box-shadow:0 14px 34px rgba(0,0,0
   .requirements-list{grid-template-columns:1fr}
 }
 
-/* =========================================================
-   Promote v6 — quieter requirements + stronger final CTA
-   Less decorative UI, more editorial hierarchy.
-   ========================================================= */
+/* Promote requirements list and final CTA */
 .requirements-list{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -1426,9 +1415,7 @@ html[data-theme=dark] .promote-card.is-popular{box-shadow:0 14px 34px rgba(0,0,0
 }
 
 
-/* =====================================
-   PAGE AVAILABILITY / MAINTENANCE
-   ===================================== */
+/* Page availability / maintenance */
 .maintenance-page {
   min-height: min(62vh, 620px);
   display: grid;
@@ -1511,7 +1498,7 @@ html[data-theme=dark] .promote-card.is-popular{box-shadow:0 14px 34px rgba(0,0,0
   }
 }
 
-/* v3.1 — mobile partner banner overflow guard and centered layout */
+/* Mobile partner banner overflow guard and centered layout */
 .partner-expand,
 .partner-expand-banner,
 .partner-banner-template {
@@ -1575,7 +1562,7 @@ html[data-theme=dark] .promote-card.is-popular{box-shadow:0 14px 34px rgba(0,0,0
 .detail-link-icon-youtube{filter:none!important;object-fit:contain}
 
 
-/* Footer alignment — icon + label are treated as one centered group. */
+/* Footer alignment: icon + label are treated as one centered group. */
 .global-footer-link {
   display: flex;
   align-items: center;

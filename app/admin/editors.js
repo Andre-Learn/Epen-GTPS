@@ -9,7 +9,6 @@ const PAGE_KEYS = ['home', 'promote', 'partners', 'servers'];
 const errAt = (errors, ...path) => errors[path.join('.')];
 const asArray = value => (Array.isArray(value) ? value : []);
 
-/* ---------- Halaman ---------- */
 export function PagesEditor({ config, change }) {
   const pages = isPlainObject(config.pages) ? Object.entries(config.pages) : [];
   return (
@@ -52,7 +51,6 @@ export function PagesEditor({ config, change }) {
   );
 }
 
-/* ---------- Situs & SEO ---------- */
 export function SiteEditor({ config, errors, change }) {
   const site = isPlainObject(config.site) ? config.site : {};
   const set = key => v => change(['site', key], v);
@@ -99,7 +97,6 @@ export function SiteEditor({ config, errors, change }) {
   );
 }
 
-/* ---------- Promote ---------- */
 export function PromoteEditor({ config, errors, change }) {
   const promote = isPlainObject(config.site?.promote) ? config.site.promote : {};
   const packages = asArray(promote.packages);
@@ -149,7 +146,6 @@ export function PromoteEditor({ config, errors, change }) {
   );
 }
 
-/* ---------- Server ---------- */
 export function ServersEditor({ config, errors, change }) {
   const servers = asArray(config.site?.servers);
   const base = ['site', 'servers'];
@@ -191,7 +187,6 @@ export function ServersEditor({ config, errors, change }) {
   );
 }
 
-/* ---------- Tombol beranda ---------- */
 const ICON_OPTIONS = [
   { value: '', label: 'Otomatis (link)' },
   { value: 'whatsapp', label: 'WhatsApp' },
@@ -244,7 +239,6 @@ export function ButtonsEditor({ config, errors, change }) {
   );
 }
 
-/* ---------- Partner ---------- */
 export function PartnersEditor({ config, errors, change }) {
   const partners = asArray(config.partners);
   return (
@@ -326,7 +320,6 @@ export function PartnersEditor({ config, errors, change }) {
   );
 }
 
-/* ---------- Video ---------- */
 export function VideoEditor({ config, errors, change }) {
   return (
     <Section title="Video beranda" hint="Video diambil dari YouTube dan di-cache 15 menit di server.">

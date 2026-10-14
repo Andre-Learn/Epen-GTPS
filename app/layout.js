@@ -12,7 +12,7 @@ export const viewport = {
   themeColor: THEME_COLOR
 };
 
-// Set tema sebelum paint supaya tidak berkedip (sama seperti versi lama).
+// Set tema sebelum paint supaya tidak berkedip.
 const THEME_SCRIPT = `(()=>{try{var s=localStorage.getItem('epen-theme');var d=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;if(s==='dark'||(!s&&d))document.documentElement.dataset.theme='dark';}catch(_){}})();`;
 
 export default function RootLayout({ children }) {

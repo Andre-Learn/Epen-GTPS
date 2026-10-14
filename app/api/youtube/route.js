@@ -6,7 +6,7 @@ export const dynamic = 'force-dynamic';
 
 const baseHeaders = { 'X-Content-Type-Options': 'nosniff' };
 
-// Error tidak boleh di-cache CDN (versi lama ikut meng-cache 429/502 selama 5 menit).
+// Error tidak boleh di-cache CDN, supaya 429/502 tidak tersimpan 5 menit.
 function fail(message, status, extra = {}) {
   return NextResponse.json(
     { error: message },

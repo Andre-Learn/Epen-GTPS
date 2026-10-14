@@ -1,16 +1,7 @@
-/* =========================================================
-   design.css — lapisan desain, dimuat SETELAH globals.css.
-
-   1. Token: warna (mode gelap beraksen ungu pucat) dan skala tipografi
-   2. Mode gelap: elemen yang di globals.css berwarna ungu pekat
-   3. Tipografi: Instrument Sans, judul besar berjarak rapat
-   4. Promote: paket Populer vs kartu polos
-   5. Detail server: panel dari bawah (ponsel) / dialog (layar lebar)
-   6. Gerakan: satu animasi saat halaman dibuka, sisanya respons aksi
-   ========================================================= */
+/* Lapisan desain, dimuat setelah globals.css supaya aturannya menang. */
 
 
-/* ---------- 1. Token ---------- */
+/* Token: warna (mode gelap beraksen ungu pucat) dan skala tipografi */
 :root{
   --font:"Instrument Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
 
@@ -77,7 +68,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{
 html[data-theme=dark] .site-header :focus-visible{outline-color:var(--purple)}
 
 
-/* ---------- 2. Mode gelap ---------- */
+/* Mode gelap: elemen yang di globals.css berwarna ungu pekat */
 
 /* Header kaca: gelap, bukan ungu pekat */
 html[data-theme=dark] .site-header{
@@ -216,7 +207,7 @@ html[data-theme=dark] .video-skeleton-thumb,
 html[data-theme=dark] .skeleton-line{background:var(--surface-2);background-size:auto}
 
 
-/* ---------- 3. Tipografi ---------- */
+/* Tipografi: Instrument Sans, judul besar berjarak rapat */
 h1,h2,h3,h4{font-family:var(--font);text-wrap:balance}
 p{text-wrap:pretty}
 
@@ -353,7 +344,7 @@ p{text-wrap:pretty}
 }
 
 
-/* ---------- 4. Promote ---------- */
+/* Promote: paket Populer vs kartu polos */
 .promote-heading{margin-bottom:6px}
 .promote-grid{padding-top:16px;column-gap:14px;row-gap:30px}
 
@@ -488,7 +479,7 @@ html[data-theme=dark] .promote-final-cta-button{
 }
 
 
-/* ---------- 5. Detail server: panel dari bawah / dialog ---------- */
+/* Detail server: panel dari bawah (ponsel) / dialog (layar lebar) */
 .server-modal{
   position:fixed;
   inset:0;
@@ -635,14 +626,26 @@ html[data-theme=dark] .server-modal-link{background:var(--surface-2);border-colo
 html[data-theme=dark] .server-modal-link:hover{background:var(--purple-soft);border-color:var(--purple)}
 .server-modal-link-label{font-size:var(--fs-small);font-weight:600}
 
-/* Status server: titik diam, tanpa berdenyut */
-.server-status-dot,
-.server-status-dot.is-offline{animation:none}
+/* Status server: online memancarkan cincin, offline berkedip pelan */
+.server-status-dot{position:relative;animation:none;box-shadow:none}
+.server-status-dot::after{
+  content:"";position:absolute;inset:0;border-radius:50%;
+  background:currentColor;color:#22c55e;
+  animation:status-ping 1.6s cubic-bezier(0,0,.2,1) infinite;
+}
+.server-status-dot.is-offline{animation:status-blink 2.4s ease-in-out infinite}
+.server-status-dot.is-offline::after{display:none}
+@keyframes status-ping{
+  0%{transform:scale(1);opacity:.7}
+  80%,100%{transform:scale(2.8);opacity:0}
+}
+@keyframes status-blink{
+  0%,100%{opacity:1}
+  50%{opacity:.3}
+}
 
 
-/* ---------- 6. Gerakan ----------
-   Satu rangkaian saat beranda dibuka: banner, logo, lalu nama.
-   Selain itu hanya respons aksi (buka-tutup, hover, tekan).
+/* Intro beranda: banner, logo, lalu nama. Gerakan lain hanya respons aksi.
    Elemen tampil normal tanpa animasi, jadi aman kalau animasi dimatikan. */
 @keyframes intro-banner{from{opacity:0;transform:translateY(18px) scale(.985)}}
 @keyframes intro-logo{from{opacity:0;transform:scale(.86)}}
@@ -663,7 +666,7 @@ html[data-theme=dark] .server-modal-link:hover{background:var(--purple-soft);bor
 }
 
 
-/* ---------- 7. Perbaikan v2 ---------- */
+/* Perbaikan lanjutan */
 
 /* Header tetap menempel saat scroll: overflow-x:hidden di html/body membuat
    sticky tidak berfungsi, jadi diganti clip (tidak membuat scroll container). */
@@ -729,7 +732,7 @@ html[data-theme=dark] .server-modal-status.server-status-badge.is-offline{backgr
   .server-card-meta.server-status-badge{padding:3px 7px;font-size:12px}
 }
 
-/* ---------- 8. Halaman server, bagikan, kartu sebagai link ---------- */
+/* Halaman server, bagikan, kartu sebagai link */
 a.server-card{text-decoration:none;color:var(--text)}
 
 .share-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
@@ -774,15 +777,27 @@ html[data-theme=dark] .server-detail-logo{background:var(--surface-2);color:var(
 
 .server-related{margin-top:32px}
 .server-related h2{font-size:var(--fs-heading);font-weight:650;letter-spacing:-.02em;margin:0 0 12px}
-.server-related-list{display:flex;flex-wrap:wrap;gap:10px}
+/* 3x2, semua kartu sama ukuran walau panjang nama beda */
+.server-related-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:1fr;gap:10px}
 .server-related-item{
-  display:flex;align-items:center;gap:10px;padding:8px 14px 8px 8px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  min-width:0;padding:14px 10px;text-align:center;
   border:1px solid var(--line);border-radius:14px;background:var(--surface);
   color:var(--text);text-decoration:none;font-size:var(--fs-small);
   transition:border-color .2s var(--ease);
 }
+.server-related-item strong{
+  width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  font-weight:600;
+}
+.server-related-item .server-status-badge{padding:3px 8px;gap:5px}
 .server-related-item:hover{border-color:var(--purple)}
-.server-related-item .server-card-logo{width:38px;height:38px;border-radius:11px;font-size:1rem}
+.server-related-item .server-card-logo{width:44px;height:44px;border-radius:12px;font-size:1rem;flex:none}
+@media(max-width:380px){
+  .server-related-list{gap:8px}
+  .server-related-item{padding:12px 6px}
+  .server-related-item .server-status-badge{padding:2px 6px}
+}
 
 @media(max-width:480px){
   .server-detail{padding:16px}
@@ -791,7 +806,7 @@ html[data-theme=dark] .server-detail-logo{background:var(--surface-2);color:var(
 }
 
 
-/* ---------- 7. Area sentuh minimal 44px ---------- */
+/* Area sentuh minimal 44px */
 /* Tombol kecil tetap terlihat kecil; area sentuhnya diperluas lewat ::after. */
 .section-refresh{position:relative}
 .section-refresh::after,

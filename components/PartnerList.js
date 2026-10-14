@@ -69,7 +69,7 @@ function PartnerAccordion({ partner, open, loaded, onToggle, fetchLimit }) {
   const expandRef = useRef(null);
   const [height, setHeight] = useState(0);
 
-  // Tinggi panel mengikuti isi (video dimuat belakangan) — menggantikan setTimeout 420ms versi lama.
+  // Tinggi panel mengikuti isi, karena video dimuat belakangan.
   useEffect(() => {
     const el = expandRef.current;
     if (!open || !el) {

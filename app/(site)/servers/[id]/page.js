@@ -6,6 +6,7 @@ import SiteFooter from '@/components/SiteFooter';
 import Maintenance from '@/components/Maintenance';
 import JsonLd from '@/components/JsonLd';
 import ShareButtons from '@/components/ShareButtons';
+import RelatedServers from '@/components/RelatedServers';
 import { ServerLinkIcon } from '@/components/Icons';
 import { getConfig } from '@/lib/config';
 import { buildPageMetadata } from '@/lib/metadata';
@@ -146,16 +147,15 @@ export default async function ServerDetailPage({ params }) {
         {others.length ? (
           <section className="server-related" aria-label="Server GTPS lainnya">
             <h2>Server GTPS lainnya</h2>
-            <div className="server-related-list">
-              {others.map(item => (
-                <Link key={item.id} href={serverPath(item.id)} className="server-related-item">
-                  <span className="server-card-logo">
-                    {item.logo ? <img src={item.logo} alt="" loading="lazy" /> : <span>{item.name.slice(0, 1).toUpperCase()}</span>}
-                  </span>
-                  <strong>{item.name}</strong>
-                </Link>
-              ))}
-            </div>
+            <RelatedServers
+              servers={others.map(item => ({
+                id: item.id,
+                name: item.name,
+                logo: item.logo,
+                status: item.status,
+                href: serverPath(item.id)
+              }))}
+            />
             <Link href="/servers" className="server-modal-page-link">Lihat semua server GTPS ›</Link>
           </section>
         ) : null}
